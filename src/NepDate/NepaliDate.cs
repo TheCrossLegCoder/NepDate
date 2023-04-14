@@ -1,5 +1,6 @@
 ﻿using System;
 using NepDate.Core;
+using NepDate.Core.Dictionaries;
 using static NepDate.Exceptions;
 
 namespace NepDate
@@ -104,12 +105,22 @@ namespace NepDate
         /// Gets the last day of the month represented by this Nepali date.
         /// </summary>
         public int MonthEndDay => Handlers.NepToEng.GetNepaliMonthEndDay(Year, Month);
-
+        
 
         /// <summary>
         /// Gets the Nepali date representing the last day of the month.
         /// </summary>
         public NepaliDate MonthEndDate => Parse($"{Year:D4}/{Month:D2}/{MonthEndDay:D2}");
+
+        /// <summary>
+        /// Gets the Nepali month full name.
+        /// </summary>
+        public string MonthName => NepaliMonths.Months[Month];
+
+        /// <summary>
+        /// Gets the Nepali month short name.
+        /// </summary>
+        public string MonthShortName => NepaliMonths.Months[Month].Substring(0, 3);
 
 
         /// <summary>
