@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+    <PackageReference Include="NepaliCalendarBS" Version="1.1.5" />
+    <PackageReference Include="NepaliDateConverter.NETCORE" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NepDate\NepDate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NepaliDateConverter.Library">
+      <HintPath>NepaliDateConverter.Library.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
