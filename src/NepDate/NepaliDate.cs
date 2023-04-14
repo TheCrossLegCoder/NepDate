@@ -125,6 +125,54 @@ namespace NepDate
             }
         }
 
+        public NepaliDate NextMonth(bool returnFirstDay = true)
+        {
+            var nextYear = Year;
+            var nextMonth = Month + 1;
+            var nextMonthDay = 1;
+
+            if (Month == 12)
+            {
+                nextYear++;
+                nextMonth = 1;
+            }
+
+            var nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
+
+            if (!returnFirstDay)
+            {
+                nextMonthDay = nextMonthNepDate.MonthEndDay < Day ? nextMonthNepDate.MonthEndDay : Day;
+                return new NepaliDate(nextYear, nextMonth, nextMonthDay);
+            }
+
+            return nextMonthNepDate;
+
+        }
+
+        public NepaliDate PreviousMonth(bool returnFirstDay = true)
+        {
+            var prevYear = Year;
+            var prevMonth = Month - 1;
+            var prevMonthDay = 1;
+
+            if (Month == 1)
+            {
+                prevYear--;
+                prevMonth = 12;
+            }
+
+            var prevMonthNepDate = new NepaliDate(prevYear, prevMonth, prevMonthDay);
+
+            if (!returnFirstDay)
+            {
+                prevMonthDay = prevMonthNepDate.MonthEndDay < Day ? prevMonthNepDate.MonthEndDay : Day;
+                return new NepaliDate(prevYear, prevMonth, prevMonthDay);
+            }
+
+            return prevMonthNepDate;
+        }
+
+
 
         /// <summary>
         /// Gets the integer representation of this Nepali date in the format "YYYYMMDD".
