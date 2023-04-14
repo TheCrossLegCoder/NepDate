@@ -1,5 +1,8 @@
 ﻿using System;
 using NepDate.Core;
+using NepDate.Core.Dictionaries;
+using NepDate.Core.Enums;
+using static NepDate.Exceptions;
 
 namespace NepDate
 {
@@ -118,6 +121,18 @@ namespace NepDate
             => Parse($"{Year:D4}/{Month:D2}/{MonthEndDay:D2}");
 
         /// <summary>
+        /// Gets the Nepali month full name.
+        /// </summary>
+        public NepaliMonths MonthName
+        {
+            get
+            {
+                return (NepaliMonths)Month;
+            }
+        }
+
+
+        /// <summary>
         /// Gets the integer representation of this Nepali date in the format "YYYYMMDD".
         /// </summary>
         private int AsInteger
@@ -141,7 +156,7 @@ namespace NepDate
         /// <summary>
         /// Represents the smallest possible value of a Nepali date.
         /// </summary>
-        public static readonly NepaliDate MinValue = Parse($"{Constants._minYear}/01/01");
+        public static readonly NepaliDate MinValue = Parse($"{Constants._minYear}/10/01");
 
         /// <summary>
         /// Represents the largest possible value of a Nepali date.
