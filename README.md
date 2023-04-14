@@ -1,4 +1,4 @@
-d![LogoWhiteCropped](https://user-images.githubusercontent.com/37014558/231635618-bf6599e3-554e-4b02-93df-019e7b8aecc3.png)
+![LogoWhiteCropped](https://user-images.githubusercontent.com/37014558/231635618-bf6599e3-554e-4b02-93df-019e7b8aecc3.png)
 
 ![GitHub Repo Stars](https://img.shields.io/github/stars/TheCrossLegCoder/NepDate)
 
