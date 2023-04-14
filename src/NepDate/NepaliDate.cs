@@ -27,12 +27,12 @@ namespace NepDate
         /// <summary>
         /// Used internally for constructor validation
         /// </summary>
-        /// <exception cref="Exceptions.InvalidNepaliDateFormatException"></exception>
+        /// <exception cref="InvalidNepaliDateFormatException"></exception>
         private void ValidateAndThrow()
         {
             if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < Constants._minYear || Year > Constants._maxYear)
             {
-                throw new Exceptions.InvalidNepaliDateFormatException();
+                throw new InvalidNepaliDateFormatException();
             }
         }
 
@@ -56,12 +56,11 @@ namespace NepDate
         /// <param name="rawNepaliDate">The raw Nepali date string in the format "YYYY/MM/DD".</param>
         public NepaliDate(string rawNepaliDate)
         {
-            const byte dateLength = 10;
             const byte splitLength = 3;
 
             if (string.IsNullOrEmpty(rawNepaliDate))
             {
-                throw new Exceptions.InvalidNepaliDateArgumentException();
+                throw new InvalidNepaliDateArgumentException();
             }
 
             if (DateTime.TryParse(rawNepaliDate, out DateTime result))
@@ -69,17 +68,12 @@ namespace NepDate
                 rawNepaliDate = result.ToString("yyyy/MM/dd");
             }
 
-            if (rawNepaliDate.Length != dateLength)
-            {
-                throw new Exceptions.InvalidNepaliDateFormatException();
-            }
-
             string trimmedDate = rawNepaliDate.Trim().Replace("-", "/");
             string[] splitDate = trimmedDate.Split('/');
 
             if (splitDate.Length != splitLength)
             {
-                throw new Exceptions.InvalidNepaliDateFormatException();
+                throw new InvalidNepaliDateFormatException();
             }
 
             Year = int.Parse(splitDate[0]);
@@ -130,6 +124,54 @@ namespace NepDate
                 return (NepaliMonths)Month;
             }
         }
+
+        public NepaliDate NextMonth(bool returnFirstDay = true)
+        {
+            var nextYear = Year;
+            var nextMonth = Month + 1;
+            var nextMonthDay = 1;
+
+            if (Month == 12)
+            {
+                nextYear++;
+                nextMonth = 1;
+            }
+
+            var nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
+
+            if (!returnFirstDay)
+            {
+                nextMonthDay = nextMonthNepDate.MonthEndDay < Day ? nextMonthNepDate.MonthEndDay : Day;
+                return new NepaliDate(nextYear, nextMonth, nextMonthDay);
+            }
+
+            return nextMonthNepDate;
+
+        }
+
+        public NepaliDate PreviousMonth(bool returnFirstDay = true)
+        {
+            var prevYear = Year;
+            var prevMonth = Month - 1;
+            var prevMonthDay = 1;
+
+            if (Month == 1)
+            {
+                prevYear--;
+                prevMonth = 12;
+            }
+
+            var prevMonthNepDate = new NepaliDate(prevYear, prevMonth, prevMonthDay);
+
+            if (!returnFirstDay)
+            {
+                prevMonthDay = prevMonthNepDate.MonthEndDay < Day ? prevMonthNepDate.MonthEndDay : Day;
+                return new NepaliDate(prevYear, prevMonth, prevMonthDay);
+            }
+
+            return prevMonthNepDate;
+        }
+
 
 
         /// <summary>
