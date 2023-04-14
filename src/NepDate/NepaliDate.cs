@@ -27,12 +27,12 @@ namespace NepDate
         /// <summary>
         /// Used internally for constructor validation
         /// </summary>
-        /// <exception cref="Exceptions.InvalidNepaliDateFormatException"></exception>
+        /// <exception cref="InvalidNepaliDateFormatException"></exception>
         private void ValidateAndThrow()
         {
             if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < Constants._minYear || Year > Constants._maxYear)
             {
-                throw new Exceptions.InvalidNepaliDateFormatException();
+                throw new InvalidNepaliDateFormatException();
             }
         }
 
@@ -56,12 +56,11 @@ namespace NepDate
         /// <param name="rawNepaliDate">The raw Nepali date string in the format "YYYY/MM/DD".</param>
         public NepaliDate(string rawNepaliDate)
         {
-            const byte dateLength = 10;
             const byte splitLength = 3;
 
             if (string.IsNullOrEmpty(rawNepaliDate))
             {
-                throw new Exceptions.InvalidNepaliDateArgumentException();
+                throw new InvalidNepaliDateArgumentException();
             }
 
             if (DateTime.TryParse(rawNepaliDate, out DateTime result))
@@ -69,17 +68,12 @@ namespace NepDate
                 rawNepaliDate = result.ToString("yyyy/MM/dd");
             }
 
-            if (rawNepaliDate.Length != dateLength)
-            {
-                throw new Exceptions.InvalidNepaliDateFormatException();
-            }
-
             string trimmedDate = rawNepaliDate.Trim().Replace("-", "/");
             string[] splitDate = trimmedDate.Split('/');
 
             if (splitDate.Length != splitLength)
             {
-                throw new Exceptions.InvalidNepaliDateFormatException();
+                throw new InvalidNepaliDateFormatException();
             }
 
             Year = int.Parse(splitDate[0]);
