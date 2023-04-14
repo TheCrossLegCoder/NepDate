@@ -1,6 +1,5 @@
 ﻿using System;
 using NepDate.Core;
-using NepDate.Core.Dictionaries;
 using NepDate.Core.Enums;
 using static NepDate.Exceptions;
 
@@ -117,19 +116,13 @@ namespace NepDate
         /// <summary>
         /// Gets the Nepali month full name.
         /// </summary>
-        public NepaliMonths MonthName
-        {
-            get
-            {
-                return (NepaliMonths)Month;
-            }
-        }
+        public NepaliMonths MonthName => (NepaliMonths)Month;
 
         public NepaliDate NextMonth(bool returnFirstDay = true)
         {
-            var nextYear = Year;
-            var nextMonth = Month + 1;
-            var nextMonthDay = 1;
+            int nextYear = Year;
+            int nextMonth = Month + 1;
+            int nextMonthDay = 1;
 
             if (Month == 12)
             {
@@ -137,7 +130,7 @@ namespace NepDate
                 nextMonth = 1;
             }
 
-            var nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
+            NepaliDate nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
 
             if (!returnFirstDay)
             {
@@ -151,9 +144,9 @@ namespace NepDate
 
         public NepaliDate PreviousMonth(bool returnFirstDay = true)
         {
-            var prevYear = Year;
-            var prevMonth = Month - 1;
-            var prevMonthDay = 1;
+            int prevYear = Year;
+            int prevMonth = Month - 1;
+            int prevMonthDay = 1;
 
             if (Month == 1)
             {
@@ -161,7 +154,7 @@ namespace NepDate
                 prevMonth = 12;
             }
 
-            var prevMonthNepDate = new NepaliDate(prevYear, prevMonth, prevMonthDay);
+            NepaliDate prevMonthNepDate = new NepaliDate(prevYear, prevMonth, prevMonthDay);
 
             if (!returnFirstDay)
             {
@@ -188,17 +181,17 @@ namespace NepDate
         /// <summary>
         /// Min year value
         /// </summary>
-        public static readonly int MinYear = 1986;
+        public static readonly int MinYear = Constants._minYear;
 
         /// <summary>
         /// Max year value
         /// </summary>
-        public static readonly int MaxYear = 2100;
+        public static readonly int MaxYear = Constants._maxYear;
 
         /// <summary>
         /// Represents the smallest possible value of a Nepali date.
         /// </summary>
-        public static readonly NepaliDate MinValue = Parse($"{Constants._minYear}/10/01");
+        public static readonly NepaliDate MinValue = Parse($"{Constants._minYear}/01/01");
 
         /// <summary>
         /// Represents the largest possible value of a Nepali date.
@@ -210,20 +203,26 @@ namespace NepDate
         /// </summary>
         /// <param name="nepDateTo">The Nepali date to subtract from this instance.</param>
         public TimeSpan Subtract(NepaliDate nepDateTo)
-            => this - nepDateTo;
+        {
+            return this - nepDateTo;
+        }
 
         /// <summary>
         /// Determines whether the current Nepali year is a leap year.
         /// </summary>
         public bool IsLeapYear()
-            => Year % 4 == 0 && (Year % 100 != 0 || Year % 400 == 0);
+        {
+            return Year % 4 == 0 && (Year % 100 != 0 || Year % 400 == 0);
+        }
 
         /// <summary>
         /// Returns a new Nepali date that adds the specified number of days to this instance.
         /// </summary>
         /// <param name="days">The number of days to add.</param>
         public NepaliDate AddDays(int days)
-            => EnglishDate.AddDays(days).ToNepaliDate();
+        {
+            return EnglishDate.AddDays(days).ToNepaliDate();
+        }
 
         /// <summary>
         /// Tries to parse the specified string representation of a Nepali date and returns a value indicating whether the parsing succeeded.
@@ -251,14 +250,18 @@ namespace NepDate
         /// <param name="rawNepDate">The raw Nepali date string in the format "YYYY/MM/DD".</param>
         /// <returns>A NepaliDate object that is equivalent to the Nepali date contained in rawNepDate.</returns>
         public static NepaliDate Parse(string rawNepDate)
-            => new NepaliDate(rawNepDate);
+        {
+            return new NepaliDate(rawNepDate);
+        }
 
         /// <summary>
         /// Returns a string that represents the current NepaliDate object in the format "yyyy/MM/dd".
         /// </summary>
         /// <returns>A string that represents the current NepaliDate object in the format "yyyy/MM/dd".</returns>
         public override string ToString()
-            => $"{Year:D4}/{Month:D2}/{Day:D2}";
+        {
+            return $"{Year:D4}/{Month:D2}/{Day:D2}";
+        }
 
         #region Operators
 
@@ -269,7 +272,9 @@ namespace NepDate
         /// <param name="d2">The second NepaliDate object to subtract.</param>
         /// <returns>A TimeSpan object representing the difference between d1 and d2.</returns>
         public static TimeSpan operator -(NepaliDate d1, NepaliDate d2)
-            => d1.EnglishDate.Subtract(d2.EnglishDate);
+        {
+            return d1.EnglishDate.Subtract(d2.EnglishDate);
+        }
 
         /// <summary>
         /// Determines whether two NepaliDate objects represent the same date.
@@ -278,7 +283,9 @@ namespace NepDate
         /// <param name="d2">The second NepaliDate object to compare.</param>
         /// <returns>true if d1 and d2 represent the same date; otherwise, false.</returns>
         public static bool operator ==(NepaliDate d1, NepaliDate d2)
-            => d1.AsInteger == d2.AsInteger;
+        {
+            return d1.AsInteger == d2.AsInteger;
+        }
 
         /// <summary>
         /// Determines whether two NepaliDate objects represent different dates.
@@ -287,7 +294,9 @@ namespace NepDate
         /// <param name="d2">The second NepaliDate object to compare.</param>
         /// <returns>true if d1 and d2 represent different dates; otherwise, false.</returns>
         public static bool operator !=(NepaliDate d1, NepaliDate d2)
-            => d1.AsInteger != d2.AsInteger;
+        {
+            return d1.AsInteger != d2.AsInteger;
+        }
 
         /// <summary>
         /// Determines whether one NepaliDate value is less than another NepaliDate value.
@@ -296,7 +305,9 @@ namespace NepDate
         /// <param name="t2">The second NepaliDate to compare.</param>
         /// <returns>true if t1 is less than t2; otherwise, false.</returns>
         public static bool operator <(NepaliDate t1, NepaliDate t2)
-            => t1.AsInteger < t2.AsInteger;
+        {
+            return t1.AsInteger < t2.AsInteger;
+        }
 
         /// <summary>
         /// Determines whether one NepaliDate value is less than or equal to another NepaliDate value.
@@ -305,7 +316,9 @@ namespace NepDate
         /// <param name="t2">The second NepaliDate to compare.</param>
         /// <returns>true if t1 is less than or equal to t2; otherwise, false.</returns>
         public static bool operator <=(NepaliDate t1, NepaliDate t2)
-            => t1.AsInteger <= t2.AsInteger;
+        {
+            return t1.AsInteger <= t2.AsInteger;
+        }
 
         /// <summary>
         /// Determines whether one NepaliDate value is greater than another NepaliDate value.
@@ -314,7 +327,9 @@ namespace NepDate
         /// <param name="t2">The second NepaliDate to compare.</param>
         /// <returns>true if t1 is greater than t2; otherwise, false.</returns>
         public static bool operator >(NepaliDate t1, NepaliDate t2)
-            => t1.AsInteger > t2.AsInteger;
+        {
+            return t1.AsInteger > t2.AsInteger;
+        }
 
         /// <summary>
         /// Determines whether one NepaliDate value is greater than or equal to another NepaliDate value.
@@ -323,7 +338,9 @@ namespace NepDate
         /// <param name="t2">The second NepaliDate to compare.</param>
         /// <returns>true if t1 is greater than or equal to t2; otherwise, false.</returns>
         public static bool operator >=(NepaliDate t1, NepaliDate t2)
-            => t1.AsInteger >= t2.AsInteger;
+        {
+            return t1.AsInteger >= t2.AsInteger;
+        }
 
         #endregion
 
@@ -333,7 +350,9 @@ namespace NepDate
         /// <param name="obj">The object to compare with the current instance.</param>
         /// <returns>true if the specified object is a NepaliDate and has the same value as the current instance; otherwise, false.</returns>
         public override bool Equals(object obj)
-            => obj is NepaliDate date && Equals(date);
+        {
+            return obj is NepaliDate date && Equals(date);
+        }
 
         /// <summary>
         /// Determines whether this NepaliDate instance is equal to another NepaliDate instance.
@@ -341,7 +360,9 @@ namespace NepDate
         /// <param name="other">The NepaliDate to compare with the current instance.</param>
         /// <returns>true if the specified NepaliDate has the same value as the current instance; otherwise, false.</returns>
         public bool Equals(NepaliDate other)
-            => AsInteger == other.AsInteger;
+        {
+            return AsInteger == other.AsInteger;
+        }
 
         /// <summary>
         /// Returns the hash code for this NepaliDate instance.
@@ -359,6 +380,8 @@ namespace NepDate
         }
 
         public int CompareTo(NepaliDate other)
-            => other.AsInteger.CompareTo(AsInteger);
+        {
+            return other.AsInteger.CompareTo(AsInteger);
+        }
     }
 }
