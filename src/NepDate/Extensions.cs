@@ -4,9 +4,11 @@ namespace NepDate
 {
     public static class Extensions
     {
-        public static NepaliDate ToNepaliDate(this DateTime englishDate)
-        {
-            return new NepaliDate(englishDate);
-        }
+        /// <summary>
+        /// Convert DateTime to NepaliDate
+        /// </summary>
+        /// <param name="englishDate">English Date</param>
+        /// <returns>Nepali Date</returns>
+        public static NepaliDate ToNepaliDate(this DateTime englishDate) => new NepaliDate(englishDate);
     }
 }
