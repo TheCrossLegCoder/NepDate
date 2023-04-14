@@ -1,6 +1,7 @@
 ﻿using System;
 using NepDate.Core;
 using NepDate.Core.Dictionaries;
+using NepDate.Core.Enums;
 using static NepDate.Exceptions;
 
 namespace NepDate
@@ -122,12 +123,13 @@ namespace NepDate
         /// <summary>
         /// Gets the Nepali month full name.
         /// </summary>
-        public string MonthName => NepaliMonths.Months[Month];
-
-        /// <summary>
-        /// Gets the Nepali month short name.
-        /// </summary>
-        public string MonthShortName => NepaliMonths.Months[Month].Substring(0, 3);
+        public NepaliMonths MonthName
+        {
+            get
+            {
+                return (NepaliMonths)Month;
+            }
+        }
 
 
         /// <summary>
@@ -154,7 +156,7 @@ namespace NepDate
         /// <summary>
         /// Represents the smallest possible value of a Nepali date.
         /// </summary>
-        public static readonly NepaliDate MinValue = Parse($"{Constants._minYear}/01/01");
+        public static readonly NepaliDate MinValue = Parse($"{Constants._minYear}/10/01");
 
         /// <summary>
         /// Represents the largest possible value of a Nepali date.
