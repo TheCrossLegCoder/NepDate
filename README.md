@@ -1,4 +1,4 @@
-![LogoWhiteCropped](https://user-images.githubusercontent.com/37014558/231635618-bf6599e3-554e-4b02-93df-019e7b8aecc3.png)
+d![LogoWhiteCropped](https://user-images.githubusercontent.com/37014558/231635618-bf6599e3-554e-4b02-93df-019e7b8aecc3.png)
 
 ![GitHub Repo Stars](https://img.shields.io/github/stars/TheCrossLegCoder/NepDate)
 
@@ -202,3 +202,5 @@ Intel Core i5-10400 CPU 2.90GHz, 1 CPU, 12 logical and 6 physical cores
 ## Contributions
 
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
+
+![Contributors](https://contrib.rocks/image?repo=TheCrossLegCoder/NepDate&anon=1)
