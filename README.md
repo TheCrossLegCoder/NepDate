@@ -10,13 +10,13 @@
 
 ## Installation
 
-#### Install NepDate with the package manager console
+### Install NepDate with the package manager console
 
 ```bash
 NuGet\Install-Package NepDate
 ```
 
-#### Install NepDate with the .NET CLI
+### Install NepDate with the .NET CLI
 
 ```bash
 dotnet add package NepDate
@@ -87,6 +87,9 @@ var monthEndDay = nepDate.MonthEndDay;
 
 // get the last day of the month as a NepaliDate object
 var monthEndDate = nepDate.MonthEndDate;
+
+// get the name of the month as a NepaliMonths enum
+var monthName = nepDate.MonthName;
 ```
 
 ### Additional Functions
@@ -104,6 +107,12 @@ var isLeapYear = nepDate.IsLeapYear();
 
 // add or subtract days from a Nepali date
 var newDate = nepDate.AddDays(10);
+
+// get next month as a NepDate object
+var nextMonth = nepDate.NextMonth();
+
+// get previous month as a NepDate object
+var nextMonth = nepDate.PreviousMonth();
 
 // subtract two Nepali dates to get a TimeSpan object
 var nepDate2 = new NepaliDate("2080/12/16");
