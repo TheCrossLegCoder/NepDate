@@ -115,9 +115,6 @@
     <Reference Include="NepaliDateConverter, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NepaliDateConverter.netstandard.1.0.1\lib\netstandard2.0\NepaliDateConverter.dll</HintPath>
     </Reference>
-    <Reference Include="NepDate">
-      <HintPath>..\..\src\NepDate\bin\Release\netstandard2.0\NepDate.dll</HintPath>
-    </Reference>
     <Reference Include="OSExtensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Diagnostics.Tracing.TraceEvent.3.0.2\lib\net462\OSExtensions.dll</HintPath>
     </Reference>
@@ -189,6 +186,12 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NepDate\NepDate.csproj">
+      <Project>{8ccc2cd6-5912-4565-a18f-1fa5e1ce5abb}</Project>
+      <Name>NepDate</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
