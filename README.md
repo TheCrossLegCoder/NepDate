@@ -211,5 +211,3 @@ Intel Core i5-10400 CPU 2.90GHz, 1 CPU, 12 logical and 6 physical cores
 ## Contributions
 
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
-
-![Contributors](https://contrib.rocks/image?repo=TheCrossLegCoder/NepDate&anon=1)
