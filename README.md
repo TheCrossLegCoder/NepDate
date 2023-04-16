@@ -208,6 +208,6 @@ Intel Core i5-10400 CPU 2.90GHz, 1 CPU, 12 logical and 6 physical cores
 | NepaliCalendar `BS -> AD`      | 169,622.5 |     377.10 |      334.29 |   5️⃣ |           230 |
 | NepaliCalendar `AD -> BS`      | 488,003.8 |   1,433.94 |    1,271.15 |   6️⃣ |           312 |
 
-## Contributions
+### Contributions
 
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
