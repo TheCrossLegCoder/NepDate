@@ -100,7 +100,7 @@ using NepDate;
 var nepDate = DateTime.Now.ToNepaliDate();
 
 // get the equivalent Nepali date as string
-var nepDateAsString = nepDate.ToString();
+var nepDateAsString = nepDate.Value;
 
 // determine if the Nepali year is a leap year
 var isLeapYear = nepDate.IsLeapYear();
@@ -159,7 +159,7 @@ if (nepDate > nepDate2)
 using NepDate;
 
 // Convert a DateTime directly to a NepaliDate string
-var convertedToBS = DateTime.Now.ToNepaliDate().ToString();
+var convertedToBS = DateTime.Now.ToNepaliDate().Value;
 
 // Convert a NepaliDate string directly to a DateTime
 var convertedToAD = NepaliDate.Parse("2079/12/16").EnglishDate;
