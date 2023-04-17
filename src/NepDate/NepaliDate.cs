@@ -21,7 +21,16 @@ namespace NepDate
         /// Day as integer
         /// </summary>
         public int Day { get; }
+
+        /// <summary>
+        /// Return English Date equivalent of the initialized Nepali Date
+        /// </summary>
         public DateTime EnglishDate { get; }
+
+        /// <summary>
+        /// Returns a string that represents the current NepaliDate object in the format "yyyy/MM/dd".
+        /// </summary>
+        public string Value => $"{Year:D4}/{Month:D2}/{Day:D2}";
 
         /// <summary>
         /// Used internally for constructor validation
@@ -165,8 +174,6 @@ namespace NepDate
             return prevMonthNepDate;
         }
 
-
-
         /// <summary>
         /// Gets the integer representation of this Nepali date in the format "YYYYMMDD".
         /// </summary>
@@ -252,15 +259,6 @@ namespace NepDate
         public static NepaliDate Parse(string rawNepDate)
         {
             return new NepaliDate(rawNepDate);
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current NepaliDate object in the format "yyyy/MM/dd".
-        /// </summary>
-        /// <returns>A string that represents the current NepaliDate object in the format "yyyy/MM/dd".</returns>
-        public override string ToString()
-        {
-            return $"{Year:D4}/{Month:D2}/{Day:D2}";
         }
 
         #region Operators

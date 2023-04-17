@@ -23,6 +23,6 @@ namespace NepDate.DotNetFrameworkBench
         public DateTime GetEngDate_NepDate() => new NepaliDate(2079, 12, 12).EnglishDate;
 
         [Benchmark]
-        public string GetNepDate_NepDate() => new NepaliDate(DateTime.Now).ToString();
+        public string GetNepDate_NepDate() => new NepaliDate(DateTime.Now).Value;
     }
 }

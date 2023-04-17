@@ -10,7 +10,7 @@ public class Benchmarks
     public DateTime GetEngDate_NepDate() => new NepaliDate(2079, 12, 12).EnglishDate;
 
     [Benchmark]
-    public string GetNepDate_NepDate() => new NepaliDate(DateTime.Now).ToString();
+    public string GetNepDate_NepDate() => new NepaliDate(DateTime.Now).Value;
 
     [Benchmark]
     public void GetEngDate_NepaliDateConverter_NETCORE() => NepaliDateConverter.DateConverter.ConvertToEnglish(2079, 12, 12);
