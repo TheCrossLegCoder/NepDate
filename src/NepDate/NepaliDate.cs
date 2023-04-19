@@ -111,13 +111,18 @@ namespace NepDate
         /// Gets the Nepali date representing the last day of the month.
         /// </summary>
         public NepaliDate MonthEndDate
-            => Parse($"{Year:D4}/{Month:D2}/{MonthEndDay:D2}");
+            => new NepaliDate(Year, Month, MonthEndDay);
 
         /// <summary>
-        /// Gets the Nepali month full name.
+        /// Gets the Nepali month full name based on the current Nepali date object.
         /// </summary>
         public NepaliMonths MonthName => (NepaliMonths)Month;
 
+        /// <summary>
+        /// Calculates the Nepali date for the next month based on the current Nepali date object.
+        /// </summary>
+        /// <param name="returnFirstDay">A boolean indicating whether to return the first day of the next month.</param>
+        /// <returns>A NepaliDate object representing the Nepali date for the next month.</returns>
         public NepaliDate NextMonth(bool returnFirstDay = true)
         {
             int nextYear = Year;
@@ -139,9 +144,13 @@ namespace NepDate
             }
 
             return nextMonthNepDate;
-
         }
 
+        // <summary>
+        /// Calculates the Nepali date for the previous month based on the current Nepali date object.
+        /// </summary>
+        /// <param name="returnFirstDay">A boolean indicating whether to return the first day of the previous month.</param>
+        /// <returns>A NepaliDate object representing the Nepali date for the previous month.</returns>
         public NepaliDate PreviousMonth(bool returnFirstDay = true)
         {
             int prevYear = Year;
