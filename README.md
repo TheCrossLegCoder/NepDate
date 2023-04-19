@@ -112,7 +112,7 @@ var newDate = nepDate.AddDays(10);
 var nextMonth = nepDate.NextMonth();
 
 // get previous month as a NepDate object
-var nextMonth = nepDate.PreviousMonth();
+var prevMonth = nepDate.PreviousMonth();
 
 // subtract two Nepali dates to get a TimeSpan object
 var nepDate2 = new NepaliDate("2080/12/16");

@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>NepDate</Title>
     <Authors>TheCrossLegCoder</Authors>
-    <Description>Super-fast and memory-efficient Nepali Date struct with powerful features that closely resembles the DateOnly struct in .NET</Description>
+    <Description>Super-fast and memory-efficient Nepali Date struct with built in nepali date converter and additional powerful features</Description>
     <PackageReadmeFile></PackageReadmeFile>
     <RepositoryUrl>https://github.com/TheCrossLegCoder/NepDate</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -13,10 +13,16 @@
     <PackageProjectUrl>https://github.com/TheCrossLegCoder/NepDate</PackageProjectUrl>
     <PackageIcon>nuget-icon.png</PackageIcon>
     <Version>1.1.0</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Copyright © 2023 NepDate</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="Assets\nuget-icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
