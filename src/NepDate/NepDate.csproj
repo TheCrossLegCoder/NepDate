@@ -12,7 +12,7 @@
     <PackageTags>Nepali-Date-Converter;Nepali-Date;Nepali-Calendar;NepDate;Date-Converter;Patro;Hamro-Patro;Nepali-Patro;Nepal</PackageTags>
     <PackageProjectUrl>https://github.com/TheCrossLegCoder/NepDate</PackageProjectUrl>
     <PackageIcon>nuget-icon.png</PackageIcon>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright>Copyright © 2023 NepDate</Copyright>
   </PropertyGroup>
