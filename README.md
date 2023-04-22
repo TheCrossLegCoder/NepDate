@@ -241,5 +241,3 @@ https://github.com/TheCrossLegCoder/NepDate/releases
 ## Contributions
 
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
-
-![Contributors](https://contrib.rocks/image?repo=TheCrossLegCoder/NepDate&anon=1)
