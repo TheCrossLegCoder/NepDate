@@ -55,29 +55,41 @@ namespace NepDate
         /// <param name="rawNepaliDate">The raw Nepali date string in the format "YYYY/MM/DD".</param>
         public NepaliDate(string rawNepaliDate)
         {
-            const byte splitLength = 3;
+            (Year, Month, Day) = SplitNepaliDate(rawNepaliDate);
 
-            if (string.IsNullOrEmpty(rawNepaliDate))
+            EnglishDate = Handlers.NepToEng.GetEnglishDate(Year, Month, Day);
+
+            ValidateAndThrow();
+        }
+
+        public NepaliDate(string rawNepaliDate, bool autoAdjust, bool monthInMiddle = true)
+        {
+            const int currentMillennium = 2;
+
+            (Year, Month, Day) = SplitNepaliDate(rawNepaliDate);
+
+            if (autoAdjust)
             {
-                throw new InvalidNepaliDateArgumentException();
+                if (Day.ToString().Length >= 3 || Day > 32)
+                {
+                    (Year, Day) = (Day, Year);
+                }
+
+                if (!monthInMiddle)
+                {
+                    (Month, Day) = (Day, Month);
+                }
+
+                if (Month > 12 && Day < 12)
+                {
+                    (Month, Day) = (Day, Month);
+                }
+
+                if (Year.ToString().Length <= 3)
+                {
+                    Year = int.Parse(string.Concat(currentMillennium.ToString(), Year.ToString("D3")));
+                }
             }
-
-            if (DateTime.TryParse(rawNepaliDate, out DateTime result))
-            {
-                rawNepaliDate = result.ToString("yyyy/MM/dd");
-            }
-
-            string trimmedDate = rawNepaliDate.Trim().Replace("-", "/");
-            string[] splitDate = trimmedDate.Split('/');
-
-            if (splitDate.Length != splitLength)
-            {
-                throw new InvalidNepaliDateFormatException();
-            }
-
-            Year = int.Parse(splitDate[0]);
-            Month = int.Parse(splitDate[1]);
-            Day = int.Parse(splitDate[2]);
 
             EnglishDate = Handlers.NepToEng.GetEnglishDate(Year, Month, Day);
 
@@ -243,7 +255,21 @@ namespace NepDate
         {
             try
             {
-                result = new NepaliDate(rawNepDate);
+                result = Parse(rawNepDate);
+                return true;
+            }
+            catch
+            {
+                result = default;
+                return false;
+            }
+        }
+
+        public static bool TryParse(string rawNepDate, out NepaliDate result, bool autoAdjust, bool monthInMiddle = true)
+        {
+            try
+            {
+                result = Parse(rawNepDate, autoAdjust, monthInMiddle);
                 return true;
             }
             catch
@@ -258,10 +284,34 @@ namespace NepDate
         /// </summary>
         /// <param name="rawNepDate">The raw Nepali date string in the format "YYYY/MM/DD".</param>
         /// <returns>A NepaliDate object that is equivalent to the Nepali date contained in rawNepDate.</returns>
-        public static NepaliDate Parse(string rawNepDate)
+        public static NepaliDate Parse(string rawNepaliDate)
         {
-            return new NepaliDate(rawNepDate);
+            return new NepaliDate(rawNepaliDate);
         }
+
+        public static NepaliDate Parse(string rawNepaliDate, bool autoAdjust, bool monthInMiddle = true)
+        {
+            return new NepaliDate(rawNepaliDate, autoAdjust, monthInMiddle);
+        }
+
+        private static (int year, int month, int day) SplitNepaliDate(string rawNepaliDate)
+        {
+            const byte splitLength = 3;
+            if (string.IsNullOrEmpty(rawNepaliDate))
+            {
+                throw new InvalidNepaliDateArgumentException();
+            }
+
+            string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/");
+            string[] splitDate = trimmedDate.Split('/');
+
+            if (splitDate.Length != splitLength)
+            {
+                throw new InvalidNepaliDateFormatException();
+            }
+            return (int.Parse(splitDate[0]), int.Parse(splitDate[1]), int.Parse(splitDate[2]));
+        }
+
 
         /// <summary>
         /// Returns a string that represents the current NepaliDate object in the format "yyyy/MM/dd".

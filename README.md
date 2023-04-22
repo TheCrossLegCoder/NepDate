@@ -71,25 +71,25 @@ using NepDate;
 
 var nepDate = new NepaliDate("2079/12/16");
 
-// get the Nepali year, month, and day values
-var year = nepDate.Year;
-var month = nepDate.Month;
-var day = nepDate.Day;
+// get Nepali year, month, and day values
+var year = nepDate.Year; // 2079
+var month = nepDate.Month; // 12
+var day = nepDate.Day; // 16
 
 // get the equivalent English date as a DateTime
-var englishDate = nepDate.EnglishDate;
+var englishDate = nepDate.EnglishDate; // 2023/03/30
 
 // get the day of the week as a DayOfWeek enum value
-var dayOfWeek = nepDate.DayOfWeek;
+var dayOfWeek = nepDate.DayOfWeek; // Thursday
 
 // get the last day of the month as an integer value
-var monthEndDay = nepDate.MonthEndDay;
+var monthEndDay = nepDate.MonthEndDay; // 30
 
 // get the last day of the month as a NepaliDate object
-var monthEndDate = nepDate.MonthEndDate;
+var monthEndDate = nepDate.MonthEndDate; // 2079/12/30
 
 // get the name of the month as a NepaliMonths enum
-var monthName = nepDate.MonthName;
+var monthName = nepDate.MonthName; // Chaitra
 ```
 
 ### Additional Functions
@@ -97,28 +97,30 @@ var monthName = nepDate.MonthName;
 ```csharp
 using NepDate;
 
-var nepDate = DateTime.Now.ToNepaliDate();
+var nepDate = new NepaliDate("2079/12/16");
 
 // get the equivalent Nepali date as string
-var nepDateAsString = nepDate.ToString();
+var nepDateAsString = nepDate.ToString(); // 2079/12/16
 
 // determine if the Nepali year is a leap year
-var isLeapYear = nepDate.IsLeapYear();
+var isLeapYear = nepDate.IsLeapYear(); // False
 
 // add or subtract days from a Nepali date
-var newDate = nepDate.AddDays(10);
+var newDate = nepDate.AddDays(30); // 2080/01/16
 
-// get next month as a NepDate object
-var nextMonth = nepDate.NextMonth();
+// get next month as a NepaliDate object
+var nextMonth = nepDate.NextMonth(); // NepaliDate obj with value 2080/01/01
+var nextMonth = nepDate.NextMonth(returnFirstDay: false); // NepaliDate obj with value 2080/01/16
 
-// get previous month as a NepDate object
-var prevMonth = nepDate.PreviousMonth();
+// get previous month as a NepaliDate object
+var prevMonth = nepDate.PreviousMonth(); // NepaliDate obj with value 2079/11/01
+var prevMonth = nepDate.PreviousMonth(returnFirstDay: false); // NepaliDate obj with value 2079/11/16
 
 // subtract two Nepali dates to get a TimeSpan object
 var nepDate2 = new NepaliDate("2080/12/16");
-var timeSpan = nepDate2 - nepDate;
+var timeSpan = nepDate2 - nepDate; // Timespan object with value 365.00:00:00
 // or
-var timeSpan = nepDate2.Subtract(nepDate);
+var timeSpan = nepDate2.Subtract(nepDate); // Timespan object with value 365.00:00:00
 
 // check if a string is a valid Nepali date and convert it to a NepaliDate object
 if (NepaliDate.TryParse("2079/13/16", out var result))
@@ -165,6 +167,29 @@ var convertedToBS = DateTime.Now.ToNepaliDate().ToString();
 var convertedToAD = NepaliDate.Parse("2079/12/16").EnglishDate;
 ```
 
+### Parsing Nepali Date With `AutoAdjust`
+```csharp
+// Parsing will try it's best to accurately identify the year, month and day
+// And returns the date in the standard format of "yyyy/MM/dd"
+// Below exmaples will demonstrate the probabilities.
+
+
+// Replaces "_" To "/", Returns without adjusting if is already adjusted
+var nepDate = NepaliDate.Parse("2077_05_25", autoAdjust: true); // 2077/05/25
+
+// Replaces "-" To "/", Identifies '25' as day, '05' as month and '077' as year '2077'
+var nepDate = NepaliDate.Parse("25-05-077", autoAdjust: true); // 2077/05/25
+
+// Replaces "." To "/", Identifies '05' as month and '25' as day
+var nepDate = NepaliDate.Parse("05.25.2077", autoAdjust: true); // 2077/05/25
+
+// As '06' is on middle, Identifies it as month and '05' as day
+var nepDate = NepaliDate.Parse("05/06/2077", autoAdjust: true); // 2077/06/05
+
+// Identifies '05' as month due to parm 'monthInMiddle = false' and '06' as day
+var nepDate = NepaliDate.Parse("05/06/2077", autoAdjust: true, monthInMiddle: false); // 2077/05/06
+```
+
 ## Performance
 
 NepDate is distinguished by its capacity to perform with exceptional speed while utilizing minimal runtime memory resources. The metrics presented below exemplify NepDate's remarkable efficiency and proficiency, while remaining mindful of resource consumption.
@@ -208,6 +233,11 @@ Intel Core i5-10400 CPU 2.90GHz, 1 CPU, 12 logical and 6 physical cores
 | NepaliCalendar `BS -> AD`      | 169,622.5 |     377.10 |      334.29 |   5️⃣ |           230 |
 | NepaliCalendar `AD -> BS`      | 488,003.8 |   1,433.94 |    1,271.15 |   6️⃣ |           312 |
 
-### Contributions
+
+## Change logs
+https://github.com/TheCrossLegCoder/NepDate/releases
+
+
+## Contributions
 
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
