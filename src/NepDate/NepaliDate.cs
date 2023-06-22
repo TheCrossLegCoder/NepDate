@@ -186,7 +186,25 @@ namespace NepDate
             return prevMonthNepDate;
         }
 
+        public NepaliDate FinancialYearStartDate(int yearAdjustment = 0)
+        {
+            if (Month <= 3)
+            {
+                yearAdjustment--;
+            }
+            return new NepaliDate(Year + yearAdjustment, 4, 1);
+        }
 
+        public NepaliDate FinancialYearEndDate(int yearAdjustment = 0)
+        {
+            if(Month >= 4)
+            {
+                yearAdjustment++;
+            }
+            var endDate = new NepaliDate(Year + yearAdjustment, 3, 1);
+            endDate = endDate.MonthEndDate;
+            return endDate;
+        }
 
         /// <summary>
         /// Gets the integer representation of this Nepali date in the format "YYYYMMDD".
