@@ -350,7 +350,7 @@ namespace NepDate
         /// <returns>A TimeSpan object representing the difference between d1 and d2.</returns>
         public static TimeSpan operator -(NepaliDate d1, NepaliDate d2)
         {
-            return d1.EnglishDate.Subtract(d2.EnglishDate);
+            return d1.EnglishDate.Date.Subtract(d2.EnglishDate.Date);
         }
 
         /// <summary>
