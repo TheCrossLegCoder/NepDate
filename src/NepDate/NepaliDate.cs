@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NepDate.Core;
 using NepDate.Core.Enums;
 using static NepDate.Exceptions;
@@ -131,60 +133,141 @@ namespace NepDate
         public NepaliMonths MonthName => (NepaliMonths)Month;
 
         /// <summary>
-        /// Calculates the Nepali date for the next month based on the current Nepali date object.
+        /// Adds months based on the current Nepali date object.
         /// </summary>
         /// <param name="returnFirstDay">A boolean indicating whether to return the first day of the next month.</param>
         /// <returns>A NepaliDate object representing the Nepali date for the next month.</returns>
-        public NepaliDate NextMonth(bool returnFirstDay = true)
+        public NepaliDate AddMonths(double months, bool nextMonthIfMonthEnd = false)
         {
+            int roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
+
+            if (months != roundedMonths)
+            {
+                return AddDays(Math.Round(months * 30.41666666666667, 0, MidpointRounding.AwayFromZero));
+            }
+
+            bool returnFirstDay = false;//added for future
+
             int nextYear = Year;
-            int nextMonth = Month + 1;
+            int nextMonth = Month + roundedMonths;
             int nextMonthDay = 1;
 
-            if (Month == 12)
+            if (nextMonth > 12)
             {
                 nextYear++;
                 nextMonth = 1;
             }
 
-            NepaliDate nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
+            var nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
 
-            if (!returnFirstDay)
+            if (returnFirstDay)
             {
-                nextMonthDay = nextMonthNepDate.MonthEndDay < Day ? nextMonthNepDate.MonthEndDay : Day;
-                return new NepaliDate(nextYear, nextMonth, nextMonthDay);
+                return nextMonthNepDate;
             }
 
-            return nextMonthNepDate;
-        }
+            if (nextMonthIfMonthEnd)
+            {
+                if (Day > nextMonthNepDate.MonthEndDay)
+                {
+                    nextMonthDay = Day - nextMonthNepDate.MonthEndDay;
+                    nextMonth++;
 
-        // <summary>
-        /// Calculates the Nepali date for the previous month based on the current Nepali date object.
-        /// </summary>
-        /// <param name="returnFirstDay">A boolean indicating whether to return the first day of the previous month.</param>
-        /// <returns>A NepaliDate object representing the Nepali date for the previous month.</returns>
-        public NepaliDate PreviousMonth(bool returnFirstDay = true)
+                    if (nextMonth > 12)
+                    {
+                        nextYear++;
+                        nextMonth = 1;
+                    }
+                }
+                else
+                {
+                    nextMonthDay = Day;
+                }
+            }
+            else
+            {
+                nextMonthDay = Math.Min(nextMonthNepDate.MonthEndDay, Day);
+            }
+
+            return new NepaliDate(nextYear, nextMonth, nextMonthDay);
+        }
+        public NepaliDate SubtractMonths(double months, bool previousMonthIfMonthStart = false)
         {
-            int prevYear = Year;
-            int prevMonth = Month - 1;
-            int prevMonthDay = 1;
-
-            if (Month == 1)
+            if (months != Math.Round(months, 0, MidpointRounding.AwayFromZero))
             {
-                prevYear--;
-                prevMonth = 12;
+                return AddDays(-Math.Round(months * 30.41666666666667, 0, MidpointRounding.AwayFromZero));
             }
 
-            NepaliDate prevMonthNepDate = new NepaliDate(prevYear, prevMonth, prevMonthDay);
+            bool returnFirstDay = false;//added for future
 
-            if (!returnFirstDay)
+            int previousYear = Year;
+            int previousMonth = Month - (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
+            int previousMonthDay = 1;
+
+            if (previousMonth <= 0)
             {
-                prevMonthDay = prevMonthNepDate.MonthEndDay < Day ? prevMonthNepDate.MonthEndDay : Day;
-                return new NepaliDate(prevYear, prevMonth, prevMonthDay);
+                previousYear--;
+                previousMonth = 12;
             }
 
-            return prevMonthNepDate;
+            var previousMonthNepDate = new NepaliDate(previousYear, previousMonth, previousMonthDay);
+            if (returnFirstDay)
+            {
+                return previousMonthNepDate;
+            }
+
+            if (previousMonthIfMonthStart)
+            {
+                if (Day > previousMonthNepDate.MonthEndDay)
+                {
+                    previousMonthDay = previousMonthNepDate.MonthEndDay - (Day - previousMonthNepDate.MonthEndDay);
+                    previousMonth--;
+
+                    if (previousMonth <= 0)
+                    {
+                        previousYear--;
+                        previousMonth = 12;
+                    }
+                }
+                else
+                {
+                    previousMonthDay = Day;
+                }
+            }
+            else
+            {
+                previousMonthDay = Math.Min(previousMonthNepDate.MonthEndDay, Day);
+            }
+
+            return new NepaliDate(previousYear, previousMonth, previousMonthDay);
         }
+
+        //// <summary>
+        ///// Calculates the Nepali date for the previous month based on the current Nepali date object.
+        ///// </summary>
+        ///// <param name="returnFirstDay">A boolean indicating whether to return the first day of the previous month.</param>
+        ///// <returns>A NepaliDate object representing the Nepali date for the previous month.</returns>
+        //public NepaliDate PreviousMonth(bool returnFirstDay = true)
+        //{
+        //    int prevYear = Year;
+        //    int prevMonth = Month - 1;
+        //    int prevMonthDay = 1;
+
+        //    if (Month == 1)
+        //    {
+        //        prevYear--;
+        //        prevMonth = 12;
+        //    }
+
+        //    NepaliDate prevMonthNepDate = new NepaliDate(prevYear, prevMonth, prevMonthDay);
+
+        //    if (!returnFirstDay)
+        //    {
+        //        prevMonthDay = prevMonthNepDate.MonthEndDay < Day ? prevMonthNepDate.MonthEndDay : Day;
+        //        return new NepaliDate(prevYear, prevMonth, prevMonthDay);
+        //    }
+
+        //    return prevMonthNepDate;
+        //}
 
         public NepaliDate FinancialYearStartDate(int yearAdjustment = 0)
         {
@@ -197,7 +280,7 @@ namespace NepDate
 
         public NepaliDate FinancialYearEndDate(int yearAdjustment = 0)
         {
-            if(Month >= 4)
+            if (Month >= 4)
             {
                 yearAdjustment++;
             }
@@ -258,7 +341,7 @@ namespace NepDate
         /// Returns a new Nepali date that adds the specified number of days to this instance.
         /// </summary>
         /// <param name="days">The number of days to add.</param>
-        public NepaliDate AddDays(int days)
+        public NepaliDate AddDays(double days)
         {
             return EnglishDate.AddDays(days).ToNepaliDate();
         }
@@ -459,6 +542,24 @@ namespace NepDate
         public int CompareTo(NepaliDate other)
         {
             return other.AsInteger.CompareTo(AsInteger);
+        }
+
+        public class BulkConvert
+        {
+            public static List<NepaliDate> ToNepaliDate(List<DateTime> engDates)
+            {
+                return engDates.Select(item => new NepaliDate(item)).ToList();
+            }
+
+            public static List<DateTime> ToEnglishDate(List<string> nepDates)
+            {
+                return nepDates.Select(item => Parse(item).EnglishDate).ToList();
+            }
+
+            public static List<DateTime> ToEnglishDate(List<NepaliDate> nepDates)
+            {
+                return nepDates.Select(item => item.EnglishDate).ToList();
+            }
         }
     }
 }
