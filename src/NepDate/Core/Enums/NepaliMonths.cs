@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NepDate.Core.Enums
+﻿namespace NepDate.Core.Enums
 {
     public enum NepaliMonths
     {

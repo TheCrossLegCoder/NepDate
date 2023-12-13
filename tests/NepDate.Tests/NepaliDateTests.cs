@@ -1,4 +1,6 @@
-﻿namespace NepDate.Tests;
+﻿using NepDate.Exceptions;
+
+namespace NepDate.Tests;
 
 public class NepaliDateTests
 {
@@ -11,7 +13,7 @@ public class NepaliDateTests
         int day = 32;
 
         // Act and Assert
-        _ = Assert.Throws<Exceptions.InvalidNepaliDateFormatException>(() => new NepaliDate(year, month, day));
+        _ = Assert.Throws<NepDateException.InvalidNepaliDateFormatException>(() => new NepaliDate(year, month, day));
     }
 
     [Theory]

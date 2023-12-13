@@ -1,10 +1,9 @@
 ﻿using System;
-using NepDate.Core.Dictionaries;
-using static NepDate.Exceptions;
+using static NepDate.Exceptions.NepDateException;
 
-namespace NepDate.Core
+namespace NepDate.Core.Dictionaries
 {
-    internal static class Handlers
+    internal static class DictionaryBridge
     {
         internal static class NepToEng
         {

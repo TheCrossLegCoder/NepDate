@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NepDate
+namespace NepDate.Extensions
 {
     public static class Extensions
     {

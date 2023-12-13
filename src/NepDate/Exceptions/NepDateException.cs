@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NepDate
+namespace NepDate.Exceptions
 {
-    public sealed class Exceptions
+    public sealed class NepDateException
     {
         public sealed class InvalidNepaliDateFormatException : FormatException
         {
