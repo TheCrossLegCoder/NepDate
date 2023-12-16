@@ -9,7 +9,7 @@ using static NepDate.Exceptions.NepDateException;
 
 namespace NepDate
 {
-    public readonly partial struct NepaliDate : IComparable<NepaliDate>, IEquatable<NepaliDate>
+    public readonly partial struct NepaliDate
     {
         #region Ctor
         /// <summary>
@@ -109,6 +109,11 @@ namespace NepDate
         /// <returns>A NepaliDate object representing the Nepali date for the next month.</returns>
         public NepaliDate AddMonths(double months, bool awayFromMonthEnd = false)
         {
+            if (months < 0)
+            {
+                return SubtractMonths(Math.Abs(months), awayFromMonthEnd);
+            }
+
             int roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
 
             if (months != roundedMonths)
@@ -170,6 +175,11 @@ namespace NepDate
         /// <returns></returns>
         public NepaliDate SubtractMonths(double months, bool awayFromMonthEnd = false)
         {
+            if (months < 0)
+            {
+                return AddMonths(Math.Abs(months), awayFromMonthEnd);
+            }
+
             int roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
 
             if (months != roundedMonths)
@@ -260,13 +270,14 @@ namespace NepDate
                 throw new InvalidNepaliDateArgumentException();
             }
 
-            string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/");
+            string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/").Replace("\\", "/").Replace(" ", "/");
             string[] splitDate = trimmedDate.Split('/');
 
             if (splitDate.Length != splitLength)
             {
                 throw new InvalidNepaliDateFormatException();
             }
+
             return (int.Parse(splitDate[0]), int.Parse(splitDate[1]), int.Parse(splitDate[2]));
         }
     }

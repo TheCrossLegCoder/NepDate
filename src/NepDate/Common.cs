@@ -1,10 +1,12 @@
-﻿using System;
+﻿using NepDate.Core.Enums;
+using NepDate.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NepDate
 {
-    public partial struct NepaliDate
+    public partial struct NepaliDate : IFormattable, IComparable<NepaliDate>, IEquatable<NepaliDate>
     {
         /// <summary>
         /// Gets the integer representation of this Nepali date in the format "YYYYMMDD".
@@ -19,6 +21,85 @@ namespace NepDate
         public override string ToString()
         {
             return $"{Year:D4}/{Month:D2}/{Day:D2}";
+        }
+
+        public string ToString(DateFormats dateFormat = DateFormats.YearMonthDay, Separators separator = Separators.ForwardSlash, bool leadingZeros = true, bool displayMonthName = false)
+        {
+            (var yearStr, var monthStr, var dayStr) = (GetLeadedString(Year, true), GetLeadedString(Month, isMonth: true), GetLeadedString(Day));
+
+            var separatorStr = GetSeparatorStr();
+
+
+            switch (dateFormat)
+            {
+                case DateFormats.YearMonthDay: return AddSeparators(yearStr, monthStr, dayStr);
+                case DateFormats.YearDayMonth: return AddSeparators(yearStr, dayStr, monthStr);
+                case DateFormats.MonthDayYear: return AddSeparators(monthStr, dayStr, yearStr);
+                case DateFormats.MonthYearDay: return AddSeparators(monthStr, yearStr, dayStr);
+                case DateFormats.DayMonthYear: return AddSeparators(dayStr, monthStr, yearStr);
+                case DateFormats.DayYearMonth: return AddSeparators(dayStr, yearStr, monthStr);
+                default:
+                    throw new NepDateException.InvalidNepaliDateArgumentException();
+            }
+
+
+            string GetSeparatorStr()
+            {
+                switch (separator)
+                {
+                    case Separators.ForwardSlash: return "/";
+                    case Separators.BackwardSlash: return "\\";
+                    case Separators.Dash: return "-";
+                    case Separators.Dot: return ".";
+                    case Separators.Underscore: return "_";
+                    case Separators.Space: return " ";
+                    default:
+                        throw new NepDateException.InvalidNepaliDateArgumentException();
+                }
+            }
+
+            string AddSeparators(string firstPart, string secondPart, string thirdPart)
+            {
+                return $"{firstPart}{separatorStr}{secondPart}{separatorStr}{thirdPart}";
+            }
+
+            string GetLeadedString(int datePart, bool isYear = false, bool isMonth = false)
+            {
+                if (isMonth && displayMonthName)
+                {
+                    return ((NepaliMonths)datePart).ToString();
+                }
+
+                return leadingZeros ? (isYear ? $"{datePart:D4}" : $"{datePart:D2}") : $"{datePart}";
+            }
+        }
+
+        public string ToUnicodeString(DateFormats dateFormat = DateFormats.YearMonthDay, Separators separator = Separators.ForwardSlash, bool leadingZeros = true, bool displayMonthName = false)
+        {
+            return ConvertToNepaliUnicode(ToString(dateFormat, separator, leadingZeros, displayMonthName));
+        }
+
+        private string ConvertToNepaliUnicode(string date)
+        {
+            string[] nepaliDigits = { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
+            var nepaliUnicode = new StringBuilder();
+
+            // Convert each digit in the number to Nepali Unicode
+            foreach (char digit in date.ToString())
+            {
+                if (char.IsDigit(digit))
+                {
+                    int digitValue = int.Parse(digit.ToString());
+                    nepaliUnicode.Append(nepaliDigits[digitValue]);
+                }
+                else
+                {
+                    // Handle non-digit characters if needed
+                    nepaliUnicode.Append(digit);
+                }
+            }
+
+            return nepaliUnicode.ToString();
         }
 
         #region Operators
@@ -140,6 +221,11 @@ namespace NepDate
         public int CompareTo(NepaliDate other)
         {
             return other.AsInteger.CompareTo(AsInteger);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            throw new NotImplementedException();
         }
     }
 }
