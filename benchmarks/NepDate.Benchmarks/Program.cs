@@ -11,7 +11,7 @@ internal class Program
         //var remainingDaysOnThisMonth = today.MonthEndDay - today.Day;
         //Console.WriteLine(remainingDaysOnThisMonth.ToString());
 
-        var nepDateAddMonthTest1 = NepDate.NepaliDate.Parse("2080/08/30").AddMonths(1, true);
+        var nepDateAddMonthTest1 = NepDate.NepaliDate.Parse("2080/08/30").SubtractMonths(36, true);
         var nepDateAddMonthTest3 = NepDate.NepaliDate.Parse("2080/09/29").AddMonths(1, false);
 
 

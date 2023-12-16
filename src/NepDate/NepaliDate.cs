@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NepDate.Core.Constants;
+﻿using NepDate.Core.Constants;
 using NepDate.Core.Dictionaries;
-using NepDate.Core.Enums;
 using NepDate.Extensions;
+using System;
 using static NepDate.Exceptions.NepDateException;
 
 namespace NepDate
@@ -127,10 +124,11 @@ namespace NepDate
             int nextMonth = Month + roundedMonths;
             int nextMonthDay = 1;
 
-            if (nextMonth > 12)
+
+            while (nextMonth > 12)
             {
                 nextYear++;
-                nextMonth = 1;
+                nextMonth -= 12;
             }
 
             var nextMonthNepDate = new NepaliDate(nextYear, nextMonth, nextMonthDay);
@@ -193,10 +191,16 @@ namespace NepDate
             int previousMonth = Month - roundedMonths;
             int previousMonthDay = 1;
 
-            if (previousMonth < 1)
+            //if (previousMonth < 1)
+            //{
+            //    previousYear--;
+            //    previousMonth = 12;
+            //}
+
+            while (previousMonth < 1)
             {
                 previousYear--;
-                previousMonth = 12;
+                previousMonth = previousMonth + 12;
             }
 
             var previousMonthNepDate = new NepaliDate(previousYear, previousMonth, previousMonthDay);

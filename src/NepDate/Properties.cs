@@ -1,8 +1,6 @@
 ﻿using NepDate.Core.Dictionaries;
 using NepDate.Core.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NepDate
 {

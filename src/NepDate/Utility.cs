@@ -1,8 +1,6 @@
 ﻿using NepDate.Core.Constants;
 using NepDate.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NepDate
 {

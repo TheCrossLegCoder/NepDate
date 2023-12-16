@@ -1,7 +1,6 @@
 ﻿using NepDate.Core.Enums;
 using NepDate.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace NepDate
@@ -22,6 +21,7 @@ namespace NepDate
         {
             return $"{Year:D4}/{Month:D2}/{Day:D2}";
         }
+
 
         public string ToString(DateFormats dateFormat = DateFormats.YearMonthDay, Separators separator = Separators.ForwardSlash, bool leadingZeros = true, bool displayMonthName = false)
         {
@@ -225,7 +225,7 @@ namespace NepDate
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            throw new NotImplementedException();
+            return ToString();
         }
     }
 }
