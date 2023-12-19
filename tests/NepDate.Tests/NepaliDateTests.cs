@@ -1,4 +1,5 @@
-﻿using NepDate.Exceptions;
+﻿using NepDate.Core.Enums;
+using NepDate.Exceptions;
 
 namespace NepDate.Tests;
 
@@ -60,5 +61,38 @@ public class NepaliDateTests
 
         // Assert
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void ToString_Validate_ReturnsCorrectValue()
+    {
+        NepaliDate nepaliDate = new NepaliDate(2079, 4, 15);
+
+        // Test cases for DateFormats.YearMonthDay
+        Assert.Equal("2079/04/15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.ForwardSlash, true));
+        Assert.Equal("2079\\4\\15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.BackwardSlash, false));
+        Assert.Equal("2079-04-15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.Dash, true));
+        Assert.Equal("2079.4.15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.Dot, false));
+        Assert.Equal("2079_04_15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.Underscore, true));
+        Assert.Equal("2079 4 15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.Space, false));
+
+        // Test cases for DateFormats.YearDayMonth
+        Assert.Equal("2079/15/04", nepaliDate.ToString(DateFormats.YearDayMonth, Separators.ForwardSlash, true));
+        
+        // Add more test cases for DateFormats.YearDayMonth with different separators
+
+        // Test cases for DateFormats.MonthDayYear
+        Assert.Equal("04/15/2079", nepaliDate.ToString(DateFormats.MonthDayYear, Separators.ForwardSlash, true));
+        // Add more test cases for DateFormats.MonthDayYear with different separators
+
+        // Test cases for DateFormats.MonthYearDay
+        // Add test cases for DateFormats.MonthYearDay with different separators
+
+        // Test cases for DateFormats.DayMonthYear
+        // Add test cases for DateFormats.DayMonthYear with different separators
+
+        // Test cases for DateFormats.DayYearMonth
+        // Add test cases for DateFormats.DayYearMonth with different separators
+
     }
 }

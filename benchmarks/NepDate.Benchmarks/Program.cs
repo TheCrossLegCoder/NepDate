@@ -1,23 +1,27 @@
-﻿using NepDate;
-using NepDate.Extensions;
+﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Running;
+using NepDate.Benchmarks;
+using NepDate.Core.Enums;
+using System.Globalization;
 internal class Program
 {
     private static void Main(string[] args)
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        //BenchmarkRunner.Run<Benchmarks>(ManualConfig.Create(DefaultConfig.Instance).WithOptions(ConfigOptions.DisableOptimizationsValidator));
+        BenchmarkRunner.Run<Benchmarks>(ManualConfig.Create(DefaultConfig.Instance).WithOptions(ConfigOptions.DisableOptimizationsValidator));
+
         //var today = NepDate.NepaliDate.Now;
         //var remainingDaysOnThisMonth = today.MonthEndDay - today.Day;
         //Console.WriteLine(remainingDaysOnThisMonth.ToString());
 
-        var nepDateAddMonthTest1 = NepDate.NepaliDate.Parse("2080/08/30").SubtractMonths(36, true);
-        var nepDateAddMonthTest3 = NepDate.NepaliDate.Parse("2080/09/29").AddMonths(1, false);
+        //var nepDateAddMonthTest1 = NepDate.NepaliDate.Parse("2080/01/01").ToLongDateUnicodeString(true, true, true);
+        //var nepDateAddMonthTest3 = NepDate.NepaliDate.Parse("2080/01/01").ToString("yyyy/mm/dd", CultureInfo.InvariantCulture);
 
 
-        
-        Console.WriteLine(nepDateAddMonthTest1.ToString(NepDate.Core.Enums.DateFormats.DayMonthYear, NepDate.Core.Enums.Separators.Dot, false, true));
-        Console.WriteLine(nepDateAddMonthTest3.ToUnicodeString(NepDate.Core.Enums.DateFormats.MonthDayYear, NepDate.Core.Enums.Separators.Space, true, true));
+
+        //Console.WriteLine(nepDateAddMonthTest1);
+        //Console.WriteLine(nepDateAddMonthTest3);
 
     }
 }

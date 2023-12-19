@@ -1,6 +1,6 @@
 ﻿namespace NepDate
 {
-    public partial struct NepaliDate
+    public readonly partial struct NepaliDate
     {
         /// <summary>
         /// Tries to parse the specified string representation of a Nepali date and returns a value indicating whether the parsing succeeded.

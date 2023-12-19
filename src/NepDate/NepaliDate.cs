@@ -1,5 +1,4 @@
-﻿using NepDate.Core.Constants;
-using NepDate.Core.Dictionaries;
+﻿using NepDate.Core.Dictionaries;
 using NepDate.Extensions;
 using System;
 using static NepDate.Exceptions.NepDateException;
@@ -15,14 +14,11 @@ namespace NepDate
         /// <exception cref="InvalidNepaliDateFormatException"></exception>
         private void ValidateAndThrow()
         {
-            if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < NepDateConstants._minYear || Year > NepDateConstants._maxYear)
+            if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < _minYear || Year > _maxYear)
             {
                 throw new InvalidNepaliDateFormatException();
             }
         }
-
-
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NepaliDate"/> class with the specified Nepali date components.
@@ -99,11 +95,6 @@ namespace NepDate
         #endregion
 
 
-        /// <summary>
-        /// Adds months based on the current Nepali date object.
-        /// </summary>
-        /// <param name="returnFirstDay">A boolean indicating whether to return the first day of the next month.</param>
-        /// <returns>A NepaliDate object representing the Nepali date for the next month.</returns>
         public NepaliDate AddMonths(double months, bool awayFromMonthEnd = false)
         {
             if (months < 0)
@@ -165,12 +156,6 @@ namespace NepDate
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="months"></param>
-        /// <param name="awayFromMonthEnd"></param>
-        /// <returns></returns>
         public NepaliDate SubtractMonths(double months, bool awayFromMonthEnd = false)
         {
             if (months < 0)
@@ -265,7 +250,19 @@ namespace NepDate
             return Year % 4 == 0 && (Year % 100 != 0 || Year % 400 == 0);
         }
 
+        public bool IsToday()
+        {
+            return DateTime.Now.ToNepaliDate() == this;
+        }
 
+        public bool IsYesterday()
+        {
+            return DateTime.Now.AddDays(-1).ToNepaliDate() == this;
+        }
+        public bool IsTomorrow()
+        {
+            return DateTime.Now.AddDays(1).ToNepaliDate() == this;
+        }
         private static (int year, int month, int day) SplitNepaliDate(string rawNepaliDate)
         {
             const byte splitLength = 3;
