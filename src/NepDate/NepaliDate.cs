@@ -156,7 +156,7 @@ namespace NepDate
         }
 
 
-        public NepaliDate SubtractMonths(double months, bool awayFromMonthEnd = false)
+        private NepaliDate SubtractMonths(double months, bool awayFromMonthEnd = false)
         {
             if (months < 0)
             {
@@ -263,23 +263,42 @@ namespace NepDate
         {
             return DateTime.Now.AddDays(1).ToNepaliDate() == this;
         }
+
+        //public static (int year, int month, int day) SplitNepaliDate(string rawNepaliDate)
+        //{
+        //    if (string.IsNullOrEmpty(rawNepaliDate))
+        //    {
+        //        throw new InvalidNepaliDateArgumentException();
+        //    }
+
+        //    var span = rawNepaliDate.Split(new char[] { '-', '/', ' ', '_', '\\' }, StringSplitOptions.RemoveEmptyEntries).AsSpan();
+
+        //    if (span.Length != 3)
+        //    {
+        //        throw new InvalidNepaliDateFormatException();
+        //    }
+
+        //    return (int.Parse(span[0]), int.Parse(span[1]), int.Parse(span[2]));
+        //}
+
         private static (int year, int month, int day) SplitNepaliDate(string rawNepaliDate)
         {
-            const byte splitLength = 3;
             if (string.IsNullOrEmpty(rawNepaliDate))
             {
                 throw new InvalidNepaliDateArgumentException();
             }
 
-            string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/").Replace("\\", "/").Replace(" ", "/");
-            string[] splitDate = trimmedDate.Split('/');
+            //string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/").Replace("\\", "/").Replace(" ", "/");
+            //string[] splitDate = trimmedDate.Split('/');
 
-            if (splitDate.Length != splitLength)
+            int[] splitDate = Array.ConvertAll(rawNepaliDate.Trim().Split(new char[] { '-', '/', ' ', '_', '\\' }, StringSplitOptions.RemoveEmptyEntries), s => int.Parse(s));
+
+            if (splitDate.Length != 3)
             {
                 throw new InvalidNepaliDateFormatException();
             }
 
-            return (int.Parse(splitDate[0]), int.Parse(splitDate[1]), int.Parse(splitDate[2]));
+            return (splitDate[0], splitDate[1], splitDate[2]);
         }
     }
 }

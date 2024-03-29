@@ -9,10 +9,9 @@ namespace NepDate.Core.Dictionaries
         {
             internal static DateTime GetEnglishDate(int nepYear, int nepMonth, int nepDay)
             {
-                if (NepaliToEnglish.data.TryGetValue(((ushort)nepYear, (byte)nepMonth), out (byte NepMonthEndDay, ushort EngYear, byte EngMonth, byte EngDay) dictVal))
+                if (NepaliToEnglish.data.TryGetValue((nepYear, nepMonth), out (int NepMonthEndDay, int EngYear, int EngMonth, int EngDay) dictVal))
                 {
-                    int dateDiff = nepDay - dictVal.NepMonthEndDay;
-                    return new DateTime(dictVal.EngYear, dictVal.EngMonth, dictVal.EngDay).AddDays(dateDiff);
+                    return new DateTime(dictVal.EngYear, dictVal.EngMonth, dictVal.EngDay).AddDays(nepDay - dictVal.NepMonthEndDay);
                 }
 
                 throw new InvalidNepaliDateArgumentException();
@@ -20,7 +19,7 @@ namespace NepDate.Core.Dictionaries
 
             internal static int GetNepaliMonthEndDay(int nepYear, int nepMonth)
             {
-                if (NepaliToEnglish.data.TryGetValue(((ushort)nepYear, (byte)nepMonth), out var dictVal))
+                if (NepaliToEnglish.data.TryGetValue((nepYear, nepMonth), out var dictVal))
                 {
                     return dictVal.NepMonthEndDay;
                 }
@@ -32,14 +31,11 @@ namespace NepDate.Core.Dictionaries
         {
             internal static (int, int, int) GetNepaliDate(int engYear, int engMonth, int engDay)
             {
-                _ = EnglishToNepali.data.TryGetValue(((ushort)engYear, (byte)engMonth), out (byte EngMonthEndDay, ushort NepYear, byte NepMonth, byte NepDay) dictVal);
-
-                byte dateDiff = (byte)(dictVal.EngMonthEndDay - engDay);
-
-                return SubtractNepaliDays(dictVal.NepYear, dictVal.NepMonth, dictVal.NepDay, dateDiff);
+                _ = EnglishToNepali.data.TryGetValue((engYear, engMonth), out (int EngMonthEndDay, int NepYear, int NepMonth, int NepDay) dictVal);
+                return SubtractNepaliDays(dictVal.NepYear, dictVal.NepMonth, dictVal.NepDay, (dictVal.EngMonthEndDay - engDay));
             }
 
-            private static (ushort yearBs, byte monthBs, byte dayBs) SubtractNepaliDays(ushort yearBs, byte monthBs, byte dayBs, int daysToSubtract)
+            private static (int yearBs, int monthBs, int dayBs) SubtractNepaliDays(int yearBs, int monthBs, int dayBs, int daysToSubtract)
             {
                 int newDayBs = dayBs - daysToSubtract;
 
@@ -56,7 +52,7 @@ namespace NepDate.Core.Dictionaries
                     }
                     newDayBs += NepToEng.GetNepaliMonthEndDay(yearBs, monthBs); // No need to cache this.
                 }
-                return (yearBs, monthBs, (byte)newDayBs);
+                return (yearBs, monthBs, newDayBs);
             }
         }
     }

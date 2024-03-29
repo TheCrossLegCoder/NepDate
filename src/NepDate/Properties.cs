@@ -46,7 +46,6 @@ namespace NepDate
         public int MonthEndDay
             => DictionaryBridge.NepToEng.GetNepaliMonthEndDay(Year, Month);
 
-
         /// <summary>
         /// Gets the Nepali date representing the last day of the month.
         /// </summary>

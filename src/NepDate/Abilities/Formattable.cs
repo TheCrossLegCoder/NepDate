@@ -2,13 +2,11 @@
 using NepDate.Core.Enums;
 using NepDate.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace NepDate
 {
-    public readonly partial struct NepaliDate : IFormattable
+    public readonly partial struct NepaliDate
     {
         #region Private Methods
         /// <summary>
@@ -84,8 +82,25 @@ namespace NepDate
         #endregion
 
 
+        /// <summary>
+        /// Returns a string that represents the current NepaliDate object in the format "yyyy/MM/dd".
+        /// </summary>
+        /// <returns>A string that represents the current NepaliDate object in the format "yyyy/MM/dd".</returns>
+        public override string ToString()
+        {
+            return $"{Year:D4}/{Month:D2}/{Day:D2}";
+        }
 
-        public string ToString(DateFormats dateFormat = DateFormats.YearMonthDay, Separators separator = Separators.ForwardSlash, bool leadingZeros = true)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dateFormat"></param>
+        /// <param name="separator"></param>
+        /// <param name="leadingZeros"></param>
+        /// <returns></returns>
+        /// <exception cref="NepDateException.InvalidNepaliDateArgumentException"></exception>
+        /// <exception cref="NepDateException.InvalidNepaliDateFormatException"></exception>
+        public string ToString(DateFormats dateFormat, Separators separator = Separators.ForwardSlash, bool leadingZeros = true)
         {
             (var yearStr, var monthStr, var dayStr) = (GetLeadedString(Year, leadingZeros, isYear: true), GetLeadedString(Month, leadingZeros, isMonth: true), GetLeadedString(Day, leadingZeros));
 
@@ -126,24 +141,41 @@ namespace NepDate
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="leadingZeros"></param>
+        /// <param name="displayDayName"></param>
+        /// <param name="displayYear"></param>
+        /// <returns></returns>
         public string ToLongDateString(bool leadingZeros = true, bool displayDayName = false, bool displayYear = true)
         {
             return ToLongDateString(leadingZeros, displayDayName, displayYear, false);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dateFormat"></param>
+        /// <param name="separator"></param>
+        /// <param name="leadingZeros"></param>
+        /// <returns></returns>
         public string ToUnicodeString(DateFormats dateFormat = DateFormats.YearMonthDay, Separators separator = Separators.ForwardSlash, bool leadingZeros = true)
         {
             return ConvertDigitsToNepaliUnicode(ToString(dateFormat, separator, leadingZeros));
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="leadingZeros"></param>
+        /// <param name="displayDayName"></param>
+        /// <param name="displayYear"></param>
+        /// <returns></returns>
         public string ToLongDateUnicodeString(bool leadingZeros = true, bool displayDayName = false, bool displayYear = true)
         {
             return ConvertDigitsToNepaliUnicode(ToLongDateString(leadingZeros, displayDayName, displayYear, true));
         }
-
 
 
 
@@ -170,22 +202,6 @@ namespace NepDate
                 hashCode = (hashCode * 397) ^ Day;
                 return hashCode;
             }
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current NepaliDate object in the format "yyyy/MM/dd".
-        /// </summary>
-        /// <returns>A string that represents the current NepaliDate object in the format "yyyy/MM/dd".</returns>
-        public override string ToString()
-        {
-            return $"{Year:D4}/{Month:D2}/{Day:D2}";
-        }
-
-
-        [Obsolete]
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            return ToString();
         }
     }
 }

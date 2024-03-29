@@ -4,7 +4,8 @@ namespace NepDate.Core.Dictionaries
 {
     internal static class NepaliToEnglish
     {
-        internal static readonly Dictionary<(ushort NepYear, byte NepMonth), (byte NepMonthEndDay, ushort EngYear, byte EngMonth, byte EngDay)> data = new Dictionary<(ushort NepYear, byte NepMonth), (byte NepMonthEndDay, ushort EngYear, byte EngMonth, byte EngDay)>()
+
+        internal static readonly Dictionary<(int NepYear, int NepMonth), (int NepMonthEndDay, int EngYear, int EngMonth, int EngDay)> data = new Dictionary<(int NepYear, int NepMonth), (int NepMonthEndDay, int EngYear, int EngMonth, int EngDay)>()
         {
             {(1986,09),(30,1930,01,13)},
             {(1986,10),(29,1930,02,11)},
@@ -1139,8 +1140,8 @@ namespace NepDate.Core.Dictionaries
             {(2080,11),(30,2024,03,13)},
             {(2080,12),(30,2024,04,12)},
             {(2081,01),(31,2024,05,13)},
-            {(2081,02),(31,2024,06,13)},
-            {(2081,03),(32,2024,07,15)},
+            {(2081,02),(32,2024,06,14)},
+            {(2081,03),(31,2024,07,15)},
             {(2081,04),(32,2024,08,16)},
             {(2081,05),(31,2024,09,16)},
             {(2081,06),(30,2024,10,16)},
@@ -1148,8 +1149,8 @@ namespace NepDate.Core.Dictionaries
             {(2081,08),(30,2024,12,15)},
             {(2081,09),(29,2025,01,13)},
             {(2081,10),(30,2025,02,12)},
-            {(2081,11),(30,2025,03,14)},
-            {(2081,12),(30,2025,04,13)},
+            {(2081,11),(29,2025,03,13)},
+            {(2081,12),(31,2025,04,13)},
             {(2082,01),(30,2025,05,13)},
             {(2082,02),(32,2025,06,14)},
             {(2082,03),(31,2025,07,15)},

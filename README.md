@@ -50,6 +50,7 @@ var nepDate = NepaliDate.Parse("2079/12/16");
 
 ```csharp
 using NepDate;
+using NepDate.Extensions;
 
 var nepDate = new NepaliDate(DateTime.Now);
 // or
@@ -72,24 +73,109 @@ using NepDate;
 var nepDate = new NepaliDate("2079/12/16");
 
 // get Nepali year, month, and day values
-var year = nepDate.Year; // 2079
-var month = nepDate.Month; // 12
-var day = nepDate.Day; // 16
+nepDate.Year; // 2079
+nepDate.Month; // 12
+nepDate.Day; // 16
 
 // get the equivalent English date as a DateTime
-var englishDate = nepDate.EnglishDate; // 2023/03/30
+nepDate.EnglishDate; // 2023/03/30
 
 // get the day of the week as a DayOfWeek enum value
-var dayOfWeek = nepDate.DayOfWeek; // Thursday
+nepDate.DayOfWeek; // Thursday
+
+//Gets the day of the year, expressed as a value between 1 and 365
+nepDate.DayOfYear; //245
 
 // get the last day of the month as an integer value
-var monthEndDay = nepDate.MonthEndDay; // 30
+nepDate.MonthEndDay; // 30
 
 // get the last day of the month as a NepaliDate object
-var monthEndDate = nepDate.MonthEndDate; // 2079/12/30
+nepDate.MonthEndDate; // 2079/12/30
 
 // get the name of the month as a NepaliMonths enum
-var monthName = nepDate.MonthName; // Chaitra
+nepDate.MonthName; // Chaitra
+```
+
+### Formatting
+
+```csharp
+using NepDate;
+
+var nepDate = new NepaliDate("2079/02/06");
+
+// Obtain the Nepali date represented as a string in its default format.
+nepDate.ToString(); // 2079/02/06
+
+// Customize the output by specifying different date formats, separators, and the use of leading zeros if needed.
+nepDate.ToString(DateFormats.DayMonthYear, Separators.Dash, leadingZeros: false); // 6-2-2079
+
+// Retrieve a representation of the date with options to omit leading zeros, display the day name, and exclude the year.
+nepDate.ToLongDateString(leadingZeros: false, displayDayName: true, displayYear: false); // Friday, Jestha 6
+
+// Obtain the date in Nepali numerical format, with options to specify the format, separators, and the use of leading zeros.
+nepDate.ToUnicodeString(DateFormats.DayMonthYear, Separators.Dot, leadingZeros: true); // ०६.०२.२०७९
+
+// Retrieve the Nepali representation of the date, with options to exclude leading zeros, display the day name, and exclude the year.
+nepDate.ToLongDateUnicodeString(leadingZeros: false, displayDayName: true, displayYear: false); // शुक्रबार, जेठ ६
+
+```
+
+### Add & Subtract Nepali Months & Days
+
+```csharp
+using NepDate;
+
+var nepDate = new NepaliDate("2081/04/32");
+
+// Increment or decrement the Nepali date by a specified number of days.
+nepDate.AddDays(05); // 2081/05/05
+nepDate.AddDays(-5); // 2081/04/27
+
+// Adjust the Nepali date by adding or subtracting a specified number of months.
+nepDate.AddMonths(2); // 2081/06/30
+nepDate.AddMonths(-2); // 2081/02/32
+
+// When adding months, if the resulting month doesn't have the same end date as the input month,
+// 'awayFromMonthEnd' option ensures adjustment away from the end of the resulting month.
+nepDate.AddMonths(2, awayFromMonthEnd: true); // 2081/07/02
+
+```
+
+### Fiscal Year
+
+```csharp
+// Can obtain various fiscal year details using the NepaliDate Instance
+var nepDate = new NepaliDate("2081/04/15");
+nepDate.FiscalYearStartDate(); // 2081/04/01
+nepDate.FiscalYearEndDate(); // 2082/03/31
+nepDate.FiscalYearStartAndEndDate(); // (2081/04/01, 2082/03/31)
+nepDate.FiscalYearQuarterStartDate(); // 2081/04/01
+nepDate.FiscalYearQuarterEndDate(); // 2081/06/30
+nepDate.FiscalYearQuarterStartAndEndDate(); // (2081/04/01, 2081/06/30)
+
+// Also can achieve the same details through parameters
+NepaliDate.GetFiscalYearStartDate(2080); // 2080/04/01
+NepaliDate.GetFiscalYearEndDate(2080); // 2081/03/31
+NepaliDate.GetFiscalYearStartAndEndDate(2080); // (2080/04/01, 2081/03/31)
+NepaliDate.GetFiscalYearQuarterStartDate(2080, 1); // 2081/01/01
+NepaliDate.GetFiscalYearQuarterEndDate(2080, 1); // 2081/03/31
+NepaliDate.GetFiscalYearQuarterStartAndEndDate(2080, 1); // (2081/01/01, 2081/03/31)
+```
+
+### Bulk Conversion
+
+```csharp
+var engDates = new List<DateTime>();
+var nepDatesAsString = new List<string>();
+
+// Converts a collection of English dates to Nepali dates
+var newNepDates = NepaliDate.BulkConvert.ToNepaliDate(engDates);
+
+// Converts a collection of Nepali date instances to English dates
+var newEngDates = NepaliDate.BulkConvert.ToEnglishDate(newNepDates);
+
+// Converts a collection of Nepali dates represented as strings to English dates
+var newEngDates = NepaliDate.BulkConvert.ToEnglishDate(nepDatesAsString);
 ```
 
 ### Additional Functions
@@ -99,28 +185,20 @@ using NepDate;
 
 var nepDate = new NepaliDate("2079/12/16");
 
-// get the equivalent Nepali date as string
-var nepDateAsString = nepDate.ToString(); // 2079/12/16
-
 // determine if the Nepali year is a leap year
-var isLeapYear = nepDate.IsLeapYear(); // False
+nepDate.IsLeapYear(); // False/True
 
-// add or subtract days from a Nepali date
-var newDate = nepDate.AddDays(30); // 2080/01/16
+nepDate.IsToday(); // False/True
 
-// get next month as a NepaliDate object
-var nextMonth = nepDate.NextMonth(); // NepaliDate obj with value 2080/01/01
-var nextMonth = nepDate.NextMonth(returnFirstDay: false); // NepaliDate obj with value 2080/01/16
+nepDate.IsYesterday(); // False/True
 
-// get previous month as a NepaliDate object
-var prevMonth = nepDate.PreviousMonth(); // NepaliDate obj with value 2079/11/01
-var prevMonth = nepDate.PreviousMonth(returnFirstDay: false); // NepaliDate obj with value 2079/11/16
+nepDate.IsTomorrow(); // False/True
 
 // subtract two Nepali dates to get a TimeSpan object
 var nepDate2 = new NepaliDate("2080/12/16");
-var timeSpan = nepDate2 - nepDate; // Timespan object with value 365.00:00:00
+nepDate2 - nepDate; // Timespan object with value 365.00:00:00
 // or
-var timeSpan = nepDate2.Subtract(nepDate); // Timespan object with value 365.00:00:00
+nepDate2.Subtract(nepDate); // Timespan object with value 365.00:00:00
 
 // check if a string is a valid Nepali date and convert it to a NepaliDate object
 if (NepaliDate.TryParse("2079/13/16", out var result))
@@ -168,6 +246,7 @@ var convertedToAD = NepaliDate.Parse("2079/12/16").EnglishDate;
 ```
 
 ### Parsing Nepali Date With `AutoAdjust`
+
 ```csharp
 // Parsing will try it's best to accurately identify the year, month and day
 // And returns the date in the standard format of "yyyy/MM/dd"
@@ -208,35 +287,18 @@ Intel Core i5-10400 CPU 2.90GHz, 1 CPU, 12 logical and 6 physical cores
 
 | Package `Method`                       |  Mean (ns) | Error (ns) | StdDev (ns) | Rank | Allocated (B) |
 | -------------------------------------- | ---------: | ---------: | ----------: | ---: | ------------: |
-| NepDate `BS -> AD`                     |      62.59 |      0.295 |       0.261 |   1️⃣ |             - |
-| NepDate `AD -> BS`                     |     276.83 |      0.593 |       0.526 |   2️⃣ |           120 |
-| NepaliDateConverter.NETCORE `BS -> AD` |  63,460.38 |     54.052 |      42.201 |   3️⃣ |         20176 |
-| NepaliDateConverter.NETCORE `AD -> BS` | 186,610.23 |    420.217 |     350.901 |   7️⃣ |         20160 |
-| NepaliCalendarBS `BS -> AD`            |  99,511.43 |    247.038 |     231.080 |   5️⃣ |        159328 |
-| NepaliCalendarBS `AD -> BS`            | 113,258.50 |    364.280 |     340.748 |   6️⃣ |        158760 |
-| NepaliDateConverter.Net `BS -> AD`     |  75,327.75 |    269.244 |     251.851 |   4️⃣ |         20176 |
-| NepaliDateConverter.Net `AD -> BS`     | 212,478.96 |  4,192.698 |   5,877.576 |   8️⃣ |         20160 |
-
-```ini
-BenchmarkDotNet=v0.13.5, OS=Windows 11 (10.0.22621.1413/22H2/2022Update/SunValley2)
-Intel Core i5-10400 CPU 2.90GHz, 1 CPU, 12 logical and 6 physical cores
-  [Host]     : .NET Framework 4.8.1 (4.8.9139.0), X86 LegacyJIT
-  DefaultJob : .NET Framework 4.8.1 (4.8.9139.0), X86 LegacyJIT
-```
-
-| Package `Method`               | Mean (ns) | Error (ns) | StdDev (ns) | Rank | Allocated (B) |
-| ------------------------------ | --------: | ---------: | ----------: | ---: | ------------: |
-| NepDate `BS -> AD`             |     121.8 |       0.15 |        0.14 |   1️⃣ |             - |
-| NepDate `AD -> BS`             |     896.6 |       3.16 |        2.80 |   2️⃣ |           413 |
-| NepaliDateConverter `BS -> AD` |   2,086.9 |       4.13 |        3.86 |   3️⃣ |          2948 |
-| NepaliDateConverter `AD -> BS` |   3,925.9 |      32.39 |       30.30 |   4️⃣ |          3041 |
-| NepaliCalendar `BS -> AD`      | 169,622.5 |     377.10 |      334.29 |   5️⃣ |           230 |
-| NepaliCalendar `AD -> BS`      | 488,003.8 |   1,433.94 |    1,271.15 |   6️⃣ |           312 |
-
+| NepDate `BS -> AD`                     |      62.59 |      0.295 |       0.261 |   1️ |             - |
+| NepDate `AD -> BS`                     |     276.83 |      0.593 |       0.526 |   2️ |           120 |
+| NepaliDateConverter.NETCORE `BS -> AD` |  63,460.38 |     54.052 |      42.201 |   3️ |         20176 |
+| NepaliDateConverter.NETCORE `AD -> BS` | 186,610.23 |    420.217 |     350.901 |   7️ |         20160 |
+| NepaliCalendarBS `BS -> AD`            |  99,511.43 |    247.038 |     231.080 |   5️ |        159328 |
+| NepaliCalendarBS `AD -> BS`            | 113,258.50 |    364.280 |     340.748 |   6️ |        158760 |
+| NepaliDateConverter.Net `BS -> AD`     |  75,327.75 |    269.244 |     251.851 |   4️ |         20176 |
+| NepaliDateConverter.Net `AD -> BS`     | 212,478.96 |  4,192.698 |   5,877.576 |   8️ |         20160 |
 
 ## Change logs
-https://github.com/TheCrossLegCoder/NepDate/releases
 
+https://github.com/TheCrossLegCoder/NepDate/releases
 
 ## Contributions
 
