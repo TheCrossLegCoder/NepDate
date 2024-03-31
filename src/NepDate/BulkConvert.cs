@@ -16,7 +16,7 @@ namespace NepDate
             /// </summary>
             /// <param name="engDates">The collection of English dates to convert.</param>
             /// <returns>An IEnumerable of NepaliDate corresponding to the input English dates.</returns>
-            public static IEnumerable<NepaliDate> ToNepaliDate(IEnumerable<DateTime> engDates)
+            public static IEnumerable<NepaliDate> ToNepaliDates(IEnumerable<DateTime> engDates)
             {
                 return engDates.Select(item => new NepaliDate(item));
             }
@@ -27,7 +27,7 @@ namespace NepDate
             /// </summary>
             /// <param name="nepDates">The collection of Nepali dates (as strings) to convert.</param>
             /// <returns>An IEnumerable of DateTime representing the English dates corresponding to the input Nepali dates.</returns>
-            public static IEnumerable<DateTime> ToEnglishDate(IEnumerable<string> nepDates)
+            public static IEnumerable<DateTime> ToEnglishDates(IEnumerable<string> nepDates)
             {
                 return nepDates.Select(item => Parse(item).EnglishDate);
             }
@@ -38,7 +38,7 @@ namespace NepDate
             /// </summary>
             /// <param name="nepDates">The collection of Nepali dates to convert.</param>
             /// <returns>An IEnumerable of DateTime representing the English dates corresponding to the input Nepali dates.</returns>
-            public static IEnumerable<DateTime> ToEnglishDate(IEnumerable<NepaliDate> nepDates)
+            public static IEnumerable<DateTime> ToEnglishDates(IEnumerable<NepaliDate> nepDates)
             {
                 return nepDates.Select(item => item.EnglishDate);
             }

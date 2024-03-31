@@ -1,4 +1,4 @@
-﻿namespace NepDate.Core.Enums
+﻿namespace NepDate
 {
     public enum NepaliMonths
     {

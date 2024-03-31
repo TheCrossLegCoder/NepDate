@@ -13,7 +13,7 @@
 ### Install NepDate with the package manager console
 
 ```bash
-NuGet\Install-Package NepDate
+Install-Package NepDate
 ```
 
 ### Install NepDate with the .NET CLI
@@ -24,7 +24,7 @@ dotnet add package NepDate
 
 ## Features
 
-NepDate is a `struct` based on `.NET Standard 2.0` that closely resembles the `DateOnly` `struct` in `.NET`. It stands out due to its `easy integration`, `super-fast` and `memory-efficient` conversions, and built in `powerful features` related to Nepali date functionality.
+NepDate is a super-fast and memory-efficient `struct` based on `.NET Standard 2.0` that closely resembles the `DateOnly` `struct` in `.NET` with built in powerful features related to Nepali date functionality.
 
 ### Initialization
 
@@ -154,6 +154,7 @@ nepDate.FiscalYearQuarterEndDate(); // 2081/06/30
 nepDate.FiscalYearQuarterStartAndEndDate(); // (2081/04/01, 2081/06/30)
 
 // Also can achieve the same details through parameters
+// Here, We take the first year as Fiscal Year. Eg: 2080 means Fy 2080/2081
 NepaliDate.GetFiscalYearStartDate(2080); // 2080/04/01
 NepaliDate.GetFiscalYearEndDate(2080); // 2081/03/31
 NepaliDate.GetFiscalYearStartAndEndDate(2080); // (2080/04/01, 2081/03/31)
@@ -169,13 +170,13 @@ var engDates = new List<DateTime>();
 var nepDatesAsString = new List<string>();
 
 // Converts a collection of English dates to Nepali dates
-var newNepDates = NepaliDate.BulkConvert.ToNepaliDate(engDates);
+var newNepDates = NepaliDate.BulkConvert.ToNepaliDates(engDates);
 
 // Converts a collection of Nepali date instances to English dates
-var newEngDates = NepaliDate.BulkConvert.ToEnglishDate(newNepDates);
+var newEngDates = NepaliDate.BulkConvert.ToEnglishDates(newNepDates);
 
 // Converts a collection of Nepali dates represented as strings to English dates
-var newEngDates = NepaliDate.BulkConvert.ToEnglishDate(nepDatesAsString);
+var newEngDates = NepaliDate.BulkConvert.ToEnglishDates(nepDatesAsString);
 ```
 
 ### Additional Functions

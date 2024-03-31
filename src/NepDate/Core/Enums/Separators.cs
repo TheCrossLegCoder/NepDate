@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace NepDate.Core.Enums
+namespace NepDate
 {
     public enum Separators
     {
