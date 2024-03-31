@@ -135,6 +135,9 @@ nepDate.AddDays(-5); // 2081/04/27
 nepDate.AddMonths(2); // 2081/06/30
 nepDate.AddMonths(-2); // 2081/02/32
 
+// Can also provide month as decimal
+nepDate.AddMonths(2.5); // 2081/07/15
+
 // When adding months, if the resulting month doesn't have the same end date as the input month,
 // 'awayFromMonthEnd' option ensures adjustment away from the end of the resulting month.
 nepDate.AddMonths(2, awayFromMonthEnd: true); // 2081/07/02
