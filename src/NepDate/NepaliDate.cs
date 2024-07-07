@@ -291,7 +291,7 @@ namespace NepDate
             //string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/").Replace("\\", "/").Replace(" ", "/");
             //string[] splitDate = trimmedDate.Split('/');
 
-            int[] splitDate = Array.ConvertAll(rawNepaliDate.Trim().Split(new char[] { '-', '/', ' ', '_', '\\' }, StringSplitOptions.RemoveEmptyEntries), s => int.Parse(s));
+            int[] splitDate = Array.ConvertAll(rawNepaliDate.Trim().Split(new char[] { '-', '/', ' ', '_', '\\', '.' }, StringSplitOptions.RemoveEmptyEntries), s => int.Parse(s));
 
             if (splitDate.Length != 3)
             {
