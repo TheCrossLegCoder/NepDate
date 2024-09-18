@@ -6,8 +6,8 @@ namespace NepDate
 {
     public readonly partial struct NepaliDate
     {
-        private const ushort _minYear = 1987;
-        private const ushort _maxYear = 2099;
+        private const ushort _minYear = 1901;
+        private const ushort _maxYear = 2199;
         internal int AsInteger => int.Parse(string.Concat($"{Year:D4}", $"{Month:D2}", $"{Day:D2}"));
 
 
