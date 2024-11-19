@@ -60,7 +60,7 @@ namespace NepDate
                 yearOffset++;
             }
 
-            return new NepaliDate(Year + yearOffset, 3, 1).MonthEndDate;
+            return new NepaliDate(Year + yearOffset, 3, 1).MonthEndDate();
         }
 
 
@@ -114,7 +114,7 @@ namespace NepDate
             {
                 yearOffset++;
             }
-            return new NepaliDate(Year + yearOffset, (int)fiscalYearQuarters + 2, 1).MonthEndDate;
+            return new NepaliDate(Year + yearOffset, (int)fiscalYearQuarters + 2, 1).MonthEndDate();
         }
 
 
@@ -160,7 +160,7 @@ namespace NepDate
         /// <returns>The end date of the fiscal year.</returns>
         public static NepaliDate GetFiscalYearEndDate(int fiscalYear)
         {
-            return new NepaliDate(fiscalYear + 1, 3, 1).MonthEndDate;
+            return new NepaliDate(fiscalYear + 1, 3, 1).MonthEndDate();
         }
 
 

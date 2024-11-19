@@ -8,9 +8,9 @@ public class NepaliDateTests
     public void Constructor_InvalidNepaliDateFormat_ThrowsException()
     {
         // Arrange
-        int year = 2079;
-        int month = 14;
-        int day = 32;
+        var year = 2079;
+        var month = 14;
+        var day = 32;
 
         // Act and Assert
         _ = Assert.Throws<NepDateException.InvalidNepaliDateFormatException>(() => new NepaliDate(year, month, day));
@@ -23,10 +23,10 @@ public class NepaliDateTests
     public void DayOfWeek_ValidNepaliDate_ReturnsCorrectDayOfWeek(string nepaliDateStr, DayOfWeek expected)
     {
         // Arrange
-        NepaliDate nepaliDate = NepaliDate.Parse(nepaliDateStr);
+        var nepaliDate = NepaliDate.Parse(nepaliDateStr);
 
         // Act
-        DayOfWeek actual = nepaliDate.DayOfWeek;
+        var actual = nepaliDate.DayOfWeek;
 
         // Assert
         Assert.Equal(expected, actual);
@@ -39,7 +39,7 @@ public class NepaliDateTests
     [InlineData(2082, false)]
     public void IsLeapYear_ValidNepaliYear_ReturnsCorrectValue(int nepaliYear, bool expected)
     {
-        bool actual = new NepaliDate(nepaliYear, 1, 1).IsLeapYear();
+        var actual = new NepaliDate(nepaliYear, 1, 1).IsLeapYear();
 
         // Assert
         Assert.Equal(expected, actual);
@@ -52,11 +52,11 @@ public class NepaliDateTests
     public void AddDays_ValidNepaliDate_ReturnsCorrectValue(string nepaliDateStr, int daysToAdd, string expectedNepaliDateStr)
     {
         // Arrange
-        NepaliDate nepaliDate = NepaliDate.Parse(nepaliDateStr);
-        NepaliDate expected = NepaliDate.Parse(expectedNepaliDateStr);
+        var nepaliDate = NepaliDate.Parse(nepaliDateStr);
+        var expected = NepaliDate.Parse(expectedNepaliDateStr);
 
         // Act
-        NepaliDate actual = nepaliDate.AddDays(daysToAdd);
+        var actual = nepaliDate.AddDays(daysToAdd);
 
         // Assert
         Assert.Equal(expected, actual);
@@ -65,7 +65,7 @@ public class NepaliDateTests
     [Fact]
     public void ToString_Validate_ReturnsCorrectValue()
     {
-        NepaliDate nepaliDate = new NepaliDate(2079, 4, 15);
+        var nepaliDate = new NepaliDate(2079, 4, 15);
 
         // Test cases for DateFormats.YearMonthDay
         Assert.Equal("2079/04/15", nepaliDate.ToString(DateFormats.YearMonthDay, Separators.ForwardSlash, true));

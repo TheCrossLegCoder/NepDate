@@ -9,7 +9,7 @@ namespace NepDate.Core.Dictionaries
         {
             internal static DateTime GetEnglishDate(int nepYear, int nepMonth, int nepDay)
             {
-                if (NepaliToEnglish.data.TryGetValue((nepYear, nepMonth), out (int NepMonthEndDay, int EngYear, int EngMonth, int EngDay) dictVal))
+                if (NepaliToEnglish.data.TryGetValue((nepYear, nepMonth), out var dictVal))
                 {
                     return new DateTime(dictVal.EngYear, dictVal.EngMonth, dictVal.EngDay).AddDays(nepDay - dictVal.NepMonthEndDay);
                 }
@@ -31,13 +31,13 @@ namespace NepDate.Core.Dictionaries
         {
             internal static (int, int, int) GetNepaliDate(int engYear, int engMonth, int engDay)
             {
-                _ = EnglishToNepali.data.TryGetValue((engYear, engMonth), out (int EngMonthEndDay, int NepYear, int NepMonth, int NepDay) dictVal);
+                _ = EnglishToNepali.data.TryGetValue((engYear, engMonth), out var dictVal);
                 return SubtractNepaliDays(dictVal.NepYear, dictVal.NepMonth, dictVal.NepDay, (dictVal.EngMonthEndDay - engDay));
             }
 
             private static (int yearBs, int monthBs, int dayBs) SubtractNepaliDays(int yearBs, int monthBs, int dayBs, int daysToSubtract)
             {
-                int newDayBs = dayBs - daysToSubtract;
+                var newDayBs = dayBs - daysToSubtract;
 
                 while (newDayBs <= 0)
                 {

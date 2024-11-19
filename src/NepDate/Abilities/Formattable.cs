@@ -25,7 +25,7 @@ namespace NepDate
 
             if (displayDayName)
             {
-                string weekDayName = DayOfWeek.ToString();
+                var weekDayName = DayOfWeek.ToString();
                 if (isUnicode)
                 {
                     weekDayName = ConvertWordsToNepaliUnicode(weekDayName);
@@ -56,11 +56,11 @@ namespace NepDate
             string[] nepaliDigits = { "०", "१", "२", "३", "४", "५", "६", "७", "८", "९" };
             var nepaliUnicode = new StringBuilder(date.Length);
 
-            foreach (char digit in date)
+            foreach (var digit in date)
             {
                 if (char.IsDigit(digit))
                 {
-                    int digitValue = int.Parse(digit.ToString());
+                    var digitValue = int.Parse(digit.ToString());
                     nepaliUnicode.Append(nepaliDigits[digitValue]);
                 }
                 else
@@ -196,7 +196,7 @@ namespace NepDate
         {
             unchecked
             {
-                int hashCode = Year;
+                var hashCode = Year;
                 hashCode = (hashCode * 397) ^ Month;
                 hashCode = (hashCode * 397) ^ Day;
                 return hashCode;

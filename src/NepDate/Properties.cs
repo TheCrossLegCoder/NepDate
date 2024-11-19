@@ -48,8 +48,8 @@ namespace NepDate
         /// <summary>
         /// Gets the Nepali date representing the last day of the month.
         /// </summary>
-        public NepaliDate MonthEndDate
-            => new NepaliDate(Year, Month, MonthEndDay);
+        //public NepaliDate MonthEndDate
+        //    => new NepaliDate(Year, Month, MonthEndDay);
 
 
         /// <summary>
@@ -72,6 +72,6 @@ namespace NepDate
         /// <summary>
         /// Represents the largest possible value of a Nepali date.
         /// </summary>
-        public static readonly NepaliDate MaxValue = new NepaliDate(_maxYear, 12, 1).MonthEndDate;
+        public static readonly NepaliDate MaxValue = new NepaliDate(_maxYear, 12, 1).MonthEndDate();
     }
 }

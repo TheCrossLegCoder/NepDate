@@ -94,6 +94,10 @@ namespace NepDate
         }
         #endregion
 
+        public NepaliDate MonthEndDate()
+        {
+            return new NepaliDate(Year, Month, MonthEndDay);
+        }
 
         public NepaliDate AddMonths(double months, bool awayFromMonthEnd = false)
         {
@@ -102,18 +106,18 @@ namespace NepDate
                 return SubtractMonths(Math.Abs(months), awayFromMonthEnd);
             }
 
-            int roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
+            var roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
 
             if (months != roundedMonths)
             {
                 return AddDays(Math.Round(months * 30.41666666666667, 0, MidpointRounding.AwayFromZero));
             }
 
-            bool returnFirstDay = false;//added for future
+            var returnFirstDay = false;//added for future
 
-            int nextYear = Year;
-            int nextMonth = Month + roundedMonths;
-            int nextMonthDay = 1;
+            var nextYear = Year;
+            var nextMonth = Month + roundedMonths;
+            var nextMonthDay = 1;
 
 
             while (nextMonth > 12)
@@ -163,18 +167,18 @@ namespace NepDate
                 return AddMonths(Math.Abs(months), awayFromMonthEnd);
             }
 
-            int roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
+            var roundedMonths = (int)Math.Round(months, 0, MidpointRounding.AwayFromZero);
 
             if (months != roundedMonths)
             {
                 return AddDays(-Math.Round(months * 30.41666666666667, 0, MidpointRounding.AwayFromZero));
             }
 
-            bool returnFirstDay = false;//added for future
+            var returnFirstDay = false;//added for future
 
-            int previousYear = Year;
-            int previousMonth = Month - roundedMonths;
-            int previousMonthDay = 1;
+            var previousYear = Year;
+            var previousMonth = Month - roundedMonths;
+            var previousMonthDay = 1;
 
             //if (previousMonth < 1)
             //{
@@ -291,7 +295,7 @@ namespace NepDate
             //string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/").Replace("\\", "/").Replace(" ", "/");
             //string[] splitDate = trimmedDate.Split('/');
 
-            int[] splitDate = Array.ConvertAll(rawNepaliDate.Trim().Split(new char[] { '-', '/', ' ', '_', '\\', '.' }, StringSplitOptions.RemoveEmptyEntries), s => int.Parse(s));
+            var splitDate = Array.ConvertAll(rawNepaliDate.Trim().Split(new char[] { '-', '/', ' ', '_', '\\', '.' }, StringSplitOptions.RemoveEmptyEntries), s => int.Parse(s));
 
             if (splitDate.Length != 3)
             {
