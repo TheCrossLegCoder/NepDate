@@ -29,7 +29,7 @@ namespace NepDate
         public NepaliDate(int yearBs, int monthBs, int dayBs)
         {
             (Year, Month, Day) = (yearBs, monthBs, dayBs);
-            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day);
+            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
 
             ValidateAndThrow();
         }
@@ -42,7 +42,7 @@ namespace NepDate
         {
             (Year, Month, Day) = SplitNepaliDate(rawNepaliDate);
 
-            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day);
+            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
 
             ValidateAndThrow();
         }
@@ -76,7 +76,7 @@ namespace NepDate
                 }
             }
 
-            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day);
+            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
 
             ValidateAndThrow();
         }
