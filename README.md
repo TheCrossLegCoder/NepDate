@@ -22,17 +22,17 @@ NepDate is a **super-fast** and **memory-efficient** `struct` built on `.NET Sta
 
 | Section | Description |
 |---------|-------------|
-| 📦[ Installation](#-installation) | How to add NepDate to your project |
-| ✨[ Key Features](#-key-features) | What makes NepDate special |
-| 🚀[ Getting Started](#-getting-started) | Begin using NepDate quickly |
-| 📅[ Date Operations](#-date-operations) | Core date manipulation functions |
-| 🔄[ Date Range Operations](#-date-range-operations) | Operations related to date ranges |
-| 🖨️[ Formatting & Display](#-formatting--display) | Control how dates appear |
-| 💼[ Fiscal Year Operations](#-fiscal-year-operations) | Business date calculations |
-| 🔍[ Advanced Features](#-advanced-features) | For power users |
-| ⚡[ Performance](#-performance) | Why NepDate is faster |
-| 👥[ Contributions](#-contributions) | How to help improve NepDate |
-| 📝[ Change Log](#-change-log) | Recent updates |
+| 📦 [Installation](#-installation) | How to add NepDate to your project |
+| ✨ [Key Features](#-key-features) | What makes NepDate special |
+| 🚀 [Getting Started](#-getting-started) | Begin using NepDate quickly |
+| 📅 [Date Operations](#-date-operations) | Core date manipulation functions |
+| 🔄 [Date Range Operations](#-date-range-operations) | Operations related to date ranges |
+| 🖨️ [Formatting & Display](#-formatting--display) | Control how dates appear |
+| 💼 [Fiscal Year Operations](#-fiscal-year-operations) | Business date calculations |
+| 🔍 [Advanced Features](#-advanced-features) | For power users |
+| ⚡ [Performance](#-performance) | Why NepDate is faster |
+| 👥 [Contributions](#-contributions) | How to help improve NepDate |
+| 📝 [Change Log](#-change-log) | Recent updates |
 
 
 
