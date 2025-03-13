@@ -26,6 +26,15 @@ dotnet add package NepDate
 
 NepDate is a super-fast and memory-efficient `struct` based on `.NET Standard 2.0` that closely resembles the `DateOnly` `struct` in `.NET` with built in powerful features related to Nepali date functionality.
 
+- Convert between Bikram Sambat (B.S.) and Gregorian (A.D.) dates
+- Full support for Nepali date validation
+- Calculate day of week for any Nepali date
+- Perform date arithmetic (add/subtract days, months, years)
+- Generate monthly calendars in Nepali dates
+- Create and work with date ranges
+- Localized date formatting with support for multiple Nepali dialects and formal/informal styles
+- Serialization support for System.Text.Json, Newtonsoft.Json, and XML
+
 ### Initialization
 
 #### By nepali year, month, and day values
@@ -307,3 +316,102 @@ https://github.com/TheCrossLegCoder/NepDate/releases
 ## Contributions
 
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
+
+### Localized Date Formatting
+
+### Serialization Support
+
+NepDate provides comprehensive serialization support for various .NET serialization frameworks:
+
+#### System.Text.Json Serialization
+
+```csharp
+using System.Text.Json;
+using NepDate;
+using NepDate.Serialization;
+
+// Configure serialization options (string format by default)
+var options = new JsonSerializerOptions()
+    .ConfigureForNepaliDate();
+
+// For object format serialization (with Year, Month, Day properties)
+var objectOptions = new JsonSerializerOptions()
+    .ConfigureForNepaliDate(useObjectFormat: true);
+
+// Serialize a NepaliDate
+var date = new NepaliDate(2080, 4, 15);
+string jsonString = JsonSerializer.Serialize(date, options);
+// Result: "2080-04-15"
+
+// Serialize with object format
+string jsonObject = JsonSerializer.Serialize(date, objectOptions);
+// Result: {"Year":2080,"Month":4,"Day":15}
+
+// Deserialize back to NepaliDate
+var deserializedDate = JsonSerializer.Deserialize<NepaliDate>(jsonString, options);
+```
+
+#### Newtonsoft.Json Serialization
+
+```csharp
+using Newtonsoft.Json;
+using NepDate;
+using NepDate.Serialization;
+
+// Configure serialization settings (string format by default)
+var settings = new JsonSerializerSettings()
+    .ConfigureForNepaliDate();
+
+// For object format serialization (with Year, Month, Day properties)
+var objectSettings = new JsonSerializerSettings()
+    .ConfigureForNepaliDate(useObjectFormat: true);
+
+// Serialize a NepaliDate
+var date = new NepaliDate(2080, 4, 15);
+string jsonString = JsonConvert.SerializeObject(date, settings);
+// Result: "2080-04-15"
+
+// Serialize with object format
+string jsonObject = JsonConvert.SerializeObject(date, objectSettings);
+// Result: {"Year":2080,"Month":4,"Day":15}
+
+// Deserialize back to NepaliDate
+var deserializedDate = JsonConvert.DeserializeObject<NepaliDate>(jsonString, settings);
+```
+
+#### XML Serialization
+
+XML serialization requires using the `NepaliDateXmlSerializer` wrapper class:
+
+```csharp
+using System.Xml.Serialization;
+using NepDate;
+using NepDate.Serialization;
+
+// Create a wrapper for XML serialization
+public class PersonWithDate
+{
+    public string Name { get; set; }
+    
+    // Use the XML serializer wrapper
+    public NepaliDateXmlSerializer BirthDate { get; set; }
+    
+    // Non-serialized property for convenience
+    [XmlIgnore]
+    public NepaliDate ActualBirthDate
+    {
+        get => BirthDate?.Value ?? default;
+        set => BirthDate = new NepaliDateXmlSerializer(value);
+    }
+}
+
+// Usage
+var person = new PersonWithDate
+{
+    Name = "Ram Sharma",
+    ActualBirthDate = new NepaliDate(2040, 2, 15)
+};
+
+var serializer = new XmlSerializer(typeof(PersonWithDate));
+// Serialize to XML...
+```
