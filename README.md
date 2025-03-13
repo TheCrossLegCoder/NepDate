@@ -26,12 +26,14 @@ NepDate is a **super-fast** and **memory-efficient** `struct` built on `.NET Sta
 | [✨ Key Features](#-key-features) | What makes NepDate special |
 | [🚀 Getting Started](#-getting-started) | Begin using NepDate quickly |
 | [📅 Date Operations](#-date-operations) | Core date manipulation functions |
+| [🔄 Date Range Operations](#-date-range-operations) | Operations related to date ranges |
 | [🖨️ Formatting & Display](#-formatting--display) | Control how dates appear |
 | [💼 Fiscal Year Operations](#-fiscal-year-operations) | Business date calculations |
 | [🔍 Advanced Features](#-advanced-features) | For power users |
 | [⚡ Performance](#-performance) | Why NepDate is faster |
 | [👥 Contributions](#-contributions) | How to help improve NepDate |
 | [📝 Change Log](#-change-log) | Recent updates |
+
 
 
 ## 📦 Installation
@@ -195,6 +197,91 @@ var newEngDates = NepaliDate.BulkConvert.ToEnglishDates(nepDates);
 
 // Convert a collection of Nepali date strings to English dates
 var parsedEngDates = NepaliDate.BulkConvert.ToEnglishDates(nepDatesAsString);
+```
+
+## 🔄 Date Range Operations
+
+### Creating Date Ranges
+
+```csharp
+using NepDate;
+
+// Create a range between two dates
+var start = new NepaliDate(2080, 1, 1);
+var end = new NepaliDate(2080, 3, 15);
+var range = new NepaliDateRange(start, end);
+
+// Create a range for a single day
+var singleDay = NepaliDateRange.SingleDay(start);
+
+// Create a range with a specific number of days
+var tenDays = NepaliDateRange.FromDayCount(start, 10);
+
+// Create ranges for specific periods
+var monthRange = NepaliDateRange.ForMonth(2080, 1);      // Full month
+var fiscalYear = NepaliDateRange.ForFiscalYear(2080);    // Full fiscal year
+var calendarYear = NepaliDateRange.ForCalendarYear(2080); // Full calendar year
+
+// Get current period ranges
+var currentMonth = NepaliDateRange.CurrentMonth();
+var currentFiscalYear = NepaliDateRange.CurrentFiscalYear();
+var currentCalendarYear = NepaliDateRange.CurrentCalendarYear();
+```
+
+### Range Properties and Operations
+
+```csharp
+var range = new NepaliDateRange(start, end);
+
+// Basic properties
+bool isEmpty = range.IsEmpty;     // Check if range is empty
+int length = range.Length;        // Get number of days in range
+var startDate = range.Start;      // Get start date
+var endDate = range.End;         // Get end date
+
+// Range operations
+bool contains = range.Contains(someDate);           // Check if date is in range
+bool containsRange = range.Contains(otherRange);    // Check if range contains another range
+bool overlaps = range.Overlaps(otherRange);        // Check if ranges overlap
+bool adjacent = range.IsAdjacentTo(otherRange);    // Check if ranges are adjacent
+
+// Range manipulation
+var intersection = range.Intersect(otherRange);    // Get intersection of two ranges
+var excluded = range.Except(otherRange);           // Get range with another range excluded
+```
+
+### Splitting and Iterating Ranges
+
+```csharp
+var range = new NepaliDateRange(start, end);
+
+// Split range by periods
+var monthRanges = range.SplitByMonth();    // Split into month ranges
+var quarterRanges = range.SplitByQuarter(); // Split into quarter ranges
+
+// Iterate through dates
+foreach (var date in range)  // Iterate all dates
+{
+    // Process each date
+}
+
+// Get specific date collections
+var workingDays = range.WorkingDays();          // Get working days (excluding Saturdays)
+var workingDaysNoSunday = range.WorkingDays(excludeSunday: true); // Exclude Sundays too
+var weekendDays = range.WeekendDays();          // Get weekend days
+var intervalDates = range.DatesWithInterval(7);  // Get dates with 7-day interval
+```
+
+### Range Formatting
+
+```csharp
+var range = new NepaliDateRange(start, end);
+
+// Basic string representation
+string basic = range.ToString();  // "2080/01/01 - 2080/03/15"
+
+// Formatted string
+string formatted = range.ToString(DateFormats.DayMonthYear, Separators.Dash);  // "01-01-2080 - 15-03-2080"
 ```
 
 ## 🖨️ Formatting & Display
