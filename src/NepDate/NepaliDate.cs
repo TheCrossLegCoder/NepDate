@@ -411,7 +411,7 @@ namespace NepDate
         {
             if (string.IsNullOrEmpty(rawNepaliDate))
             {
-                throw new InvalidNepaliDateArgumentException();
+                throw new InvalidNepaliDateFormatException();
             }
 
             // Optimized splitting to avoid multiple string replacements
