@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Private", "Private", "{AC51
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scrapper", "Private\Scrapper.csproj", "{CE37A77A-2771-48E1-8E60-894EBBA74607}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NepDate.MemoryBenchmark", "benchmarks\NepDate.MemoryBenchmark\NepDate.MemoryBenchmark.csproj", "{B29A45AB-3D42-49A7-8474-8AF28354024A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{CE37A77A-2771-48E1-8E60-894EBBA74607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE37A77A-2771-48E1-8E60-894EBBA74607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE37A77A-2771-48E1-8E60-894EBBA74607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{98560507-293F-4282-A3E9-83D4A7848B7C} = {F3024C3C-D686-4F00-BA9B-7C9D5E032791}
 		{70FD9D60-2D73-44B5-A1A3-025CB8A86CEC} = {F3024C3C-D686-4F00-BA9B-7C9D5E032791}
 		{CE37A77A-2771-48E1-8E60-894EBBA74607} = {AC51FF99-31A3-46CE-B2CF-8EAC970006E7}
+		{B29A45AB-3D42-49A7-8474-8AF28354024A} = {F3024C3C-D686-4F00-BA9B-7C9D5E032791}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A76FC618-B3D7-4FBF-9F3D-A06A75D8EA99}
