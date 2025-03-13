@@ -29,7 +29,14 @@ namespace NepDate
         /// <exception cref="InvalidNepaliDateFormatException">Thrown when any date component is outside the valid range.</exception>
         private void ValidateAndThrow()
         {
-            if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < _minYear || Year > _maxYear)
+            try
+            {
+                if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < _minYear || Year > _maxYear)
+                {
+                    throw new InvalidNepaliDateFormatException();
+                }
+            }
+            catch (Exception)
             {
                 throw new InvalidNepaliDateFormatException();
             }
