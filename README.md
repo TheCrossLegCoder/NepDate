@@ -32,6 +32,7 @@ NepDate is a super-fast and memory-efficient `struct` based on `.NET Standard 2.
 - Perform date arithmetic (add/subtract days, months, years)
 - Generate monthly calendars in Nepali dates
 - Create and work with date ranges
+- Intelligent date parsing with support for multiple formats and dialects
 - Localized date formatting with support for multiple Nepali dialects and formal/informal styles
 - Serialization support for System.Text.Json, Newtonsoft.Json, and XML
 
@@ -318,6 +319,64 @@ https://github.com/TheCrossLegCoder/NepDate/releases
 Please view the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information.
 
 ### Localized Date Formatting
+
+### Smart Date Parser
+
+NepDate includes a powerful Smart Date Parser that can intelligently parse a wide variety of Nepali date formats:
+
+```csharp
+using NepDate;
+using NepDate.Extensions;
+
+// Parse dates in different standard formats
+var date1 = SmartDateParser.Parse("2080/04/15");     // YYYY/MM/DD
+var date2 = SmartDateParser.Parse("15-04-2080");     // DD-MM-YYYY
+var date3 = SmartDateParser.Parse("04.15.2080");     // MM.DD.YYYY
+
+// Parse dates with month names (supports multiple spelling variations)
+var date4 = SmartDateParser.Parse("15 Shrawan 2080"); // DD Month YYYY
+var date5 = SmartDateParser.Parse("Shrawan 15, 2080"); // Month DD, YYYY
+var date6 = SmartDateParser.Parse("15 Saun 2080");    // Alternate spelling
+
+// Parse dates with Nepali unicode digits and/or month names
+var date7 = SmartDateParser.Parse("२०८०/०४/१५");      // YYYY/MM/DD in Nepali digits
+var date8 = SmartDateParser.Parse("१५ श्रावण २०८०");   // DD Month YYYY in Nepali
+
+// Parse mixed formats (combining Nepali and English elements)
+var date9 = SmartDateParser.Parse("15 साउन 2080");    // DD Nepali_Month English_Year
+
+// Handle dates with common suffixes and formats
+var date10 = SmartDateParser.Parse("15 Shrawan 2080 B.S."); // With B.S. suffix
+var date11 = SmartDateParser.Parse("15 साउन, 2080 गते");    // With 'gate' suffix
+
+// Use the extension method for easier access
+var date12 = "15 Shrawan 2080".ToNepaliDate();
+
+// Try parsing with error handling
+if (SmartDateParser.TryParse("15 Shrawan 2080", out var result))
+{
+    // Use the successful result
+    Console.WriteLine(result);
+}
+
+// Extension method version for error handling
+if ("15 Shrawan 2080".TryToNepaliDate(out var date))
+{
+    // Use the successfully parsed date
+    Console.WriteLine(date);
+}
+```
+
+The Smart Date Parser features:
+
+- Support for multiple date formats (YYYY/MM/DD, DD/MM/YYYY, MM/DD/YYYY)
+- Multiple separator support (/, -, ., space, etc.)
+- Month name recognition in both English and Nepali with multiple spelling variations
+- Nepali unicode digit support
+- Mixed format handling (combining English and Nepali elements)
+- Fuzzy matching for month names to handle typos
+- Support for common date suffixes (B.S., V.S., गते, etc.)
+- Intelligent handling of 2-digit and 3-digit years
 
 ### Serialization Support
 
