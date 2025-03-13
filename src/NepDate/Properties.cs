@@ -8,8 +8,9 @@ namespace NepDate
     {
         private const ushort _minYear = 1901;
         private const ushort _maxYear = 2199;
-        internal int AsInteger => int.Parse(string.Concat($"{Year:D4}", $"{Month:D2}", $"{Day:D2}"));
-
+        
+        // Optimized AsInteger property to avoid string concatenation
+        internal int AsInteger => Year * 10000 + Month * 100 + Day;
 
         /// <summary>
         /// Year as integer
@@ -25,7 +26,11 @@ namespace NepDate
         /// Day as integer
         /// </summary>
         public int Day { get; }
-        public DateTime EnglishDate { get; }
+
+        private readonly DateTime? _englishDate;
+
+        public DateTime EnglishDate => _englishDate ?? DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
+
 
 
         /// <summary>

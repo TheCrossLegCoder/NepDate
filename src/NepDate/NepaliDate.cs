@@ -29,8 +29,7 @@ namespace NepDate
         public NepaliDate(int yearBs, int monthBs, int dayBs)
         {
             (Year, Month, Day) = (yearBs, monthBs, dayBs);
-            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
-
+            _englishDate = null;
             ValidateAndThrow();
         }
 
@@ -41,9 +40,7 @@ namespace NepDate
         public NepaliDate(string rawNepaliDate)
         {
             (Year, Month, Day) = SplitNepaliDate(rawNepaliDate);
-
-            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
-
+            _englishDate = null;
             ValidateAndThrow();
         }
 
@@ -75,9 +72,7 @@ namespace NepDate
                     Year = int.Parse(string.Concat(currentMillennium.ToString(), Year.ToString("D3")));
                 }
             }
-
-            EnglishDate = DictionaryBridge.NepToEng.GetEnglishDate(Year, Month, Day) + DateTime.Now.TimeOfDay;
-
+            _englishDate = null;
             ValidateAndThrow();
         }
 
@@ -88,8 +83,7 @@ namespace NepDate
         public NepaliDate(DateTime englishDate)
         {
             (Year, Month, Day) = DictionaryBridge.EngToNep.GetNepaliDate(englishDate.Year, englishDate.Month, englishDate.Day);
-            EnglishDate = englishDate;
-
+            _englishDate = null;
             ValidateAndThrow();
         }
         #endregion
@@ -268,23 +262,6 @@ namespace NepDate
             return DateTime.Now.AddDays(1).ToNepaliDate() == this;
         }
 
-        //public static (int year, int month, int day) SplitNepaliDate(string rawNepaliDate)
-        //{
-        //    if (string.IsNullOrEmpty(rawNepaliDate))
-        //    {
-        //        throw new InvalidNepaliDateArgumentException();
-        //    }
-
-        //    var span = rawNepaliDate.Split(new char[] { '-', '/', ' ', '_', '\\' }, StringSplitOptions.RemoveEmptyEntries).AsSpan();
-
-        //    if (span.Length != 3)
-        //    {
-        //        throw new InvalidNepaliDateFormatException();
-        //    }
-
-        //    return (int.Parse(span[0]), int.Parse(span[1]), int.Parse(span[2]));
-        //}
-
         private static (int year, int month, int day) SplitNepaliDate(string rawNepaliDate)
         {
             if (string.IsNullOrEmpty(rawNepaliDate))
@@ -292,12 +269,51 @@ namespace NepDate
                 throw new InvalidNepaliDateArgumentException();
             }
 
-            //string trimmedDate = rawNepaliDate.Trim().Replace("-", "/").Replace(".", "/").Replace("_", "/").Replace("\\", "/").Replace(" ", "/");
-            //string[] splitDate = trimmedDate.Split('/');
+            // Optimized splitting to avoid multiple string replacements
+            // Pre-allocate array for better performance
+            var splitDate = new int[3];
+            var currentIndex = 0;
+            var numberStart = 0;
+            var length = rawNepaliDate.Length;
 
-            var splitDate = Array.ConvertAll(rawNepaliDate.Trim().Split(new char[] { '-', '/', ' ', '_', '\\', '.' }, StringSplitOptions.RemoveEmptyEntries), s => int.Parse(s));
+            for (int i = 0; i < length; i++)
+            {
+                char c = rawNepaliDate[i];
+                if (c == '-' || c == '/' || c == '.' || c == '_' || c == '\\' || c == ' ')
+                {
+                    if (i > numberStart) // There is a number before this separator
+                    {
+                        if (currentIndex >= 3) // Too many parts
+                        {
+                            throw new InvalidNepaliDateFormatException();
+                        }
 
-            if (splitDate.Length != 3)
+                        // Regular string parsing instead of Span
+                        if (!int.TryParse(rawNepaliDate.Substring(numberStart, i - numberStart), out splitDate[currentIndex++]))
+                        {
+                            throw new InvalidNepaliDateFormatException();
+                        }
+                    }
+                    numberStart = i + 1; // Start of next number is after this separator
+                }
+            }
+
+            // Handle the last number part
+            if (numberStart < length)
+            {
+                if (currentIndex >= 3) // Too many parts
+                {
+                    throw new InvalidNepaliDateFormatException();
+                }
+
+                // Regular string parsing instead of Span
+                if (!int.TryParse(rawNepaliDate.Substring(numberStart, length - numberStart), out splitDate[currentIndex++]))
+                {
+                    throw new InvalidNepaliDateFormatException();
+                }
+            }
+
+            if (currentIndex != 3)
             {
                 throw new InvalidNepaliDateFormatException();
             }
