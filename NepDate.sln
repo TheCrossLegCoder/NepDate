@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scrapper", "Private\Scrappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NepDate.MemoryBenchmark", "benchmarks\NepDate.MemoryBenchmark\NepDate.MemoryBenchmark.csproj", "{B29A45AB-3D42-49A7-8474-8AF28354024A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NepDateExamples", "src\Examples\NepDateExamples.csproj", "{AD24F79A-0810-4A42-A072-E1BA2857BDC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B29A45AB-3D42-49A7-8474-8AF28354024A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD24F79A-0810-4A42-A072-E1BA2857BDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD24F79A-0810-4A42-A072-E1BA2857BDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD24F79A-0810-4A42-A072-E1BA2857BDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD24F79A-0810-4A42-A072-E1BA2857BDC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{70FD9D60-2D73-44B5-A1A3-025CB8A86CEC} = {F3024C3C-D686-4F00-BA9B-7C9D5E032791}
 		{CE37A77A-2771-48E1-8E60-894EBBA74607} = {AC51FF99-31A3-46CE-B2CF-8EAC970006E7}
 		{B29A45AB-3D42-49A7-8474-8AF28354024A} = {F3024C3C-D686-4F00-BA9B-7C9D5E032791}
+		{AD24F79A-0810-4A42-A072-E1BA2857BDC3} = {47E267F0-90BD-4F5B-8905-BF866D593638}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A76FC618-B3D7-4FBF-9F3D-A06A75D8EA99}

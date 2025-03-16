@@ -8,9 +8,9 @@ public class BulkConvertTests
         // Arrange
         var englishDates = new List<DateTime>
         {
-            new DateTime(2023, 1, 1),
-            new DateTime(2023, 1, 2),
-            new DateTime(2023, 1, 10)
+            new(2023, 1, 1),
+            new(2023, 1, 2),
+            new(2023, 1, 10)
         };
 
         // Act
@@ -42,9 +42,9 @@ public class BulkConvertTests
         // Arrange
         var nepaliDates = new List<NepaliDate>
         {
-            new NepaliDate(2079, 9, 17),
-            new NepaliDate(2079, 9, 18),
-            new NepaliDate(2079, 9, 26)
+            new(2079, 9, 17),
+            new(2079, 9, 18),
+            new(2079, 9, 26)
         };
 
         // Act

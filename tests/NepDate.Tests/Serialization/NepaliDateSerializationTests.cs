@@ -12,7 +12,7 @@ namespace NepDate.Tests.Serialization;
 
 public class SerializationTests
 {
-    private readonly NepaliDate _testDate = new NepaliDate(2080, 4, 15);
+    private readonly NepaliDate _testDate = new(2080, 4, 15);
     private readonly Person _testPerson;
 
     public SerializationTests()
@@ -66,9 +66,9 @@ public class SerializationTests
         var options = new STJ.JsonSerializerOptions().ConfigureForNepaliDate();
         var dateList = new List<NepaliDate>
         {
-            new NepaliDate(2080, 1, 1),
+            new(2080, 1, 1),
             _testDate,
-            new NepaliDate(2080, 12, 30)
+            new(2080, 12, 30)
         };
         
         // Act
@@ -144,9 +144,9 @@ public class SerializationTests
         var settings = new JsonSerializerSettings().ConfigureForNepaliDate();
         var dateList = new List<NepaliDate>
         {
-            new NepaliDate(2080, 1, 1),
+            new(2080, 1, 1),
             _testDate,
-            new NepaliDate(2080, 12, 30)
+            new(2080, 12, 30)
         };
         
         // Act
