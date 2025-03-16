@@ -97,7 +97,7 @@ namespace NepDate
         /// <param name="separator"></param>
         /// <param name="leadingZeros"></param>
         /// <returns></returns>
-        /// <exception cref="NepDateException.InvalidNepaliDateArgumentException"></exception>
+        /// <exception cref="NepDateException.InvalidNepaliDateFormatException"></exception>
         /// <exception cref="NepDateException.InvalidNepaliDateFormatException"></exception>
         public string ToString(DateFormats dateFormat, Separators separator = Separators.ForwardSlash, bool leadingZeros = true)
         {
@@ -115,7 +115,7 @@ namespace NepDate
                 case DateFormats.DayMonthYear: return AddSeparators(dayStr, monthStr, yearStr);
                 case DateFormats.DayYearMonth: return AddSeparators(dayStr, yearStr, monthStr);
                 default:
-                    throw new NepDateException.InvalidNepaliDateArgumentException();
+                    throw new NepDateException.InvalidNepaliDateFormatException();
             }
 
 

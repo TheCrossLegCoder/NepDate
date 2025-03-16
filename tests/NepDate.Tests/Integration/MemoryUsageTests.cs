@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace NepDate.Tests;
+namespace NepDate.Tests.Integration;
 
 public class MemoryUsageTests
 {

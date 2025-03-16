@@ -29,14 +29,21 @@ namespace NepDate
         /// <exception cref="InvalidNepaliDateFormatException">Thrown when any date component is outside the valid range.</exception>
         private void ValidateAndThrow()
         {
-            try
+            // Check if date is before minimum supported date (1901-04-13)
+            if (Year < _minYear)
             {
-                if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12 || Year < _minYear || Year > _maxYear)
-                {
-                    throw new InvalidNepaliDateFormatException();
-                }
+                throw new ArgumentOutOfRangeException(nameof(Year),
+                    $"The date is before the minimum supported date ({MinValue}).");
             }
-            catch (Exception)
+
+            // Check if date is after maximum supported date (2143-04-12)
+            if (Year > _maxYear)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Year),
+                    $"The date is after the maximum supported date ({MaxValue}).");
+            }
+
+            if (Day < 1 || Day > MonthEndDay || Month < 1 || Month > 12)
             {
                 throw new InvalidNepaliDateFormatException();
             }
@@ -64,7 +71,7 @@ namespace NepDate
         /// Initializes a new instance of the <see cref="NepaliDate"/> struct from a Nepali date string.
         /// </summary>
         /// <param name="rawNepaliDate">The Nepali date string in various formats like "YYYY/MM/DD", "YYYY-MM-DD", etc.</param>
-        /// <exception cref="InvalidNepaliDateArgumentException">Thrown when the input string is null or empty.</exception>
+        /// <exception cref="InvalidNepaliDateFormatException">Thrown when the input string is null or empty.</exception>
         /// <exception cref="InvalidNepaliDateFormatException">Thrown when the string cannot be parsed as a valid Nepali date.</exception>
         /// <remarks>
         /// Supports multiple separator characters including slash, dash, dot, underscore, backslash, and space.
@@ -83,7 +90,7 @@ namespace NepDate
         /// <param name="rawNepaliDate">The Nepali date string to parse.</param>
         /// <param name="autoAdjust">Whether to automatically adjust the date components to form a valid date.</param>
         /// <param name="monthInMiddle">Whether the month component is in the middle position (true) or not (false).</param>
-        /// <exception cref="InvalidNepaliDateArgumentException">Thrown when the input string is null or empty.</exception>
+        /// <exception cref="InvalidNepaliDateFormatException">Thrown when the input string is null or empty.</exception>
         /// <exception cref="InvalidNepaliDateFormatException">Thrown when the string cannot be parsed as a valid Nepali date.</exception>
         /// <remarks>
         /// When autoAdjust is true, this method applies several heuristics to fix common date format issues:
@@ -137,6 +144,20 @@ namespace NepDate
         /// </remarks>
         public NepaliDate(DateTime englishDate)
         {
+            // Check if date is before minimum supported date (1901-04-13)
+            if (englishDate.Date < MinValue.EnglishDate.Date)
+            {
+                throw new ArgumentOutOfRangeException(nameof(englishDate),
+                    $"The date is before the minimum supported date ({MinValue.EnglishDate.Date}).");
+            }
+
+            // Check if date is after maximum supported date (2143-04-12)
+            if (englishDate.Date > MaxValue.EnglishDate.Date)
+            {
+                throw new ArgumentOutOfRangeException(nameof(englishDate),
+                    $"The date is after the maximum supported date ({MaxValue.EnglishDate.Date}).");
+            }
+
             (Year, Month, Day) = DictionaryBridge.EngToNep.GetNepaliDate(englishDate.Year, englishDate.Month, englishDate.Day);
             _englishDate = null;
             ValidateAndThrow();
@@ -400,7 +421,7 @@ namespace NepDate
         /// </summary>
         /// <param name="rawNepaliDate">The string containing a Nepali date to parse.</param>
         /// <returns>A tuple containing the year, month, and day components.</returns>
-        /// <exception cref="InvalidNepaliDateArgumentException">Thrown when the input string is null or empty.</exception>
+        /// <exception cref="InvalidNepaliDateFormatException">Thrown when the input string is null or empty.</exception>
         /// <exception cref="InvalidNepaliDateFormatException">Thrown when the string cannot be parsed as a valid Nepali date.</exception>
         /// <remarks>
         /// This method supports various separator characters including slashes, dashes, dots, underscores, and spaces.
@@ -424,7 +445,7 @@ namespace NepDate
             for (int i = 0; i < length; i++)
             {
                 char c = rawNepaliDate[i];
-                if (c == '-' || c == '/' || c == '.' || c == '_' || c == '\\' || c == ' ')
+                if (c == '-' || c == '/' || c == '.' || c == '_' || c == '\\' || c == ' ' || c == '।' || c == '|')
                 {
                     if (i > numberStart) // There is a number before this separator
                     {

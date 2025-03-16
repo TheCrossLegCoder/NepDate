@@ -17,7 +17,7 @@ namespace NepDate
         /// 
         /// This method determines which quarter the current date falls into.
         /// </remarks>
-        /// <exception cref="NepDateException.InvalidNepaliDateArgumentException">
+        /// <exception cref="NepDateException.InvalidNepaliDateFormatException">
         /// Thrown if the month is outside the valid range of 1-12.
         /// </exception>
         private FiscalYearQuarters FiscalYearQuarter()
@@ -41,7 +41,7 @@ namespace NepDate
                 case 3:
                     return FiscalYearQuarters.Fourth;
                 default:
-                    throw new NepDateException.InvalidNepaliDateArgumentException();
+                    throw new NepDateException.InvalidNepaliDateFormatException();
             }
         }
 

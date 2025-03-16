@@ -27,7 +27,7 @@ namespace NepDate.Core.Dictionaries
             /// <param name="nepMonth">The Nepali month (1-12).</param>
             /// <param name="nepDay">The Nepali day (1-32, depending on month).</param>
             /// <returns>The equivalent English (Gregorian) DateTime.</returns>
-            /// <exception cref="InvalidNepaliDateArgumentException">
+            /// <exception cref="InvalidNepaliDateFormatException">
             /// Thrown when the provided Nepali date is outside the supported range or invalid.
             /// </exception>
             /// <remarks>
@@ -47,7 +47,7 @@ namespace NepDate.Core.Dictionaries
                     return new DateTime(dictVal.EngYear, dictVal.EngMonth, dictVal.EngDay).AddDays(nepDay - dictVal.NepMonthEndDay);
                 }
 
-                throw new InvalidNepaliDateArgumentException();
+                throw new InvalidNepaliDateFormatException();
             }
 
             /// <summary>
@@ -56,7 +56,7 @@ namespace NepDate.Core.Dictionaries
             /// <param name="nepYear">The Nepali year (in BS).</param>
             /// <param name="nepMonth">The Nepali month (1-12).</param>
             /// <returns>The number of days in the specified Nepali month (typically 29-32).</returns>
-            /// <exception cref="InvalidNepaliDateArgumentException">
+            /// <exception cref="InvalidNepaliDateFormatException">
             /// Thrown when the provided Nepali date is outside the supported range or invalid.
             /// </exception>
             /// <remarks>
@@ -71,7 +71,7 @@ namespace NepDate.Core.Dictionaries
                 {
                     return dictVal.NepMonthEndDay;
                 }
-                throw new InvalidNepaliDateArgumentException();
+                throw new InvalidNepaliDateFormatException();
             }
         }
 

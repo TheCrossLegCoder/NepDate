@@ -28,9 +28,13 @@ namespace NepDate.Extensions
         /// 
         /// For converting multiple dates efficiently, consider using the BulkConvert class instead.
         /// </remarks>
-        /// <exception cref="NepDate.Exceptions.NepDateException.InvalidNepaliDateFormatException">
-        /// Thrown if the conversion results in a date outside the supported range (1901-2199 BS).
+        /// <exception cref="System.ArgumentOutOfRangeException">
+        /// Thrown if the input date is outside the supported range (equivalent to 1901-04-13 to 2143-04-12).
+        /// This includes DateTime.MinValue, DateTime.MaxValue, and dates before 1901 or after 2143.
         /// </exception>
-        public static NepaliDate ToNepaliDate(this DateTime englishDate) => new NepaliDate(englishDate);
+        public static NepaliDate ToNepaliDate(this DateTime englishDate)
+        {
+            return new NepaliDate(englishDate);
+        }
     }
 }

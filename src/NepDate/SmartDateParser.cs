@@ -15,67 +15,67 @@ namespace NepDate
         private static readonly Dictionary<string, int> MonthNameMappings = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
         {
             // Month 1 - Baisakh (वैशाख)
-            { "baisakh", 1 }, { "baishakh", 1 }, { "baisak", 1 }, { "vaisakh", 1 }, { "vaisakha", 1 }, 
-            { "vaishak", 1 }, { "vaisakhi", 1 }, { "beshak", 1 }, { "baishak", 1 }, 
+            { "baisakh", 1 }, { "baishakh", 1 }, { "baisak", 1 }, { "vaisakh", 1 }, { "vaisakha", 1 },
+            { "vaishak", 1 }, { "vaisakhi", 1 }, { "beshak", 1 }, { "baishak", 1 },
             { "baisaga", 1 }, { "baishaga", 1 }, { "vesak", 1 },
             
             // Month 2 - Jestha (जेष्ठ)
-            { "jestha", 2 }, { "jeth", 2 }, { "jeshtha", 2 }, { "jyeshtha", 2 }, { "jyestha", 2 }, 
+            { "jestha", 2 }, { "jeth", 2 }, { "jeshtha", 2 }, { "jyeshtha", 2 }, { "jyestha", 2 },
             { "jesth", 2 }, { "jeshth", 2 }, { "jetha", 2 }, { "jeshta", 2 }, { "jayshtha", 2 },
             { "jayestha", 2 }, { "jesta", 2 }, { "jyesth", 2 }, { "jyaistha", 2 }, { "jaistha", 2 },
             
             // Month 3 - Asar (असार)
-            { "asar", 3 }, { "asadh", 3 }, { "ashar", 3 }, { "ashad", 3 }, { "asad", 3 }, 
-            { "aasad", 3 }, { "asada", 3 }, { "ashadh", 3 }, { "asadha", 3 }, { "ashadha", 3 }, 
+            { "asar", 3 }, { "asadh", 3 }, { "ashar", 3 }, { "ashad", 3 }, { "asad", 3 },
+            { "aasad", 3 }, { "asada", 3 }, { "ashadh", 3 }, { "asadha", 3 }, { "ashadha", 3 },
             { "ashara", 3 }, { "asara", 3 }, { "ashada", 3 }, { "asaad", 3 }, { "aashar", 3 },
             
             // Month 4 - Shrawan (श्रावण)
-            { "shrawan", 4 }, { "sawan", 4 }, { "saun", 4 }, { "srawan", 4 }, { "shraawan", 4 }, 
-            { "shravan", 4 }, { "shravana", 4 }, { "sawun", 4 }, { "savan", 4 }, { "shrawana", 4 }, 
+            { "shrawan", 4 }, { "sawan", 4 }, { "saun", 4 }, { "srawan", 4 }, { "shraawan", 4 },
+            { "shravan", 4 }, { "shravana", 4 }, { "sawun", 4 }, { "savan", 4 }, { "shrawana", 4 },
             { "sravana", 4 }, { "sawon", 4 }, { "sravan", 4 }, { "saawan", 4 }, { "sharwan", 4 },
             { "sarwan", 4 }, { "sraawan", 4 }, { "shaun", 4 }, { "shawan", 4 },
             
             // Month 5 - Bhadra (भाद्र)
-            { "bhadra", 5 }, { "bhadau", 5 }, { "bhado", 5 }, { "bhaadra", 5 }, 
-            { "bhadow", 5 }, { "bhadava", 5 }, { "bhadaw", 5 }, { "bhada", 5 }, 
+            { "bhadra", 5 }, { "bhadau", 5 }, { "bhado", 5 }, { "bhaadra", 5 },
+            { "bhadow", 5 }, { "bhadava", 5 }, { "bhadaw", 5 }, { "bhada", 5 },
             { "bhadoo", 5 }, { "bhadon", 5 }, { "bhadrapad", 5 }, { "bhadrapada", 5 }, { "bhaado", 5 },
             
             // Month 6 - Ashwin (आश्विन)
-            { "ashwin", 6 }, { "asoj", 6 }, { "ashoj", 6 }, { "aswin", 6 }, { "ashvin", 6 }, 
-            { "aaswin", 6 }, { "ashwini", 6 }, { "aswini", 6 }, { "ashvini", 6 }, { "aasoj", 6 }, 
+            { "ashwin", 6 }, { "asoj", 6 }, { "ashoj", 6 }, { "aswin", 6 }, { "ashvin", 6 },
+            { "aaswin", 6 }, { "ashwini", 6 }, { "aswini", 6 }, { "ashvini", 6 }, { "aasoj", 6 },
             { "aashoj", 6 }, { "asoja", 6 }, { "asojh", 6 }, { "ashoja", 6 },
             { "asvin", 6 }, { "aashwin", 6 }, { "ashvina", 6 }, { "ashwina", 6 }, { "asvaayuja", 6 },
 
             // Month 7 - Kartik (कार्तिक)
-            { "kartik", 7 }, { "kattik", 7 }, { "kaartik", 7 }, { "kartika", 7 }, { "katik", 7 }, 
-            { "kartike", 7 }, { "karttik", 7 }, { "kartiki", 7 }, { "karthik", 7 }, { "karthika", 7 }, 
+            { "kartik", 7 }, { "kattik", 7 }, { "kaartik", 7 }, { "kartika", 7 }, { "katik", 7 },
+            { "kartike", 7 }, { "karttik", 7 }, { "kartiki", 7 }, { "karthik", 7 }, { "karthika", 7 },
             { "kathik", 7 }, { "kaatik", 7 }, { "katak", 7 }, { "karttic", 7 }, { "kartic", 7 },
             
             // Month 8 - Mangsir (मंसिर)
-            { "mangsir", 8 }, { "mangshir", 8 }, { "manshir", 8 }, { "marg", 8 }, { "margashirsha", 8 }, 
-            { "mangasir", 8 }, { "mangsheer", 8 }, { "mangseer", 8 }, { "margshirsha", 8 }, 
+            { "mangsir", 8 }, { "mangshir", 8 }, { "manshir", 8 }, { "marg", 8 }, { "margashirsha", 8 },
+            { "mangasir", 8 }, { "mangsheer", 8 }, { "mangseer", 8 }, { "margshirsha", 8 },
             { "mansheer", 8 }, { "margsir", 8 }, { "managsir", 8 }, { "mangaseer", 8 }, { "mangsheersh", 8 },
             { "mangsira", 8 }, { "mansir", 8 }, { "magshir", 8 }, { "mangir", 8 }, { "magsir", 8 },
             
             // Month 9 - Poush (पौष)
             { "poush", 9 }, { "push", 9 }, { "pus", 9 }, { "paush", 9 },
-            { "pausha", 9 }, { "pousha", 9 }, { "pos", 9 }, { "pausa", 9 }, { "pousa", 9 }, 
+            { "pausha", 9 }, { "pousha", 9 }, { "pos", 9 }, { "pausa", 9 }, { "pousa", 9 },
             { "posh", 9 }, { "posma", 9 }, { "paus", 9 }, { "poos", 9 },
             
             // Month 10 - Magh (माघ)
-            { "magh", 10 }, { "mag", 10 }, { "maagh", 10 }, { "magha", 10 }, { "maagha", 10 }, 
-            { "maga", 10 }, { "magah", 10 }, { "maag", 10 }, { "maaha", 10 }, { "maghu", 10 }, 
+            { "magh", 10 }, { "mag", 10 }, { "maagh", 10 }, { "magha", 10 }, { "maagha", 10 },
+            { "maga", 10 }, { "magah", 10 }, { "maag", 10 }, { "maaha", 10 }, { "maghu", 10 },
             { "maghaa", 10 }, { "magg", 10 }, { "mahi", 10 }, { "mahag", 10 },
             
             // Month 11 - Falgun (फाल्गुन)
-            { "falgun", 11 }, { "phagun", 11 }, { "phalgun", 11 }, { "fagan", 11 }, { "fagun", 11 }, 
-            { "phalguna", 11 }, { "falguna", 11 }, { "phalgoon", 11 }, { "falgunn", 11 }, { "phalguni", 11 }, 
+            { "falgun", 11 }, { "phagun", 11 }, { "phalgun", 11 }, { "fagan", 11 }, { "fagun", 11 },
+            { "phalguna", 11 }, { "falguna", 11 }, { "phalgoon", 11 }, { "falgunn", 11 }, { "phalguni", 11 },
             { "phalagan", 11 }, { "phalagun", 11 }, { "phalag", 11 },
             { "fagoon", 11 }, { "phaguna", 11 }, { "falgoona", 11 }, { "phagoon", 11 },
             
             // Month 12 - Chaitra (चैत्र)
-            { "chaitra", 12 }, { "chait", 12 }, { "chaita", 12 }, { "chet", 12 }, { "chetra", 12 }, 
-            { "chaitr", 12 }, { "chaity", 12 }, { "cheta", 12 }, { "chaitya", 12 }, 
+            { "chaitra", 12 }, { "chait", 12 }, { "chaita", 12 }, { "chet", 12 }, { "chetra", 12 },
+            { "chaitr", 12 }, { "chaity", 12 }, { "cheta", 12 }, { "chaitya", 12 },
             { "chaitri", 12 }, { "chaito", 12 }, { "chythro", 12 }, { "chaithra", 12 },
             
             // Nepali unicode month names
@@ -124,7 +124,7 @@ namespace NepDate
         };
 
         // Common date separators
-        private static readonly char[] DateSeparators = { '/', '-', '.', ' ', ',', '_' };
+        private static readonly char[] DateSeparators = { '/', '-', '.', ' ', ',', '_', '|', '।' };
 
         /// <summary>
         /// Parses a string representation of a Nepali date in various formats and returns a NepaliDate.

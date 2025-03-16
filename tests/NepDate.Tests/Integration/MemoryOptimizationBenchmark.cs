@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace NepDate.Tests;
+namespace NepDate.Tests.Integration;
 
 public class MemoryOptimizationBenchmark
 {
