@@ -13,7 +13,7 @@ jobs:
       matrix:
         configuration: [Release]
         framework: [
-            net472, # .NET Framework 4.7.2
+            4.7.2, # .NET Framework 4.7.2
             7.0.x, # .NET 7.0 - gets latest patch
             9.0.x, # .NET 9.0 - gets latest patch
           ]
