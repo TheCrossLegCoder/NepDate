@@ -19,25 +19,21 @@ NepDate is a **super-fast** and **memory-efficient** `struct` built on `.NET Sta
 
 ## 📋 Table of Contents
 
-
-| Section | Description |
-|---------|-------------|
-| 📦 [Installation](#-installation) | How to add NepDate to your project |
-| ✨ [Key Features](#-key-features) | What makes NepDate special |
-| 🚀 [Getting Started](#-getting-started) | Begin using NepDate quickly |
-| 📅 [Date Operations](#-date-operations) | Core date manipulation functions |
-| 🔄 [Date Range Operations](#-date-range-operations) | Operations related to date ranges |
-| 🖨️ [Formatting & Display](#-formatting--display) | Control how dates appear |
-| 💼 [Fiscal Year Operations](#-fiscal-year-operations) | Business date calculations |
-| 🔍 [Advanced Features](#-advanced-features) | For power users |
-| ⚡ [Performance](#-performance) | Why NepDate is faster |
-| 👥 [Contributions](#-contributions) | How to help improve NepDate |
-| 📝 [Change Log](#-change-log) | Recent updates |
-
-
+| Section                                               | Description                        |
+| ----------------------------------------------------- | ---------------------------------- |
+| 📦 [Installation](#-installation)                     | How to add NepDate to your project |
+| ✨ [Key Features](#-key-features)                     | What makes NepDate special         |
+| 🚀 [Getting Started](#-getting-started)               | Begin using NepDate quickly        |
+| 📅 [Date Operations](#-date-operations)               | Core date manipulation functions   |
+| 🔄 [Date Range Operations](#-date-range-operations)   | Operations related to date ranges  |
+| 🖨️ [Formatting & Display](#-formatting--display)      | Control how dates appear           |
+| 💼 [Fiscal Year Operations](#-fiscal-year-operations) | Business date calculations         |
+| 🔍 [Advanced Features](#-advanced-features)           | For power users                    |
+| ⚡ [Performance](#-performance)                       | Why NepDate is faster              |
+| 👥 [Contributions](#-contributions)                   | How to help improve NepDate        |
+| 📝 [Change Log](#-change-log)                         | Recent updates                     |
 
 ## 📦 Installation
-
 
 ### Using Package Manager Console
 
@@ -50,7 +46,6 @@ Install-Package NepDate
 ```bash
 dotnet add package NepDate
 ```
-
 
 ## ✨ Key Features
 
@@ -286,12 +281,10 @@ string formatted = range.ToString(DateFormats.DayMonthYear, Separators.Dash);  /
 
 ## 🖨️ Formatting & Display
 
-
 ### Formatting Options
 
-🗓️ **Default** `2079/02/06`  <br>  📆 **Custom** `6-2-2079`  <br>  📝 **Long** `Friday, Jestha 6`  
-📊 **Unicode** `०६.०२.२०७९`  <br>  🌟 **Nepali** `शुक्रबार, जेठ ६`
-
+🗓️ **Default** `2079/02/06` <br> 📆 **Custom** `6-2-2079` <br> 📝 **Long** `Friday, Jestha 6`  
+📊 **Unicode** `०६.०२.२०७९` <br> 🌟 **Nepali** `शुक्रबार, जेठ ६`
 
 ### Basic Formatting
 
@@ -349,16 +342,14 @@ if ("15 Shrawan 2080".TryToNepaliDate(out var date12)) {
 
 ## 💼 Fiscal Year Operations
 
-
 ### Fiscal Year Support
 
-| Operation | Result | Time Period |
-|-----------|--------|-------------|
+| Operation         | Result     | Time Period              |
+| ----------------- | ---------- | ------------------------ |
 | Fiscal Year Start | 2081/04/01 | Beginning of fiscal year |
-| Fiscal Year End | 2082/03/31 | End of fiscal year |
-| Quarter Start | 2081/04/01 | Beginning of quarter |
-| Quarter End | 2081/06/30 | End of quarter |
-
+| Fiscal Year End   | 2082/03/31 | End of fiscal year       |
+| Quarter Start     | 2081/04/01 | Beginning of quarter     |
+| Quarter End       | 2081/06/30 | End of quarter           |
 
 ```csharp
 using NepDate;
@@ -406,10 +397,9 @@ if (NepaliDate.TryParse("2079/13/16", out var result)) {
 
 ### Serialization Support
 
-
 #### Supporting Multiple Serialization Formats
 
-JSON (String): `"2080-04-15"`  <br>  JSON (Object): `{"Year":2080,"Month":4,"Day":15}`  <br>  XML: Custom wrapper
+JSON (String): `"2080-04-15"` <br> JSON (Object): `{"Year":2080,"Month":4,"Day":15}` <br> XML: Custom wrapper
 
 #### System.Text.Json
 
@@ -470,10 +460,10 @@ using NepDate.Serialization;
 public class PersonWithDate
 {
     public string Name { get; set; }
-    
+
     // Use the XML serializer wrapper
     public NepaliDateXmlSerializer BirthDate { get; set; }
-    
+
     // Helper property for convenience
     [XmlIgnore]
     public NepaliDate ActualBirthDate
@@ -496,12 +486,9 @@ var serializer = new XmlSerializer(typeof(PersonWithDate));
 
 ## ⚡ Performance
 
-
 ### NepDate is up to 1000x faster than other libraries
 
-
 NepDate is designed for exceptional performance, significantly outperforming other Nepali date libraries while using minimal memory.
-
 
 | Package `Method`                       |  Mean (ns) | Error (ns) | StdDev (ns) | Rank | Allocated (B) |
 | -------------------------------------- | ---------: | ---------: | ----------: | ---: | ------------: |
@@ -520,10 +507,7 @@ NepDate is designed for exceptional performance, significantly outperforming oth
 
 ## 👥 Contributions
 
-
-
-### We welcome contributions from the community!
-
+### We welcome contributions from the community
 
 Contributions are welcome! Please check out the [CONTRIBUTING](https://github.com/TheCrossLegCoder/NepDate/blob/main/CONTRIBUTING.md) guide for more information on how you can help improve NepDate.
 
@@ -532,7 +516,6 @@ Contributions are welcome! Please check out the [CONTRIBUTING](https://github.co
 For a detailed list of changes in each release, visit the [releases page](https://github.com/TheCrossLegCoder/NepDate/releases).
 
 ---
-
 
 Made with ❤️ by [TheCrossLegCoder](https://github.com/TheCrossLegCoder)
 
