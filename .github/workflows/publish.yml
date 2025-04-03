@@ -12,7 +12,11 @@ jobs:
     strategy:
       matrix:
         configuration: [Release]
-        framework: [net7.0, net9.0, .NETFramework4.7] # Target all frameworks
+        framework: [
+            net472, # .NET Framework 4.7.2
+            7.0.x, # .NET 7.0 - gets latest patch
+            9.0.x, # .NET 9.0 - gets latest patch
+          ]
 
     steps:
       - uses: actions/checkout@v4

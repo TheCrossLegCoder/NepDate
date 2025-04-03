@@ -13,7 +13,12 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        framework: [.NETFramework4.7, net7.0, net9.0] # Include .NET Framework and .NET versions
+        # Use specific versions.  For .NET Core/5+, use A.B.x syntax to get the latest patch.
+        framework: [
+            net472, # .NET Framework 4.7.2
+            7.0.x, # .NET 7.0 - gets latest patch
+            9.0.x, # .NET 9.0 - gets latest patch
+          ]
 
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +32,15 @@ jobs:
         run: dotnet restore NepDate.sln
 
       - name: Build
-        run: dotnet build NepDate.sln --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-restore
+        run: |
+          dotnet build NepDate.sln \
+            --configuration ${{ matrix.configuration }} \
+            --framework ${{ matrix.framework }} \
+            --no-restore
 
       - name: Test
-        run: dotnet test NepDate.sln --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-build --verbosity normal
+        run: |
+          dotnet test NepDate.sln \
+            --configuration ${{ matrix.configuration }} \
+            --framework ${{ matrix.framework }} \
+            --no-build --verbosity normal
