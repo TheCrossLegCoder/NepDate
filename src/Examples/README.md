@@ -94,4 +94,4 @@ IEnumerable<DateTime> englishDates = NepaliDate.BulkConvert.ToEnglishDates(nepal
 
 - These examples demonstrate the key functionality but don't cover every method and property
 - Check the XML documentation in the library code for comprehensive API documentation
-- The examples use dates from the 2080s BS (2023-2024 AD) as representative samples 
+- The examples use dates from the 2080s BS (2023-2024 AD) as representative samples
