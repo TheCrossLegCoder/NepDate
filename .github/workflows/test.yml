@@ -13,13 +13,13 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        framework: [.NETFramework4.8, net7.0, net9.0] # Include .NET Framework and .NET versions
+        framework: [.NETFramework4.7, net7.0, net9.0] # Include .NET Framework and .NET versions
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.framework }} # Use matrix to specify .NET version
 

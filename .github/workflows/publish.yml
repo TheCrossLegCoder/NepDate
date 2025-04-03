@@ -12,13 +12,13 @@ jobs:
     strategy:
       matrix:
         configuration: [Release]
-        framework: [net7.0, net9.0, .NETFramework4.8] # Target all frameworks
+        framework: [net7.0, net9.0, .NETFramework4.7] # Target all frameworks
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.framework }} # Use matrix value
 
