@@ -7,29 +7,36 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest # Changed to Windows for broader compatibility
+
+    strategy:
+      matrix:
+        configuration: [Release]
+        framework: [net7.0, net9.0, .NETFramework4.8] # Target all frameworks
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "7.0.x" # Use a single version for publishing
+          dotnet-version: ${{ matrix.framework }} # Use matrix value
 
       - name: Restore dependencies
         run: dotnet restore NepDate.sln
 
       - name: Build
-        run: dotnet build NepDate.sln --configuration Release --no-restore
+        run: dotnet build NepDate.sln --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-restore
 
       - name: Test
-        run: dotnet test NepDate.sln --configuration Release --no-build --verbosity normal
+        run: dotnet test NepDate.sln --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-build --verbosity normal
 
       - name: Pack
-        run: dotnet pack src/NepDate/NepDate.csproj --configuration Release --no-build --output nupkgs
+        run: dotnet pack src/NepDate/NepDate.csproj --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-build --output nupkgs
 
       - name: Extract Version from Tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Push to NuGet
-        run: dotnet nuget push nupkgs/NepDate.${VERSION}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        if: matrix.framework == 'net7.0' # Only push once
+        run: dotnet nuget push nupkgs/NepDate.${VERSION}.${{ matrix.framework }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

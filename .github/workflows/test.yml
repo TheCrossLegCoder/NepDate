@@ -8,7 +8,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest # Changed to Windows
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+        framework: [.NETFramework4.8, net7.0, net9.0] # Include .NET Framework and .NET versions
 
     steps:
       - uses: actions/checkout@v3
@@ -16,13 +21,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "7.0.x"
+          dotnet-version: ${{ matrix.framework }} # Use matrix to specify .NET version
 
       - name: Restore dependencies
         run: dotnet restore NepDate.sln
 
       - name: Build
-        run: dotnet build NepDate.sln --no-restore
+        run: dotnet build NepDate.sln --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-restore
 
       - name: Test
-        run: dotnet test NepDate.sln --no-build --verbosity normal
+        run: dotnet test NepDate.sln --configuration ${{ matrix.configuration }} --framework ${{ matrix.framework }} --no-build --verbosity normal
