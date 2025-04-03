@@ -9,6 +9,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/TheCrossLegCoder/NepDate)](https://github.com/TheCrossLegCoder/NepDate)
 [![NuGet Version](https://img.shields.io/nuget/v/NepDate.svg)](https://www.nuget.org/packages/NepDate/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/NepDate)](https://www.nuget.org/packages/NepDate/)
+[![Tests: Passing](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)](https://github.com/TheCrossLegCoder/NepDate/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
