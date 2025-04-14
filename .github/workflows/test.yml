@@ -1,0 +1,57 @@
+name: .NET Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }}, ${{ matrix.dotnet }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            dotnet: "7.0.x"
+          - os: windows-latest
+            dotnet: "9.0.x"
+          - os: windows-latest
+            dotnet: "4.7.2"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET ${{ matrix.dotnet }}
+        if: matrix.dotnet != '4.7.2'
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Install VS Build Tools
+        if: matrix.dotnet == '4.7.2'
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Restore dependencies
+        run: |
+          if [ "${{ matrix.dotnet }}" = "4.7.2" ]; then
+            msbuild NepDate.sln /t:Restore /p:RestorePackagesConfig=true
+          else
+            dotnet restore NepDate.sln
+          fi
+
+      - name: Build
+        run: |
+          if [ "${{ matrix.dotnet }}" = "4.7.2" ]; then
+            msbuild NepDate.sln /p:Configuration=Release
+          else
+            dotnet build NepDate.sln --configuration Release --no-restore
+          fi
+
+      - name: Test
+        run: |
+          if [ "${{ matrix.dotnet }}" = "4.7.2" ]; then
+            msbuild /t:VSTest /p:Configuration=Release /p:VSTestTestCaseFilter="TestCategory!=Integration" NepDate.sln
+          else
+            dotnet test NepDate.sln --configuration Release --no-build --verbosity normal
+          fi
