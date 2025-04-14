@@ -42,5 +42,5 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Push to NuGet
-        if: matrix.framework == 'net7.0' # Only push once
+        if: matrix.framework == '7.0.x' # Only push once
         run: dotnet nuget push nupkgs/NepDate.${VERSION}.${{ matrix.framework }}.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
