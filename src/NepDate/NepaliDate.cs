@@ -135,31 +135,31 @@ namespace NepDate
         /// <summary>
         /// Initializes a new instance of the <see cref="NepaliDate"/> struct by converting from a Gregorian (English) date.
         /// </summary>
-        /// <param name="englishDate">The Gregorian DateTime to convert to Nepali date.</param>
+        /// <param name="engDate">The Gregorian DateTime to convert to Nepali date.</param>
         /// <exception cref="InvalidNepaliDateFormatException">Thrown when the converted date is outside the supported range.</exception>
         /// <remarks>
         /// This constructor converts from the Gregorian calendar to the Nepali calendar.
         /// Only the date components (year, month, day) are used from the input DateTime; time components are ignored.
         /// The conversion is performed using predefined mapping data in the dictionaries.
         /// </remarks>
-        public NepaliDate(DateTime englishDate)
+        public NepaliDate(DateTime engDate)
         {
             // Check if date is before minimum supported date (1901-04-13)
-            if (englishDate.Date < MinValue.EnglishDate.Date)
+            if (engDate.Date < MinValue.EnglishDate.Date)
             {
-                throw new ArgumentOutOfRangeException(nameof(englishDate),
+                throw new ArgumentOutOfRangeException(nameof(engDate),
                     $"The date is before the minimum supported date ({MinValue.EnglishDate.Date}).");
             }
 
             // Check if date is after maximum supported date (2143-04-12)
-            if (englishDate.Date > MaxValue.EnglishDate.Date)
+            if (engDate.Date > MaxValue.EnglishDate.Date)
             {
-                throw new ArgumentOutOfRangeException(nameof(englishDate),
+                throw new ArgumentOutOfRangeException(nameof(engDate),
                     $"The date is after the maximum supported date ({MaxValue.EnglishDate.Date}).");
             }
 
-            (Year, Month, Day) = DictionaryBridge.EngToNep.GetNepaliDate(englishDate.Year, englishDate.Month, englishDate.Day);
-            _englishDate = null;
+            (Year, Month, Day) = DictionaryBridge.EngToNep.GetNepaliDate(engDate.Year, engDate.Month, engDate.Day);
+            _englishDate = engDate;
             ValidateAndThrow();
         }
         #endregion
