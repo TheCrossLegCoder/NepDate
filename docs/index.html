@@ -8,8 +8,8 @@
   <meta name="description" content="High performance, zero-allocation Bikram Sambat (B.S.) date library for .NET. Conversion, smart parsing, fiscal year, calendar metadata, and more." />
   <link rel="canonical" href="https://rajuprasai.github.io/NepDate/" />
   <link rel="icon" href="assets/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" href="assets/logo.png?v=2" />
-  <link rel="apple-touch-icon" href="assets/logo.png?v=2" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -28,38 +28,47 @@
     "operatingSystem": ".NET Standard 2.0, .NET 5+, .NET Framework 4.6.1+",
     "applicationCategory": "DeveloperApplication",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "author": { "@type": "Person", "name": "rajuprasai" },
+    "author": { "@type": "Person", "name": "Raju Prasai" },
     "url": "https://rajuprasai.github.io/NepDate/",
     "license": "https://opensource.org/licenses/MIT"
   }
   </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Inline theme bootstrap. Resolves stored preference (light/dark/system)
-       to a concrete data-theme so first paint matches the final state. -->
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-M68P99TD');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Prevent theme flash -->
   <script>
     (function () {
       try {
-        var p = localStorage.getItem('nepdate-theme');
-        if (p !== 'light' && p !== 'dark' && p !== 'system') p = 'system';
-        var resolved = p === 'system'
-          ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-          : p;
-        document.documentElement.setAttribute('data-theme', resolved);
-        document.documentElement.setAttribute('data-theme-pref', p);
-      } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
-        document.documentElement.setAttribute('data-theme-pref', 'system');
-      }
+        var t = localStorage.getItem('nepdate-theme');
+        if (!t) t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
     })();
   </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M68P99TD"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="inner">
       <a class="brand" href="index.html">
-        <img class="logo-img" src="assets/logo.png?v=2" alt="NepDate logo" width="30" height="30" />
+        <img class="logo-img" src="assets/logo.png" alt="NepDate logo" width="30" height="30" />
         <span>NepDate</span>
       </a>
       <nav class="nav-main" aria-label="Primary">
@@ -68,22 +77,20 @@
         <a href="changelog.html">Changelog</a>
       </nav>
       <div class="header-right">
-                <a class="btn btn-momo btn-sm" href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener" aria-label="Buy me a momo">
-          <span class="momo-ico" aria-hidden="true"><svg class="momo-ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 14.2c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5c0 .9-.7 1.6-1.6 1.6H5.1c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M9 6.6c.4-1.1 1.5-1.9 2.7-1.9.4 0 .8.1 1.2.3-.4.4-.7.9-.9 1.5l-.2.7c-.4-.1-.8-.3-1.2-.3-.6 0-1.1.2-1.6.5l-.5-.4c.2-.2.3-.3.5-.4Zm6 0 .5-.4c.2.1.3.2.5.4-.4-.3-1-.5-1.6-.5-.4 0-.8.2-1.2.3l-.2-.7c-.2-.6-.5-1.1-.9-1.5.4-.2.8-.3 1.2-.3 1.2 0 2.3.8 2.7 1.9-.3.3-.6.6-1 .8Z"/><path d="M12 4.5c0-.7.6-1.3 1.3-1.3.4 0 .7.1 1 .4-.3.6-.5 1.3-.5 2 0 .3 0 .7.1 1l-.7-.1c-.7 0-1.3-.6-1.3-1.3 0-.3.1-.5.1-.7Z"/><path d="M5.5 18h13l.4 1.4c.2.6-.3 1.2-.9 1.2H6c-.6 0-1.1-.6-.9-1.2L5.5 18Z"/></svg></span>
+        <a class="btn btn-momo btn-sm" href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener" aria-label="Buy me a momo">
+          <span class="momo-ico" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.7-9.5-9.3C1.1 7.8 3.6 4 7.4 4c2 0 3.4 1 4.6 2.6C13.2 5 14.6 4 16.6 4c3.8 0 6.3 3.8 4.9 7.7C19.5 16.3 12 21 12 21z"/></svg>
+          </span>
           <span>Buy me a momo</span>
         </a>
-        <a class="github-btn" href="https://github.com/rajuprasai/NepDate" target="_blank" rel="noopener" aria-label="GitHub repository">
+        <a class="github-btn" href="https://github.com/RajuPrasai/NepDate" target="_blank" rel="noopener" aria-label="GitHub repository">
           <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
           <span>GitHub</span>
         </a>
-        <div class="theme-switch" role="group" aria-label="Theme">
-          <button type="button" data-theme-value="light" aria-label="Light theme" title="Light">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          </button>
-          <button type="button" data-theme-value="dark" aria-label="Dark theme" title="Dark">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-          </button>
-        </div>
+        <button class="icon-btn theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
         <button class="icon-btn hamburger" aria-label="Open menu"><span></span></button>
       </div>
     </div>
@@ -94,7 +101,7 @@
     <a href="index.html" class="active">Home</a>
     <a href="docs.html">Documentation</a>
     <a href="changelog.html">Changelog</a>
-    <a href="https://github.com/rajuprasai/NepDate" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/RajuPrasai/NepDate" target="_blank" rel="noopener">GitHub</a>
     <a href="https://www.nuget.org/packages/NepDate/" target="_blank" rel="noopener">NuGet</a>
     <a href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener">Buy me a momo</a>
   </nav>
@@ -106,24 +113,13 @@
       <div class="container">
         <div class="hero-grid">
           <div>
-            <div class="chips" aria-label="Project facts">
-              <a class="chip" href="https://www.nuget.org/packages/NepDate/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-                NuGet package
-              </a>
-              <span class="chip chip-accent">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                .NET Standard 2.0+ &middot; .NET 8
-              </span>
-              <span class="chip chip-success">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-                Zero dependencies
-              </span>
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                MIT License
-              </span>
-            </div><h1>
+            <div class="hero-badges">
+              <img class="hero-badge" src="https://img.shields.io/nuget/v/NepDate.svg?style=for-the-badge&color=dc3f10" alt="NuGet Version" />
+              <img class="hero-badge" src="https://img.shields.io/nuget/dt/NepDate?style=for-the-badge&label=Downloads&color=111827" alt="NuGet Downloads" />
+              <img class="hero-badge" src="https://img.shields.io/github/stars/RajuPrasai/NepDate?style=for-the-badge&color=f59e0b" alt="GitHub Stars" />
+              <img class="hero-badge" src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
+            </div>
+            <h1>
               Bikram Sambat for <span class="grad">.NET</span>, done right.
             </h1>
             <p class="lede">
@@ -135,12 +131,14 @@
               <a class="btn btn-primary" href="docs.html">Get Started
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </a>
-              <a class="btn btn-secondary" href="https://github.com/rajuprasai/NepDate" target="_blank" rel="noopener">
+              <a class="btn btn-secondary" href="https://github.com/RajuPrasai/NepDate" target="_blank" rel="noopener">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                 Star on GitHub
               </a>
               <a class="btn btn-momo" href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener">
-                <span class="momo-ico" aria-hidden="true"><svg class="momo-ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 14.2c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5c0 .9-.7 1.6-1.6 1.6H5.1c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M9 6.6c.4-1.1 1.5-1.9 2.7-1.9.4 0 .8.1 1.2.3-.4.4-.7.9-.9 1.5l-.2.7c-.4-.1-.8-.3-1.2-.3-.6 0-1.1.2-1.6.5l-.5-.4c.2-.2.3-.3.5-.4Zm6 0 .5-.4c.2.1.3.2.5.4-.4-.3-1-.5-1.6-.5-.4 0-.8.2-1.2.3l-.2-.7c-.2-.6-.5-1.1-.9-1.5.4-.2.8-.3 1.2-.3 1.2 0 2.3.8 2.7 1.9-.3.3-.6.6-1 .8Z"/><path d="M12 4.5c0-.7.6-1.3 1.3-1.3.4 0 .7.1 1 .4-.3.6-.5 1.3-.5 2 0 .3 0 .7.1 1l-.7-.1c-.7 0-1.3-.6-1.3-1.3 0-.3.1-.5.1-.7Z"/><path d="M5.5 18h13l.4 1.4c.2.6-.3 1.2-.9 1.2H6c-.6 0-1.1-.6-.9-1.2L5.5 18Z"/></svg></span>
+                <span class="momo-ico" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.7-9.5-9.3C1.1 7.8 3.6 4 7.4 4c2 0 3.4 1 4.6 2.6C13.2 5 14.6 4 16.6 4c3.8 0 6.3 3.8 4.9 7.7C19.5 16.3 12 21 12 21z"/></svg>
+                </span>
                 Buy me a momo
               </a>
             </div>
@@ -169,7 +167,7 @@
         <div class="section-head">
           <div class="section-eyebrow">Installation</div>
           <h2 class="section-title">Get started in seconds</h2>
-          <p class="section-sub">One command, zero configuration. Works anywhere .NET Standard 2.0 runs: .NET Framework 4.6.1+, .NET Core 2.0+, .NET 5&ndash;9, Mono, Xamarin, Unity, and MAUI.</p>
+          <p class="section-sub">One command, zero configuration. Works on .NET Framework 4.6.1+, .NET Core 2.0+, .NET 5 through 9, Xamarin, Unity, and MAUI.</p>
         </div>
 
         <div class="install-tabs" data-tabs>
@@ -185,7 +183,7 @@
             <pre><code class="language-bash">Install-Package NepDate</code></pre>
           </div>
           <div class="tab-panel" data-panel="ref">
-<pre><code class="language-bash">&lt;PackageReference Include="NepDate" Version="2.0.6" /&gt;</code></pre>
+<pre><code class="language-bash">&lt;PackageReference Include="NepDate" Version="2.0.7" /&gt;</code></pre>
           </div>
         </div>
       </div>
@@ -483,11 +481,11 @@
           <p class="section-sub">NepDate is open source and welcomes pull requests, bug reports, and ideas from anyone.</p>
         </div>
         <div class="contributors">
-          <a href="https://github.com/rajuprasai/NepDate/graphs/contributors" target="_blank" rel="noopener">
-            <img src="https://contrib.rocks/image?repo=rajuprasai/NepDate" alt="NepDate contributors" loading="lazy" />
+          <a href="https://github.com/RajuPrasai/NepDate/graphs/contributors" target="_blank" rel="noopener">
+            <img src="https://contrib.rocks/image?repo=RajuPrasai/NepDate" alt="NepDate contributors" loading="lazy" />
           </a>
           <div style="margin-top:8px;">
-            <a class="btn btn-secondary" href="https://github.com/rajuprasai/NepDate/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Read the Contributing Guide</a>
+            <a class="btn btn-secondary" href="https://github.com/RajuPrasai/NepDate/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Read the Contributing Guide</a>
           </div>
         </div>
       </div>
@@ -497,14 +495,10 @@
     <section class="section" id="sponsor">
       <div class="container">
         <div class="sponsor-card">
-          <div class="sponsor-ico" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M3.5 14.2c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5c0 .9-.7 1.6-1.6 1.6H5.1c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M5.5 18h13l.4 1.4c.2.6-.3 1.2-.9 1.2H6c-.6 0-1.1-.6-.9-1.2L5.5 18Z"/><path d="M9 6c.5-1 1.6-1.6 2.7-1.6.5 0 1 .1 1.4.4-.5.5-.9 1.1-1.1 1.8l-.2.6c-.4-.1-.8-.2-1.2-.2-.6 0-1.2.2-1.6.5L8 7c.3-.4.6-.7 1-1Zm6 0 .5.6c.4.3 1 .5 1.6.5-.4-.3-1-.5-1.6-.5-.4 0-.8.1-1.2.2l-.2-.6c-.2-.7-.6-1.3-1.1-1.8.4-.3.9-.4 1.4-.4 1.1 0 2.2.6 2.6 1.6Z"/></svg>
-          </div>
-          <h3>Support NepDate</h3>
-          <p>NepDate is free, MIT licensed, and built in spare time. If it saves your project effort, drop a momo. It keeps the library, NepDate Widget, and the docs site actively maintained.</p>
-          <a class="btn btn-momo btn-lg" href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener">
-            <span class="momo-ico" aria-hidden="true"><svg class="momo-ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 14.2c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5c0 .9-.7 1.6-1.6 1.6H5.1c-.9 0-1.6-.7-1.6-1.6Z"/><path d="M9 6.6c.4-1.1 1.5-1.9 2.7-1.9.4 0 .8.1 1.2.3-.4.4-.7.9-.9 1.5l-.2.7c-.4-.1-.8-.3-1.2-.3-.6 0-1.1.2-1.6.5l-.5-.4c.2-.2.3-.3.5-.4Zm6 0 .5-.4c.2.1.3.2.5.4-.4-.3-1-.5-1.6-.5-.4 0-.8.2-1.2.3l-.2-.7c-.2-.6-.5-1.1-.9-1.5.4-.2.8-.3 1.2-.3 1.2 0 2.3.8 2.7 1.9-.3.3-.6.6-1 .8Z"/><path d="M12 4.5c0-.7.6-1.3 1.3-1.3.4 0 .7.1 1 .4-.3.6-.5 1.3-.5 2 0 .3 0 .7.1 1l-.7-.1c-.7 0-1.3-.6-1.3-1.3 0-.3.1-.5.1-.7Z"/><path d="M5.5 18h13l.4 1.4c.2.6-.3 1.2-.9 1.2H6c-.6 0-1.1-.6-.9-1.2L5.5 18Z"/></svg></span>
-            Buy me a momo
+          <h3>Support NepDate development</h3>
+          <p>If NepDate saves you time, consider buying the maintainer a momo. Every bit helps keep the project actively maintained.</p>
+          <a class="btn btn-primary" href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener">
+            <span style="font-size:1.1em">🥟</span> Buy Me a Momo
           </a>
         </div>
       </div>
@@ -517,7 +511,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a class="brand" href="index.html" style="margin-bottom:12px;">
-            <img class="logo-img" src="assets/logo.png?v=2" alt="NepDate logo" width="30" height="30" />
+            <img class="logo-img" src="assets/logo.png" alt="NepDate logo" width="30" height="30" />
             <span>NepDate</span>
           </a>
           <p>The fastest Bikram Sambat library for .NET. Open source, MIT licensed, made with care for the Nepali developer community.</p>
@@ -533,16 +527,16 @@
         <div class="footer-col">
           <h4>Community</h4>
           <ul>
-            <li><a href="https://github.com/rajuprasai/NepDate" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://github.com/rajuprasai/NepDate/issues" target="_blank" rel="noopener">Issues</a></li>
-            <li><a href="https://github.com/rajuprasai/NepDate/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+            <li><a href="https://github.com/RajuPrasai/NepDate" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/RajuPrasai/NepDate/issues" target="_blank" rel="noopener">Issues</a></li>
+            <li><a href="https://github.com/RajuPrasai/NepDate/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <ul>
             <li><a href="https://buymemomo.com/rajuprasai" target="_blank" rel="noopener">Sponsor</a></li>
-            <li><a href="https://github.com/rajuprasai/NepDate/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+            <li><a href="https://github.com/RajuPrasai/NepDate/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
           </ul>
         </div>
       </div>
@@ -556,15 +550,3 @@
   <script src="js/main.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

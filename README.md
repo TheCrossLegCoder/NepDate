@@ -1,15 +1,17 @@
 ![NepDate Logo](https://user-images.githubusercontent.com/37014558/231635618-bf6599e3-554e-4b02-93df-019e7b8aecc3.png)
 
+<div align="center">
+
 # NepDate: Fast and Efficient Nepali Date Library for .NET
 
 ### Modern, High Performance Bikram Sambat Date Operations for .NET Applications
 
-[![GitHub Stars](https://img.shields.io/github/stars/rajuprasai/NepDate)](https://github.com/rajuprasai/NepDate)
+[![GitHub Stars](https://img.shields.io/github/stars/RajuPrasai/NepDate)](https://github.com/RajuPrasai/NepDate)
 [![NuGet Version](https://img.shields.io/nuget/v/NepDate.svg)](https://www.nuget.org/packages/NepDate/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/NepDate)](https://www.nuget.org/packages/NepDate/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Open NepDate Website](https://img.shields.io/badge/NepDate-Website-2ea44f?style=for-the-badge)](https://rajuprasai.github.io/NepDate/)
+</div>
 
 ---
 
@@ -308,7 +310,7 @@ string.Format("{0:yyyy/MM/dd}", date)         // 2079/02/06
 `SmartDateParser` handles ambiguous, informal, and multi locale date strings. It recognizes over 100 month name spellings (English and Nepali Unicode), Nepali digits, common separators, optional suffixes (`B.S.`, `V.S.`, `गते`, `मिति`), and 2 digit year expansion.
 
 ```csharp
-// SmartDateParser.Parse — throws on failure
+// SmartDateParser.Parse - throws on failure
 NepaliDate d1 = SmartDateParser.Parse("15 Shrawan 2080");    // DD Month YYYY
 NepaliDate d2 = SmartDateParser.Parse("Shrawan 15, 2080");   // Month DD, YYYY
 NepaliDate d3 = SmartDateParser.Parse("15 Saun 2080");       // alternate month spelling
@@ -321,7 +323,7 @@ NepaliDate d6 = "15 Shrawan 2080".ToNepaliDate();
 if ("15 Shrawan 2080".TryToNepaliDate(out NepaliDate d7))
     Console.WriteLine(d7);
 
-// NepaliDate.Parse with autoAdjust — heuristic correction for ambiguous or non-standard input
+// NepaliDate.Parse with autoAdjust - heuristic correction for ambiguous or non-standard input
 // Rules applied in order:
 //   1. day > 32 → swap year and day
 //   2. monthInMiddle: false → swap month and day first
@@ -368,7 +370,7 @@ NepaliDate start  = NepaliDate.GetFiscalYearStartDate(2080);      // 2080/04/01
 NepaliDate end    = NepaliDate.GetFiscalYearEndDate(2080);         // 2081/03/last-day-of-Ashadh
 (var s, var e)    = NepaliDate.GetFiscalYearStartAndEndDate(2080); // (2080/04/01, 2081/03/last-day-of-Ashadh)
 
-// Quarter boundaries — second parameter is the month (1–12) used to identify the quarter
+// Quarter boundaries - second parameter is the month (1–12) used to identify the quarter
 // Month 4 → Q1, month 7 → Q2, month 10 → Q3, month 1 → Q4
 NepaliDate qS  = NepaliDate.GetFiscalYearQuarterStartDate(2080, 4);         // 2080/04/01
 NepaliDate qE  = NepaliDate.GetFiscalYearQuarterEndDate(2080, 4);           // 2080/06/30
@@ -539,14 +541,18 @@ NepDate uses flat array dictionaries for O(1) date lookups with zero heap alloca
 
 NepDate is up to **8,600× faster** than comparable libraries while producing zero heap allocations on every conversion.
 
+<div align="center">
+
 ## 👥 Contributions
 
-Contributions are welcome. Please read the [CONTRIBUTING](https://github.com/rajuprasai/NepDate/blob/main/CONTRIBUTING.md) guide before submitting a pull request.
+Contributions are welcome. Please read the [CONTRIBUTING](https://github.com/RajuPrasai/NepDate/blob/main/CONTRIBUTING.md) guide before submitting a pull request.
 
 ## 📝 Change Log
 
-For a detailed list of changes in each release, visit the [releases page](https://github.com/rajuprasai/NepDate/releases).
+For a detailed list of changes in each release, visit the [releases page](https://github.com/RajuPrasai/NepDate/releases).
 
 ---
 
-Made with ❤️ by [rajuprasai](https://github.com/rajuprasai)
+Made with ❤️ by [Raju Prasai](https://github.com/RajuPrasai)
+
+</div>

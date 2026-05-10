@@ -138,7 +138,7 @@ public class NepaliDateArithmeticEdgeCaseTests
     [Fact]
     public void AddMonths_DayCappedAtMonthEnd_WhenResultMonthIsShorter()
     {
-        // 2081/04/32 (Shrawan 32 — last day of Shrawan 2081, which has 32 days per tests).
+        // 2081/04/32 (Shrawan 32 - last day of Shrawan 2081, which has 32 days per tests).
         // + 5 months → month = 4 + 5 = 9 (Poush 2081).
         // Poush 2081 likely has fewer than 32 days.
         // The result day must be capped at MonthEndDay of Poush 2081.
@@ -306,7 +306,7 @@ public class NepaliDateArithmeticEdgeCaseTests
     [Fact]
     public void TryParse_AutoAdjust_ValidStandardFormat_ReturnsCorrectDate()
     {
-        // "2080/05/15" is already standard — autoAdjust should still produce the right result.
+        // "2080/05/15" is already standard - autoAdjust should still produce the right result.
         bool success = NepaliDate.TryParse("2080/05/15", out var result, autoAdjust: true, monthInMiddle: true);
         Assert.True(success);
         Assert.Equal(new NepaliDate(2080, 5, 15), result);

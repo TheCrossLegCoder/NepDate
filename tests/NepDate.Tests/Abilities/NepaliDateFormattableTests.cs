@@ -90,7 +90,7 @@ public class NepaliDateFormattableTests
     [Fact]
     public void CustomFormat_M_WithoutLeadingZero_ReturnsUnpadded()
     {
-        // Month 4 — single M should give "4" not "04"
+        // Month 4 - single M should give "4" not "04"
         var result = _date.ToString("M/d/yyyy", null);
         Assert.Equal("4/15/2081", result);
     }

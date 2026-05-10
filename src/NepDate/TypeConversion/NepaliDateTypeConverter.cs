@@ -50,9 +50,9 @@ namespace NepDate.TypeConversion
         /// <param name="value">
         /// The value to convert. Supported types:
         /// <list type="bullet">
-        ///   <item><description><see cref="string"/> — parsed as a Nepali date string (<c>"YYYY/MM/DD"</c> or any supported separator); a null or whitespace string returns <c>default(NepaliDate)</c>.</description></item>
-        ///   <item><description><see cref="int"/> — treated as a <c>YYYYMMDD</c> integer.</description></item>
-        ///   <item><description><see cref="DateTime"/> — converted from Gregorian to Bikram Sambat.</description></item>
+        ///   <item><description><see cref="string"/> - parsed as a Nepali date string (<c>"YYYY/MM/DD"</c> or any supported separator); a null or whitespace string returns <c>default(NepaliDate)</c>.</description></item>
+        ///   <item><description><see cref="int"/> - treated as a <c>YYYYMMDD</c> integer.</description></item>
+        ///   <item><description><see cref="DateTime"/> - converted from Gregorian to Bikram Sambat.</description></item>
         /// </list>
         /// </param>
         /// <returns>A <see cref="NepaliDate"/> equivalent to the converted value.</returns>
@@ -90,9 +90,9 @@ namespace NepDate.TypeConversion
         /// <param name="destinationType">The type to convert to.</param>
         /// <returns>
         /// <list type="bullet">
-        ///   <item><description><see cref="string"/> — sortable ISO format <c>"YYYY-MM-DD"</c>.</description></item>
-        ///   <item><description><see cref="int"/> — integer in <c>YYYYMMDD</c> form.</description></item>
-        ///   <item><description><see cref="DateTime"/> — midnight on the equivalent Gregorian date.</description></item>
+        ///   <item><description><see cref="string"/> - sortable ISO format <c>"YYYY-MM-DD"</c>.</description></item>
+        ///   <item><description><see cref="int"/> - integer in <c>YYYYMMDD</c> form.</description></item>
+        ///   <item><description><see cref="DateTime"/> - midnight on the equivalent Gregorian date.</description></item>
         /// </list>
         /// </returns>
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)

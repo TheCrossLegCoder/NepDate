@@ -4,15 +4,15 @@
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>NepDate</Title>
-    <Authors>rajuprasai</Authors>
+    <Authors>Raju Prasai</Authors>
     <Description>Super-fast and memory-efficient Nepali Date struct with built in nepali date converter and additional powerful features</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/rajuprasai/NepDate</RepositoryUrl>
+    <RepositoryUrl>https://github.com/RajuPrasai/NepDate</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Nepali Date Converter;Nepali Date;Nepali Calendar;NepDate;Date Converter;Patro;Nepali Patro;Nepal;Nepali-Date-Converter;NepaliDateConverter;Nepali;Date;Converter;Miti</PackageTags>
-    <PackageProjectUrl>https://github.com/rajuprasai/NepDate</PackageProjectUrl>
+    <PackageProjectUrl>https://rajuprasai.github.io/NepDate/</PackageProjectUrl>
     <PackageIcon>nuget-icon.png</PackageIcon>
-    <Version>2.0.6</Version>
+    <Version>2.0.7</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright>Copyright © 2023-2026 NepDate</Copyright>
     <ApplicationIcon>Assets\nuget-icon.ico</ApplicationIcon>

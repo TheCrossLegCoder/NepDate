@@ -321,10 +321,10 @@ public class FiscalYearInstanceMethodTests
     // ---- Consistency: FiscalYearStartAndEndDate matches manually constructed dates ----
 
     [Theory]
-    [InlineData(4)]   // Shrawan — first month of fiscal year
-    [InlineData(6)]   // Ashoj   — last month of Q1
-    [InlineData(7)]   // Kartik  — first month of Q2
-    [InlineData(12)]  // Chaitra — last month of Q3
+    [InlineData(4)]   // Shrawan - first month of fiscal year
+    [InlineData(6)]   // Ashoj   - last month of Q1
+    [InlineData(7)]   // Kartik  - first month of Q2
+    [InlineData(12)]  // Chaitra - last month of Q3
     public void FiscalYearStartDate_AllFiscalMonths_Return2080Shrawan1(int month)
     {
         // All months 4-12 of 2080 belong to fiscal year 2080.

@@ -1,134 +1,71 @@
 /* ==========================================================================
    NepDate Documentation Site
-   Theme: light / dark / system, manual segmented toggle
-   Foundation: design tokens (Phase 1 rewrite)
+   Theme: auto dark/light with manual toggle
    ========================================================================== */
-
-/* -------- Self-hosted variable fonts (latin subset) --------
-   Single woff2 per family covers every weight via the wght axis.
-   Files served from same origin -> no CDN, no FOIT, GDPR-safe. */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('../assets/fonts/Inter-Variable.woff2') format('woff2-variations'),
-       url('../assets/fonts/Inter-Variable.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('../assets/fonts/JetBrainsMono-Variable.woff2') format('woff2-variations'),
-       url('../assets/fonts/JetBrainsMono-Variable.woff2') format('woff2');
-}
 
 /* -------- Reset & Base -------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body { margin: 0; padding: 0; }
 img, svg { max-width: 100%; display: block; }
-a { color: var(--accent); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
+a { color: var(--accent); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent-hover); }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-h1, h2, h3, h4, h5, h6 { margin: 0 0 .6em; line-height: 1.18; font-weight: 600; letter-spacing: -.022em; font-feature-settings: 'ss01','cv11','cv03'; }
+h1, h2, h3, h4, h5, h6 { margin: 0 0 .6em; line-height: 1.25; font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0 0 1em; }
 ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
 li { margin-bottom: .25em; }
 
-/* -------- Design Tokens (single source of truth) -------- */
+/* -------- Design Tokens -------- */
 :root {
   --bg:            #ffffff;
-  --bg-alt:        #f6f7f9;
+  --bg-alt:        #f7f8fa;
   --bg-elev:       #ffffff;
-  --bg-elev-1:     #fbfbfd;
-  --bg-elev-2:     #f3f4f7;
-  --bg-elev-3:     #ebedf2;
-  --bg-code:       #0e1117;
-  --bg-glass:      color-mix(in srgb, #ffffff 72%, transparent);
-
-  --text:          #0b0f1a;
-  --text-muted:    #4b5466;
-  --text-subtle:   #6b7588;
-
-  --border:        #e6e8ee;
-  --border-strong: #d3d6df;
-  --border-subtle: color-mix(in srgb, #0b0f1a 6%, transparent);
-
-  --accent:        #dc3f10;
+  --bg-code:       #0d1117;
+  --text:          #111827;
+  --text-muted:    #4b5563;
+  --text-subtle:   #6b7280;
+  --border:        #e5e7eb;
+  --border-strong: #d1d5db;
+  --accent:        #dc3f10;         /* warm reddish orange, nods to Nepal flag */
   --accent-hover:  #b3300a;
   --accent-soft:   #ffece4;
   --accent-border: #fbb39a;
-  --accent-glow:   rgba(220, 63, 16, .35);
-  --grad-aurora:   linear-gradient(135deg, #ff7a18 0%, #af002d 100%);
-
   --success:       #16a34a;
   --danger:        #dc2626;
-  --warning:       #d97706;
+  --shadow-sm:     0 1px 2px rgba(17,24,39,.06), 0 1px 3px rgba(17,24,39,.08);
+  --shadow-md:     0 4px 6px -1px rgba(17,24,39,.08), 0 2px 4px -2px rgba(17,24,39,.08);
+  --shadow-lg:     0 12px 24px -8px rgba(17,24,39,.14), 0 4px 10px -4px rgba(17,24,39,.08);
+  --radius-sm:     6px;
+  --radius:        10px;
+  --radius-lg:     14px;
 
-  --shadow-sm:     0 1px 2px rgba(11,15,26,.06), 0 1px 3px rgba(11,15,26,.06);
-  --shadow-md:     0 4px 8px -2px rgba(11,15,26,.07), 0 2px 4px -2px rgba(11,15,26,.06);
-  --shadow-lg:     0 16px 32px -12px rgba(11,15,26,.14), 0 4px 12px -4px rgba(11,15,26,.06);
-  --shadow-xl:     0 30px 80px -20px rgba(11,15,26,.22), 0 8px 24px -8px rgba(11,15,26,.10);
-  --shadow-glow:   0 0 0 1px var(--accent-border), 0 8px 24px -8px var(--accent-glow);
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro', Consolas, 'Courier New', monospace;
 
-  --radius-xs:     4px;
-  --radius-sm:     8px;
-  --radius:        12px;
-  --radius-lg:     16px;
-  --radius-2xl:    24px;
-  --radius-pill:   999px;
-
-  --dur-fast:      .15s;
-  --dur-med:       .28s;
-  --dur-slow:      .55s;
-  --ease-out:      cubic-bezier(.22,1,.36,1);
-  --ease-in-out:   cubic-bezier(.65,0,.35,1);
-
-  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Cascadia Code', 'Source Code Pro', Consolas, 'Courier New', monospace;
-
-  --header-h:      64px;
-  --sidebar-w:     280px;
-  --toc-w:         270px;
-  --content-max:   1500px;
+  --header-h: 64px;
+  --sidebar-w: 280px;
+  --toc-w: 270px;
+  --content-max: 1500px;
 }
 
 [data-theme="dark"] {
-  --bg:            #0a0e1a;
-  --bg-alt:        #0d1322;
-  --bg-elev:       #11182a;
-  --bg-elev-1:     #131b30;
-  --bg-elev-2:     #1a2238;
-  --bg-elev-3:     #222b44;
-  --bg-code:       #060912;
-  --bg-glass:      color-mix(in srgb, #0a0e1a 70%, transparent);
-
-  --text:          #e8ecf4;
-  --text-muted:    #9aa3b8;
-  --text-subtle:   #6b7388;
-
-  --border:        #1f2740;
-  --border-strong: #2a324d;
-  --border-subtle: color-mix(in srgb, #e8ecf4 8%, transparent);
-
-  --accent:        #ff8a5b;
-  --accent-hover:  #ffa685;
-  --accent-soft:   rgba(255, 138, 91, .14);
-  --accent-border: rgba(255, 138, 91, .42);
-  --accent-glow:   rgba(255, 138, 91, .50);
-  --grad-aurora:   linear-gradient(135deg, #ff8a5b 0%, #e0245a 100%);
-
-  --success:       #4ade80;
-  --danger:        #f87171;
-  --warning:       #fbbf24;
-
-  --shadow-sm:     0 1px 2px rgba(0,0,0,.45);
-  --shadow-md:     0 4px 12px -4px rgba(0,0,0,.55);
+  --bg:            #0b1020;
+  --bg-alt:        #0f172a;
+  --bg-elev:       #111827;
+  --bg-code:       #05070d;
+  --text:          #e5e7eb;
+  --text-muted:    #9ca3af;
+  --text-subtle:   #6b7280;
+  --border:        #1f2937;
+  --border-strong: #374151;
+  --accent:        #fb7045;
+  --accent-hover:  #fda07a;
+  --accent-soft:   rgba(251, 112, 69, .14);
+  --accent-border: rgba(251, 112, 69, .38);
+  --shadow-sm:     0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:     0 4px 8px -2px rgba(0,0,0,.5);
   --shadow-lg:     0 18px 40px -12px rgba(0,0,0,.65);
-  --shadow-xl:     0 36px 100px -24px rgba(0,0,0,.75), 0 12px 32px -8px rgba(0,0,0,.55);
-  --shadow-glow:   0 0 0 1px var(--accent-border), 0 12px 36px -8px var(--accent-glow);
 }
 
 body {
@@ -137,8 +74,7 @@ body {
   color: var(--text);
   font-size: 16px;
   line-height: 1.65;
-  font-feature-settings: 'ss01','cv11','cv03','cv05';
-  transition: background var(--dur-med) var(--ease-out), color var(--dur-med) var(--ease-out);
+  transition: background .3s ease, color .3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -1199,403 +1135,4 @@ pre:hover .copy-btn { opacity: 1; }
 /* Printable / reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-}
-
-/* ==========================================================================
-   Phase 1 additions
-   ========================================================================== */
-
-/* -------- Tri-state theme toggle (Light / Dark / System) -------- */
-.theme-switch {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px;
-  background: var(--bg-elev-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  position: relative;
-  isolation: isolate;
-  font-size: 0;
-  height: 34px;
-}
-.theme-switch button {
-  width: 32px; height: 28px;
-  display: grid; place-items: center;
-  border-radius: var(--radius-pill);
-  color: var(--text-muted);
-  position: relative; z-index: 1;
-  transition: color var(--dur-fast) var(--ease-out);
-}
-.theme-switch button svg { width: 15px; height: 15px; }
-.theme-switch button[aria-pressed="true"] { color: var(--text); }
-.theme-switch::before {
-  content: "";
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 32px; height: 28px;
-  background: var(--bg);
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--dur-med) var(--ease-out);
-  z-index: 0;
-}
-.theme-switch[data-active="light"]::before  { transform: translateX(0); }
-.theme-switch[data-active="dark"]::before   { transform: translateX(32px); }
-.theme-switch[data-active="system"]::before { transform: translateX(64px); }
-
-/* Hide the legacy single-button toggle if it is still in DOM */
-.theme-toggle { display: none !important; }
-
-/* -------- Skip link visibility on focus -------- */
-.skip-link:focus {
-  background: var(--accent);
-  color: #fff;
-  outline: 2px solid var(--accent-glow);
-  outline-offset: 2px;
-}
-
-/* -------- Reduced motion guard --------
-   Honors user OS preference. Animations and parallax are disabled
-   while keeping focus-visible transitions usable. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-  html { scroll-behavior: auto; }
-}
-
-
-/* =====================================================================
-   Phase 2: Visual identity
-   Sticky header polish, native chips, screenshot chrome,
-   stroke-dash icon hover, bento feature grid.
-   ===================================================================== */
-
-/* Sticky header gains depth on scroll. */
-.site-header {
-  transition:
-    background var(--dur-med) var(--ease-out),
-    border-color var(--dur-med) var(--ease-out),
-    box-shadow var(--dur-med) var(--ease-out);
-}
-.site-header.is-scrolled {
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
-  backdrop-filter: saturate(1.6) blur(18px);
-  -webkit-backdrop-filter: saturate(1.6) blur(18px);
-  border-bottom-color: var(--border-strong);
-  box-shadow: 0 8px 24px -16px rgba(0, 0, 0, .35);
-}
-[data-theme="dark"] .site-header.is-scrolled {
-  box-shadow: 0 10px 28px -16px rgba(0, 0, 0, .8);
-}
-
-/* ----- Native chips (replaces shields.io badges) ----- */
-.chips {
-  display: flex; flex-wrap: wrap; gap: 8px;
-  margin: 0 0 22px;
-}
-.chip {
-  display: inline-flex; align-items: center; gap: 7px;
-  height: 28px; padding: 0 12px;
-  background: var(--bg-elev-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  font-size: .8rem; font-weight: 600;
-  color: var(--text);
-  font-feature-settings: 'tnum' 1, 'cv11' 1;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
-}
-.chip svg { width: 13px; height: 13px; flex: none; }
-.chip .chip-k { color: var(--text-muted); font-weight: 500; }
-.chip .chip-v { color: var(--text); font-weight: 700; }
-.chip:hover { border-color: var(--border-strong); color: var(--text); }
-a.chip:hover { border-color: var(--accent-border); color: var(--accent); }
-.chip-accent {
-  border-color: var(--accent-border);
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-.chip-accent .chip-k, .chip-accent .chip-v { color: inherit; }
-.chip-success {
-  border-color: color-mix(in srgb, var(--success) 35%, var(--border));
-  background: color-mix(in srgb, var(--success) 10%, var(--bg-elev-1));
-  color: var(--success);
-}
-.chip-success .chip-k, .chip-success .chip-v { color: inherit; }
-
-/* Hide the legacy shields.io badge wall if any page still emits it. */
-.hero-badges { display: none; }
-
-/* ----- Screenshot window chrome ----- */
-/* Adds a 26px titlebar with traffic-light dots above every .shot. */
-.shot {
-  position: relative;
-  padding-top: 26px;
-}
-.shot::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 26px;
-  background:
-    radial-gradient(circle at 14px 13px, #ff5f56 0 5px, transparent 5.5px),
-    radial-gradient(circle at 32px 13px, #ffbd2e 0 5px, transparent 5.5px),
-    radial-gradient(circle at 50px 13px, #27c93f 0 5px, transparent 5.5px),
-    linear-gradient(180deg, var(--bg-alt), color-mix(in srgb, var(--bg-alt) 82%, var(--border)));
-  border-bottom: 1px solid var(--border);
-  pointer-events: none;
-  z-index: 1;
-}
-[data-theme="dark"] .shot::before {
-  background:
-    radial-gradient(circle at 14px 13px, #ff5f56 0 5px, transparent 5.5px),
-    radial-gradient(circle at 32px 13px, #ffbd2e 0 5px, transparent 5.5px),
-    radial-gradient(circle at 50px 13px, #27c93f 0 5px, transparent 5.5px),
-    linear-gradient(180deg, var(--bg-elev-2), var(--bg-elev-1));
-}
-
-/* ----- Animated stroke-dash on feature icons (hover only) ----- */
-@media (prefers-reduced-motion: no-preference) {
-  .feature-icon svg {
-    overflow: visible;
-  }
-  .feature-icon svg path,
-  .feature-icon svg rect,
-  .feature-icon svg circle,
-  .feature-icon svg line,
-  .feature-icon svg polyline,
-  .feature-icon svg polygon {
-    stroke-dasharray: 240;
-    stroke-dashoffset: 0;
-    transition: stroke-dashoffset var(--dur-slow) var(--ease-out);
-  }
-  .feature:hover .feature-icon svg path,
-  .feature:hover .feature-icon svg rect,
-  .feature:hover .feature-icon svg circle,
-  .feature:hover .feature-icon svg line,
-  .feature:hover .feature-icon svg polyline,
-  .feature:hover .feature-icon svg polygon {
-    animation: nd-draw .85s var(--ease-out);
-  }
-}
-@keyframes nd-draw {
-  0%   { stroke-dashoffset: 240; }
-  100% { stroke-dashoffset: 0; }
-}
-
-/* ----- Bento feature grid: hero card spans two columns ----- */
-.features {
-  grid-auto-flow: dense;
-}
-.features .feature:first-child {
-  grid-column: span 2;
-  background:
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--accent-soft) 100%, transparent) 0%,
-      var(--bg-elev-1) 60%);
-  border-color: var(--accent-border);
-}
-.features .feature:first-child .feature-icon {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 8px 22px -8px var(--accent-glow);
-}
-.features .feature:first-child .feature-icon svg { width: 28px; height: 28px; }
-.features .feature:first-child h3 { font-size: 1.3rem; }
-.features .feature:first-child p  { font-size: 1rem; max-width: 62ch; }
-
-@media (max-width: 900px) {
-  .features .feature:first-child { grid-column: span 1; }
-  .features .feature:first-child .feature-icon { width: 48px; height: 48px; }
-  .features .feature:first-child .feature-icon svg { width: 24px; height: 24px; }
-}
-
-
-/* =====================================================================
-   Phase 2 second pass
-   - Drop traffic-light shot chrome, switch to a clean elevated card.
-   - Brand mark: inline SVG, perfectly transparent, theme-aware ring.
-   - Cleaner two-state theme toggle.
-   - Sponsor card icon halo.
-   - Hero collage clickable affordance.
-   - Lightbox close button colour fix on dark.
-   ===================================================================== */
-
-/* ----- Reset Phase 2 frame to a clean card ----- */
-.shot {
-  position: relative;
-  padding-top: 0;                   /* undo titlebar slot */
-  background: var(--bg-elev-1);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow:
-    0 1px 0 0 color-mix(in srgb, var(--text) 4%, transparent) inset,
-    0 8px 24px -14px rgba(0, 0, 0, .25);
-  transition:
-    transform var(--dur-med) var(--ease-out),
-    box-shadow var(--dur-med) var(--ease-out),
-    border-color var(--dur-med) var(--ease-out);
-}
-[data-theme="dark"] .shot {
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, .04) inset,
-    0 12px 32px -16px rgba(0, 0, 0, .8);
-}
-.shot::before { content: none; }    /* kill the traffic lights */
-.shot:hover {
-  transform: translateY(-3px);
-  border-color: var(--accent-border);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, .05) inset,
-    0 18px 38px -16px var(--accent-glow);
-}
-.shot img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Clickable shots get a subtle expand affordance. */
-.shot[data-lightbox] { cursor: zoom-in; }
-.shot[data-lightbox]::after {
-  content: "";
-  position: absolute;
-  top: 12px; right: 12px;
-  width: 30px; height: 30px;
-  border-radius: 999px;
-  background:
-    color-mix(in srgb, var(--bg) 70%, transparent)
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M15 3h6v6'/><path d='M9 21H3v-6'/><path d='M21 3l-7 7'/><path d='M3 21l7-7'/></svg>")
-    center / 16px no-repeat;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid var(--border);
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
-  pointer-events: none;
-}
-[data-theme="dark"] .shot[data-lightbox]::after {
-  background:
-    color-mix(in srgb, var(--bg) 60%, transparent)
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M15 3h6v6'/><path d='M9 21H3v-6'/><path d='M21 3l-7 7'/><path d='M3 21l7-7'/></svg>")
-    center / 16px no-repeat;
-}
-.shot[data-lightbox]:hover::after,
-.shot[data-lightbox]:focus-visible::after {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ----- Brand mark: inline SVG ----- */
-.brand .logo-mark-svg {
-  width: 30px; height: 30px;
-  display: block;
-  flex: none;
-  filter: drop-shadow(0 2px 4px rgba(220, 63, 16, .25));
-}
-[data-theme="dark"] .brand .logo-mark-svg {
-  filter: drop-shadow(0 2px 6px rgba(255, 122, 89, .35));
-}
-.footer-brand .brand .logo-mark-svg { width: 30px; height: 30px; }
-
-/* ----- Sponsor card icon ----- */
-.sponsor-card .sponsor-ico {
-  width: 56px; height: 56px;
-  margin: 0 auto 16px;
-  display: grid; place-items: center;
-  border-radius: 18px;
-  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #ff5722));
-  color: #fff;
-  box-shadow: 0 14px 32px -10px var(--accent-glow);
-}
-.sponsor-card .sponsor-ico svg { width: 28px; height: 28px; }
-
-/* ----- Hero collage clickable affordance ----- */
-.hc-item[data-lightbox] { cursor: zoom-in; }
-
-/* ----- Lightbox close button readable on light backgrounds ----- */
-.lightbox .lb-close,
-.lightbox .lb-nav {
-  color: #fff;
-}
-
-/* ----- Theme switch: collapse to two cells (Light / Dark) ----- */
-.theme-switch {
-  width: auto;
-}
-.theme-switch button { width: 32px; }
-.theme-switch::before { width: 32px; }
-.theme-switch[data-active="light"]::before { transform: translateX(0); }
-.theme-switch[data-active="dark"]::before  { transform: translateX(32px); }
-/* Fallback for any stale system markup left over: hide that button. */
-.theme-switch button[data-theme-value="system"] { display: none; }
-
-
-/* =====================================================================
-   Phase 2 third pass: revert SVG mark, polish PNG brand, sponsor btn-lg
-   ===================================================================== */
-
-/* The brand image is a transparent circular PNG — kill the rounded
-   square clip, the backing tile, and the box shadow. */
-.brand .logo-img {
-  width: 32px;
-  height: 32px;
-  border-radius: 0;
-  object-fit: contain;
-  display: block;
-  box-shadow: none;
-  background: transparent;
-  filter: drop-shadow(0 2px 4px rgba(220, 63, 16, .25));
-  transition: transform var(--dur-med) var(--ease-out), filter var(--dur-med) var(--ease-out);
-}
-[data-theme="dark"] .brand .logo-img {
-  filter: drop-shadow(0 2px 6px rgba(255, 122, 89, .35));
-}
-.brand:hover .logo-img {
-  transform: rotate(-6deg) scale(1.04);
-}
-
-/* Drop the now-unused inline mark class (kept just in case markup lingers). */
-.brand .logo-mark-svg { display: none; }
-
-/* Big sponsor-card momo button. */
-.btn-momo.btn-lg {
-  height: 48px;
-  padding: 0 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -.005em;
-  border-radius: var(--radius-pill);
-}
-.btn-momo.btn-lg .momo-ico { display: inline-flex; }
-.btn-momo.btn-lg .momo-ico svg { width: 18px; height: 18px; }
-
-/* Sponsor card centre-align the button so it doesn't cling to the left edge. */
-.sponsor-card .btn-momo { margin: 0 auto; }
-
-
-
-/* ----- Phase 2 pass 4: cross-link logo variant ----- */
-.crosslink-card .ic-logo {
-  background: transparent;
-  box-shadow: none;
-}
-.crosslink-card .ic-logo img {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  display: block;
-  filter: drop-shadow(0 4px 10px rgba(220, 63, 16, .25));
-}
-[data-theme="dark"] .crosslink-card .ic-logo img {
-  filter: drop-shadow(0 4px 12px rgba(255, 122, 89, .35));
 }

@@ -68,7 +68,7 @@ public class CalendarExamples
 
         var newYear = new NepaliDate(2081, 1, 1);
         var info = newYear.GetCalendarInfo();
-        Console.WriteLine($"Events on {newYear} (New Year — {info.EventsNp.Length} events):");
+        Console.WriteLine($"Events on {newYear} (New Year - {info.EventsNp.Length} events):");
         for (int i = 0; i < info.EventsNp.Length; i++)
             Console.WriteLine($"  {info.EventsNp[i]}  /  {info.EventsEn[i]}");
 

@@ -288,7 +288,7 @@ public class NepaliDateRangeExtendedTests
     [Fact]
     public void WorkingDays_ExcludeSundayFalse_ExcludesOnlySaturday()
     {
-        // Thu(14), Fri(15), Sat(16), Sun(17), Mon(18) — excludes only Sat → 4 working days.
+        // Thu(14), Fri(15), Sat(16), Sun(17), Mon(18) - excludes only Sat → 4 working days.
         var range = new NepaliDateRange(new NepaliDate(2080, 5, 14), new NepaliDate(2080, 5, 18));
         var working = range.WorkingDays(excludeSunday: false).ToList();
 
@@ -300,7 +300,7 @@ public class NepaliDateRangeExtendedTests
     [Fact]
     public void WorkingDays_ExcludeSundayTrue_ExcludesBothSatAndSun()
     {
-        // Thu(14), Fri(15), Sat(16), Sun(17), Mon(18) — excludes Sat and Sun → 3 working days.
+        // Thu(14), Fri(15), Sat(16), Sun(17), Mon(18) - excludes Sat and Sun → 3 working days.
         var range = new NepaliDateRange(new NepaliDate(2080, 5, 14), new NepaliDate(2080, 5, 18));
         var working = range.WorkingDays(excludeSunday: true).ToList();
 
@@ -351,7 +351,7 @@ public class NepaliDateRangeExtendedTests
     [Fact]
     public void Intersect_AdjacentRanges_ReturnsEmptyRange()
     {
-        // Range1 ends on day 10, range2 starts on day 11 — no shared date.
+        // Range1 ends on day 10, range2 starts on day 11 - no shared date.
         var range1 = new NepaliDateRange(new NepaliDate(2080, 1, 1), new NepaliDate(2080, 1, 10));
         var range2 = new NepaliDateRange(new NepaliDate(2080, 1, 11), new NepaliDate(2080, 1, 20));
 
@@ -399,7 +399,7 @@ public class NepaliDateRangeExtendedTests
     [Fact]
     public void Union_NonOverlappingRanges_SpansEntireGap()
     {
-        // Range1: 01/01–01/10, Range2: 01/20–01/30 — union covers 01/01–01/30 including the gap.
+        // Range1: 01/01–01/10, Range2: 01/20–01/30 - union covers 01/01–01/30 including the gap.
         var range1 = new NepaliDateRange(new NepaliDate(2080, 1, 1), new NepaliDate(2080, 1, 10));
         var range2 = new NepaliDateRange(new NepaliDate(2080, 1, 20), new NepaliDate(2080, 1, 30));
 
@@ -451,7 +451,7 @@ public class NepaliDateRangeExtendedTests
     [Fact]
     public void IsAdjacentTo_GapBetweenRanges_ReturnsFalse()
     {
-        // Range1 ends 01/10, Range2 starts 01/12 — gap of one day means not adjacent.
+        // Range1 ends 01/10, Range2 starts 01/12 - gap of one day means not adjacent.
         var range1 = new NepaliDateRange(new NepaliDate(2080, 1, 1), new NepaliDate(2080, 1, 10));
         var range2 = new NepaliDateRange(new NepaliDate(2080, 1, 12), new NepaliDate(2080, 1, 20));
 

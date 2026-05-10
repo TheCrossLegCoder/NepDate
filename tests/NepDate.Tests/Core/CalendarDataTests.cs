@@ -307,7 +307,7 @@ public class CalendarDataTests
     }
 
     // -------------------------------------------------------------------------
-    // Exhaustive range scan — no exceptions and no out-of-bounds
+    // Exhaustive range scan - no exceptions and no out-of-bounds
     // -------------------------------------------------------------------------
 
     [Fact]
@@ -336,7 +336,7 @@ public class CalendarDataTests
     {
         // Does not assert specific values; asserts no exceptions are thrown on any day.
         var exceptions = new System.Text.StringBuilder();
-        for (int year = 2078; year <= 2082; year++) // dense Tithi years — highest risk
+        for (int year = 2078; year <= 2082; year++) // dense Tithi years - highest risk
         {
             for (int month = 1; month <= 12; month++)
             {

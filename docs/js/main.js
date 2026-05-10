@@ -6,61 +6,23 @@
 (function () {
   'use strict';
 
-  /* ---------- Theme (light / dark) ----------
-     Persisted as 'light' or 'dark'. If nothing is stored we follow the
-     OS preference live (no pinned choice). The inline bootstrap script in
-     <head> handles the first paint to avoid FOUC. */
+  /* ---------- Theme ---------- */
   const THEME_KEY = 'nepdate-theme';
-  const VALID_THEMES = ['light', 'dark'];
-  const SYSTEM_QUERY = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-
-  function osTheme() {
-    return SYSTEM_QUERY && SYSTEM_QUERY.matches ? 'dark' : 'light';
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
   }
-
-  function applyTheme(stored) {
-    const isPinned = VALID_THEMES.includes(stored);
-    const resolved = isPinned ? stored : osTheme();
-    document.documentElement.setAttribute('data-theme', resolved);
-    document.documentElement.setAttribute('data-theme-pref', isPinned ? stored : 'system');
-    try {
-      if (isPinned) localStorage.setItem(THEME_KEY, stored);
-      else localStorage.removeItem(THEME_KEY);
-    } catch (_) {}
-    syncSwitch(resolved);
-  }
-
-  function syncSwitch(resolved) {
-    document.querySelectorAll('.theme-switch').forEach(root => {
-      root.setAttribute('data-active', resolved);
-      root.querySelectorAll('button[data-theme-value]').forEach(b => {
-        b.setAttribute('aria-pressed', String(b.dataset.themeValue === resolved));
-      });
-    });
-  }
-
   function initTheme() {
-    let stored = null;
-    try { stored = localStorage.getItem(THEME_KEY); } catch (_) {}
-    if (!VALID_THEMES.includes(stored)) stored = null;
-    applyTheme(stored);
-
-    if (SYSTEM_QUERY && SYSTEM_QUERY.addEventListener) {
-      SYSTEM_QUERY.addEventListener('change', () => {
-        const pref = document.documentElement.getAttribute('data-theme-pref') || 'system';
-        if (pref === 'system') applyTheme(null);
-      });
+    let theme = null;
+    try { theme = localStorage.getItem(THEME_KEY); } catch (_) {}
+    if (!theme) {
+      theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark' : 'light';
     }
-
-    document.querySelectorAll('.theme-switch button[data-theme-value]').forEach(btn => {
-      const v = btn.dataset.themeValue;
-      if (!VALID_THEMES.includes(v)) return;
-      btn.addEventListener('click', () => applyTheme(v));
-    });
-
-    const legacy = document.querySelector('.theme-toggle');
-    if (legacy) {
-      legacy.addEventListener('click', () => {
+    applyTheme(theme);
+    const btn = document.querySelector('.theme-toggle');
+    if (btn) {
+      btn.addEventListener('click', () => {
         const cur = document.documentElement.getAttribute('data-theme');
         applyTheme(cur === 'dark' ? 'light' : 'dark');
       });
@@ -476,22 +438,9 @@
     });
   }
 
-  /* ---------- Sticky header scroll polish ---------- */
-  function initStickyHeader() {
-    var hdr = document.querySelector('.site-header');
-    if (!hdr) return;
-    var update = function () {
-      if (window.scrollY > 8) hdr.classList.add('is-scrolled');
-      else hdr.classList.remove('is-scrolled');
-    };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-  }
-
   /* ---------- Init ---------- */
   function init() {
     initTheme();
-    initStickyHeader();
     initMobileMenu();
     initDocsSidebar();
     highlightAll();
